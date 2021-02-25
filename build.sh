@@ -18,10 +18,10 @@ npm install hexo-theme-landscape
 npm install hexo-theme-volantis
 npm install hexo-helper-qrcode
 echo '------------------------------- end npm install '
-cd node_modules
-ls -la
-cd ../
-echo '-------------------------------'
+# cd node_modules
+# ls -la
+# cd ../
+# echo '-------------------------------'
 hexo version
 # 删除之前编译的
 # rm -rf ./doc
