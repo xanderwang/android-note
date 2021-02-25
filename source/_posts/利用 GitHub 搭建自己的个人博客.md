@@ -8,11 +8,11 @@ tags:
 - GitHub Page
 categories: 
 - Android
-
+---
 
 先看下预览图吧。
 
-![预览图](https://sm.ms/image/YtAFzBrdhTGoNCL)
+![预览图](https://img.imgdb.cn/item/6037cadc5f4313ce25858739.png)
 
 先说下方案:
 
