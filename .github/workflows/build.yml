@@ -43,7 +43,7 @@ jobs:
         echo "---------- git add"
         git add ./
         echo "---------- git commit"
-        git commit -m "auto build task run"
+        git commit -a -m "auto build task run"
         echo "----------
         git status
         echo "---------- git status"
