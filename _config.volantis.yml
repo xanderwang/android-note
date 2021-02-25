@@ -55,9 +55,9 @@ cover:
     home: true
     archive: true
     others: false # can be written in front-matter 'cover: true'
-  background: https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture
+  # background: https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture
   # background: https://bing.ioliu.cn/v1/rand?w=1920&h=1200
-  # background: https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg
+  background: https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg
   logo: # https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-Cover@3x.png
   title: "Xander's Blog"
   subtitle: "A blog for Android"
