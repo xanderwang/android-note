@@ -16,7 +16,8 @@ npm install hexo-renderer-stylus
 npm install hexo-server
 npm install hexo-theme-landscape
 npm install hexo-theme-volantis
-npm install hexo-helper-qrcode
+# npm install hexo-helper-qrcode
+npm install hexo-wordcount
 echo '------------------------------- end npm install '
 # cd node_modules
 # ls -la
