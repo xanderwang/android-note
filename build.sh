@@ -18,6 +18,8 @@ npm install hexo-theme-landscape
 npm install hexo-theme-volantis
 # npm install hexo-helper-qrcode
 npm install hexo-wordcount
+npm install hexo-generator-search 
+npm install hexo-generator-json-content
 echo '------------------------------- end npm install '
 # cd node_modules
 # ls -la

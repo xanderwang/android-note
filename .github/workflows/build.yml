@@ -1,5 +1,5 @@
 # workflow 名字 具体的配置见  https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
-name: My Note Build Task
+name: Xander's Blog Task
 # 在push *.md文件后执行任务
 on:
   # Trigger the workflow on push or pull request,

@@ -2,7 +2,7 @@
 # use_cdn: /source/js/* 中的JS文件(JS Only)使用jsdelivr的min版本加速
 # 默认使用 https://cdn.jsdelivr.net/npm/hexo-theme-volantis@<%- theme.info.theme_version %>/source/js/*.min.js 的CDN压缩版本(min.js)，注意版本号对应关系！！可以通过修改以下配置项覆盖
 # 开发者注意 use_cdn 设置为 false
-use_cdn: false
+use_cdn: false # true false
 info:
   theme_name: Volantis # This is theme's name.
   theme_version: '4.3.1' # This is theme's version.
@@ -46,7 +46,6 @@ navbar:
   search: Search...   # Search bar placeholder
 ############################### Navigation Bar ############################### > end
 
-
 ############################### Cover ############################### > start
 cover:
   height_scheme: half # full, half
@@ -83,7 +82,6 @@ cover:
       icon: fas fa-info-circle
     #   img: https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg
       url: /about/
-
 ############################### Cover ############################### > end
 
 pages:
@@ -208,7 +206,6 @@ article:
           img: # https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png
 ############################### Article Layout ############################### > end
 
-
 ############################### Comments ############################### > start
 comments:
   title: <i class='fas fa-comments'></i> 评论
@@ -311,13 +308,12 @@ comments:
     avatar: robohash # gravatar style https://waline.js.org/client/basic.html#avatar
     pageSize: 10 # 评论每页显示数量
     lang: zh-CN
-
 ############################### Comments ############################### > end
 
 ############################### Sidebar ############################### > start
 sidebar:
   # 主页、分类、归档等独立页面
-  for_page: [blogger, category, tagcloud, qrcode]
+  for_page: [blogger, category, tagcloud, donate, webinfo]
   # layout: docs/post 这类文章页面
   for_post: [toc]
   # 侧边栏组件库
@@ -377,7 +373,6 @@ sidebar:
       color: true
       start_color: '#999'
       end_color: '#555'
-
     # ---------------------------------------
     # qrcode widget
     donate:
@@ -426,7 +421,6 @@ sidebar:
           unit: '日'
 ############################### Sidebar ############################### > end
 
-
 ############################### Tag Plugins ############################### > start
 # 内置标签插件的配置
 tag_plugins:
@@ -444,11 +438,10 @@ tag_plugins:
     placeholder: https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/256/safari.png
 ############################### Tag Plugins ############################### > end
 
-
 ############################### Site Footer ############################### > start
 site_footer:
   # layout of footer: [aplayer, social, license, info, copyright]
-  layout: [aplayer, social, license, analytics, info, copyright]
+  layout: [social, license, analytics, info, copyright]
   social:
     - icon: #fas fa-rss
       url:
@@ -494,8 +487,8 @@ plugins:
     enable: true
     js: https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js
     onlypost: false
-    loadingImg: # https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg
-    blurIn: true # 模糊加载效果 （loadingImg为空时有效）
+    loadingImg:  https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg
+    blurIn: #true # 模糊加载效果 （loadingImg为空时有效）
 
   ######## Plugins to optimize the experience:
 
@@ -508,7 +501,7 @@ plugins:
 
   # https://scrollrevealjs.org/api/reveal.html
   scrollreveal:
-    enable: #true
+    enable: true
     js: https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js
     distance: 32px
     duration: 800 # ms
@@ -535,17 +528,17 @@ plugins:
 
   # fontawesome animation
   fontawesome_animation:
-    enable: #true
+    enable: true
     css: https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css
 
   # Typing Effects
   comment_typing:
-    enable: #true
+    enable: true
     js: https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/comment_typing.js
 
   # Slide Background
   backstretch:
-    enable: #true
+    enable: true
     js: https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js
     position: cover       # cover: sticky on the cover.   fixed: Fixed as background for the site.
     shuffle: true         # shuffle playlist
@@ -577,7 +570,7 @@ plugins:
   # APlayer is only available in mainland China.
   # APlayer config: https://github.com/metowolf/MetingJS
   aplayer:
-    enable: true
+    enable: #true
     js:
       aplayer: https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js
       meting: https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js
@@ -712,8 +705,8 @@ rightmenu:
 # To use hexo search, you need to install the following plugins:
 # npm i hexo-generator-search hexo-generator-json-content
 search:
-  enable: # true
-  service: baidu  # hexo, google, algolia, azure, baidu
+  enable:  true
+  service: hexo  # hexo, google, algolia, azure, baidu
   js:
   google:
     apiKey:
@@ -908,8 +901,8 @@ custom_css:
 analytics:
   busuanzi: https://cdn.jsdelivr.net/gh/volantis-x/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js
   leancloud: # 请使用自己的 id & key 以防止数据丢失
-    app_id: u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI
-    app_key: jfHtEKVE24j0IVCGHbvuFClp
+    app_id: rFjxhNkjfJEFwCxatct9lFP5-gzGzoHsz
+    app_key: bPYEsXC56n2ziDYGE5pg7EHW
     custom_api_server: # 国际版一般不需要写，除非自定义了 API Server
 ############################### Analytics ############################### > end
 
