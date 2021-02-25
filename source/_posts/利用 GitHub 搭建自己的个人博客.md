@@ -89,8 +89,10 @@ jobs: # 配置具体任务
         git config --list
         echo "---------- git status"
         git status
+        echo "---------- git add ./"
+        git add ./
         echo "---------- git commit"
-        git commit -a -m "auto build task"
+        git commit -m "auto build task"
         echo "---------- git status"
         git status
     # 这里引用其他的 Action ，上传 commit 到自己的 repository 
