@@ -23,9 +23,11 @@ echo '------------------------------- end npm install '
 # cd ../
 # echo '-------------------------------'
 hexo version
+echo '-------------------------------'
 # 删除之前编译的
 # rm -rf ./doc
 hexo clean --debug
+echo '-------------------------------'
 # 编译
 hexo generate --debug
 # 拷贝内容
