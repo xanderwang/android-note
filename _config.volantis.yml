@@ -223,8 +223,8 @@ comments:
     # 其他配置项按照yml格式继续填写即可 除了 [el path placeholder emojiCDN emojiMaps] 选项
     appId: rFjxhNkjfJEFwCxatct9lFP5-gzGzoHsz # your appId
     appKey: bPYEsXC56n2ziDYGE5pg7EHW # your appKey
-    meta: [nick,mail,link] # valine comment header info
-    requiredFields: [nick,mail]
+    meta: [nick, mail] # valine comment header info
+    requiredFields: [nick]
     enableQQ: true # Unstable avatar link
     recordIP: false # Record commenter IP
     avatar: robohash # gravatar style https://valine.js.org/avatar
