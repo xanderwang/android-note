@@ -21,10 +21,10 @@ github_username: XanderWang
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://xanderwang.github.io/Android-Note
-root: /Android-Note/
+url: https://xanderwang.github.io/android-note
+root: /android-note/
 permalink: :year/:month/:day/:title/
-permalink_defaults: https://xanderwang.github.io/Android-Note
+permalink_defaults: https://xanderwang.github.io/android-note
 
 # Directory
 source_dir: source    # 资源文件夹，这个文件夹用来存放内容。
