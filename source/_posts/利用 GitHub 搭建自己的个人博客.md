@@ -11,7 +11,7 @@ categories:
 
 先看下预览图吧。
 
-// 图片
+![预览图](https://sm.ms/image/YtAFzBrdhTGoNCL)
 
 先说下方案:
 

@@ -1,6 +1,6 @@
 ---
 title: 归档
-layout: archive
+layout: archives
 type: "archives"
 cover: true
 sidebar: []

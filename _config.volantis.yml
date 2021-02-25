@@ -920,3 +920,9 @@ seo:
     tag: noindex,follow
     # robots can be written in front-matter
 ############################### SEO ############################### > end
+
+
+favicon:
+  # small: /images/xander_blog_s.ico
+  #medium: /images/favicon-32x32-next.png
+  medium: /images/xander_blog.ico
