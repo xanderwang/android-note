@@ -36,10 +36,17 @@ jobs:
       run: |
         git config --local user.email "420640763@qq.com"
         git config --local user.name "$GITHUB_ACTOR"
+        echo "----------------------------------------"
+        git config --list
+        echo "----------------------------------------"
         git status
+        echo "----------------------------------------"
         git add ./
-        git status
+        echo "----------------------------------------"
         git commit -m "auto build task run"
+        echo "----------------------------------------"
+        git status
+        echo "----------------------------------------"
     - name: push changes
       uses: ad-m/github-push-action@master
       with:
