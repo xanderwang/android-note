@@ -4,7 +4,8 @@ title: 利用 GitHub 搭建自己的个人博客
 date: 2021-02-25 22:41:00
 tags:
 - hexo
-- github action
+- Github Action
+- GitHub Page
 categories: 
 - Android
 
