@@ -1873,6 +1873,33 @@ ul.list-v >li>a:hover {
     color: var(--color-text);
     background: #6f6f72;
   }
+  :root:not([data-user-color-scheme]) .aplayer {
+    background: var(--color-site-bg);
+  }
+  :root:not([data-user-color-scheme]) .aplayer .aplayer-list ol li:hover {
+    background: rgba(68,215,182,0.2);
+  }
+  :root:not([data-user-color-scheme]) .aplayer .aplayer-list ol li.aplayer-list-light {
+    background: var(--color-block);
+  }
+  :root:not([data-user-color-scheme]) .aplayer-info {
+    background: var(--color-site-bg) !important;
+  }
+  :root:not([data-user-color-scheme]) .aplayer .aplayer-lrc:before {
+    background: linear-gradient(180deg, #282c34 0, rgba(255,255,255,0));
+  }
+  :root:not([data-user-color-scheme]) .aplayer .aplayer-lrc:after {
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0, rgba(33,33,33,0.8));
+  }
+  :root:not([data-user-color-scheme]) .aplayer-pic {
+    filter: brightness(70%);
+  }
+  :root:not([data-user-color-scheme]) .aplayer .aplayer-list ol li {
+    border-top: 1px solid var(--color-card);
+  }
+  :root:not([data-user-color-scheme]) .aplayer.aplayer-withlist .aplayer-info {
+    border-bottom: 1px solid var(--color-block);
+  }
   :root:not([data-user-color-scheme]) #valine_container button {
     background-color: var(--color-block) !important;
   }
@@ -2025,6 +2052,33 @@ ul.list-v >li>a:hover {
 [data-user-color-scheme='dark'] #archive-page .archive .all-tags ul li span {
   color: var(--color-text);
   background: #6f6f72;
+}
+[data-user-color-scheme='dark'] .aplayer {
+  background: var(--color-site-bg);
+}
+[data-user-color-scheme='dark'] .aplayer .aplayer-list ol li:hover {
+  background: rgba(68,215,182,0.2);
+}
+[data-user-color-scheme='dark'] .aplayer .aplayer-list ol li.aplayer-list-light {
+  background: var(--color-block);
+}
+[data-user-color-scheme='dark'] .aplayer-info {
+  background: var(--color-site-bg) !important;
+}
+[data-user-color-scheme='dark'] .aplayer .aplayer-lrc:before {
+  background: linear-gradient(180deg, #282c34 0, rgba(255,255,255,0));
+}
+[data-user-color-scheme='dark'] .aplayer .aplayer-lrc:after {
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0, rgba(33,33,33,0.8));
+}
+[data-user-color-scheme='dark'] .aplayer-pic {
+  filter: brightness(70%);
+}
+[data-user-color-scheme='dark'] .aplayer .aplayer-list ol li {
+  border-top: 1px solid var(--color-card);
+}
+[data-user-color-scheme='dark'] .aplayer.aplayer-withlist .aplayer-info {
+  border-bottom: 1px solid var(--color-block);
 }
 [data-user-color-scheme='dark'] #valine_container button {
   background-color: var(--color-block) !important;
