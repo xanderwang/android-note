@@ -160,9 +160,9 @@ article:
       # 默认文章作者（可在 _data/author.yaml 中增加其他作者，并在 front-matter 中设置）
       # https://volantis.js.org/advanced-settings/#多人协同
       author:
-        avatar:
+        avatar: https://i.loli.net/2020/05/18/WO1oJwFsRb4gV79.png
         name: XanderWang
-        url: /
+        url: https://github.com/XanderWang/
       # 文章创建日期
       date:
         icon: fas fa-calendar-alt
@@ -202,8 +202,8 @@ article:
           img: https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png
         - id: weibo
           img: https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png
-        - id: qrcode # 当id为qrcode时需要安装插件  npm i hexo-helper-qrcode
-          img: https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png
+        - id: #qrcode # 当id为qrcode时需要安装插件  npm i hexo-helper-qrcode
+          img: #https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/wechat.png
         - id: # telegram
           img: # https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/telegram.png
 ############################### Article Layout ############################### > end
