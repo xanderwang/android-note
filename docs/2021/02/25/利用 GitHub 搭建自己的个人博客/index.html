@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -24,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>Tag: 反射 - Xander&#39;s blog</title>
+  <title>利用 GitHub 搭建自己的个人博客 - Xander&#39;s blog</title>
+  
+    <meta name="keywords" content="hexo,Github Action,GitHub Page">
   
 
   
@@ -343,7 +343,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  dock' style="display: none;">
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -413,79 +413,254 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      
-  <section class="post-list">
     
-      
+    
+      <h1 class="title">
+        利用 GitHub 搭建自己的个人博客
+      </h1>
+      <div class='new-meta-box'>
         
           
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/">
-        总结笔记(二) - Java 反射和注解总结
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        反射总结什么是反射反射是 Java 语言的一个特性，就是在程序运行状态中，对于任何一个类，都可以通过反射知道这个类所有的方法和属性。对于任何一个实例，都可以调用这个实例的任何方法和属性。这个在运行时动态获取类或者实例的属性和方法，动态调用属性和方法的特性就叫反射。
-反射有什么用从特性可以看出，在运行时可以动态调整属性的值和调用代码，可以让程序更灵活。主要用于以下几点
+            
+<div class='new-meta-item author'>
+  <a class='author' target="_blank" href="https://github.com/XanderWang/" rel="nofollow noopener">
+    <img no-lazy src="https://i.loli.net/2020/05/18/WO1oJwFsRb4gV79.png">
+    <p>XanderWang</p>
+  </a>
+</div>
 
-动态创建实例( cla...
-      
-    
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/android-note/categories/Android/">Android</a>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+
+
+          
         
-        <time>2021-02-07</time>
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Feb 25, 2021</p>
+  </a>
+</div>
+
+          
         
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/Java/">Java</a>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="利用 GitHub 搭建自己的个人博客" data-path="/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  
+  <p>先看下预览图吧。</p>
+<p><img src="https://img.imgdb.cn/item/6037cadc5f4313ce25858739.png" class="lazyload placeholder" data-srcset="https://img.imgdb.cn/item/6037cadc5f4313ce25858739.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg" alt="预览图"></p>
+<p>先说下方案:</p>
+<blockquote>
+<p> GitHub Page + GitHub Action + hexo &amp; 配套主题 </p>
+</blockquote>
+<h1 id="GitHub-Page"><a href="#GitHub-Page" class="headerlink" title="GitHub Page"></a>GitHub Page</h1><p>这个都不陌生吧，注册 GitHub 账号后，可以帮你托管你的 <code>repository</code> 下的静态网页，比如我有个 <code>repository</code> 叫  <code>android-note</code> ，我的 github 账号叫 <code>xanderwang</code> ，那么我的 android-note 托管后，访问地址就是：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://xander.github.io/android-note">https://xander.github.io/android-note</a></p>
+</blockquote>
+<p>托管后，如果我每次写了新的文章后，我把最新的静态 blog 上传上来，那么就可以更新自己的博客。</p>
+<p>如果每次都可以自动编译和上传 blog 静态网页，那就很省事了。事实上，这个是可以做到的，具体细节后面再说。我们先看看如何托管我们的 <code>repository</code> 到 GitHub Page 。</p>
+<p>最开始接触到 GitHub Page 的时候，看文章都是说需要新建一个和自己用户名同名的 <code>repository</code> ，然后往这个 <code>repository</code> 根目录里面上传静态 blog 网页，然后托管。</p>
+<p>后来我发现不是这样，至少目前不是这样，我发现任意的 <code>repository</code> 都可以托管，只需要做一些特别的设置，如何设置呢？</p>
+<p>找到你的 <code>repository</code> ，然后</p>
+<blockquote>
+<p>settings -&gt; GitHub Pages -&gt; Source -&gt; 选择分支和静态博客的根目录</p>
+</blockquote>
+<p>到这里 GitHub 托管就设置好了。按照之前的规则你就可以访问你托管 blog 了。</p>
+<h1 id="GitHub-Action"><a href="#GitHub-Action" class="headerlink" title="GitHub Action"></a>GitHub Action</h1><p>刚刚说了，如果有个自动编译和上传 blog 的工具或者平台，每次我们写好 blog 后，自动帮我们编译上传好，那我们就可以省很多事。GitHub Action 正好可以做这个的，而且可以和 GitHub 无缝对接。那如何使用呢？</p>
+<p>很简单，只需要在你的 <code>repository</code> 里面新建 <code>.github</code> 文件夹，然后在里面新建 <code>.workflows</code> 文件夹，然后在里面新建 <code>build.yml</code> 文件(build 可以换成任意你喜欢的)，然后 GitHub Action 功能就开通了。这个时候， <code>repository</code> 下的目录结构大概是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── .github</span><br><span class="line">│   └── workflows</span><br><span class="line">│       └── build.yml</span><br></pre></td></tr></table></figure>
+
+<p>现在介绍下如何配置 build.yml 文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Xander&#x27;s</span> <span class="string">Blog</span> <span class="string">Task</span></span><br><span class="line"><span class="comment"># 在push **.md **.yml **.yaml **.sh 文件后执行任务</span></span><br><span class="line"><span class="attr">on:</span> <span class="comment">#配置任务执行时机</span></span><br><span class="line">  <span class="comment"># Trigger the workflow on push or pull request,</span></span><br><span class="line">  <span class="comment"># but only for the master branch</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="comment"># branches:    </span></span><br><span class="line">    <span class="comment">#   - master</span></span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;**.md&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;**.yml&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;**.yaml&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;**.sh&#x27;</span></span><br><span class="line"><span class="attr">jobs:</span> <span class="comment"># 配置具体任务</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="comment"># runs-on: macOS-latest</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">    <span class="comment"># 输出虚拟机的环境变量, 非常有用</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">print</span> <span class="string">env</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">printenv</span></span><br><span class="line">    <span class="comment"># 引用外部 Action, 拉取代码仓库到虚拟机工作目录</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">chekout</span> <span class="string">code</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">actions/checkout@v1</span></span><br><span class="line">    <span class="comment"># 执行 .sh 脚本文件，很多的任务可以在这个脚本里面执行</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">build</span> <span class="string">note</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">sh</span> <span class="string">./build.sh</span>  </span><br><span class="line">    <span class="comment"># 这里是一些额外的操作, 通常不需要. 这里是为了把编译好的静态 blog 文件 push 到 GitHub 仓库</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">commit</span> <span class="string">change</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">        <span class="string">git</span> <span class="string">config</span> <span class="string">--local</span> <span class="string">user.email</span> <span class="string">&quot;420640763@qq.com&quot;</span></span><br><span class="line">        <span class="string">git</span> <span class="string">config</span> <span class="string">--local</span> <span class="string">user.name</span> <span class="string">&quot;$GITHUB_ACTOR&quot;</span></span><br><span class="line">        <span class="string">echo</span> <span class="string">&quot;---------- git config --list&quot;</span></span><br><span class="line">        <span class="string">git</span> <span class="string">config</span> <span class="string">--list</span></span><br><span class="line">        <span class="string">echo</span> <span class="string">&quot;---------- git status&quot;</span></span><br><span class="line">        <span class="string">git</span> <span class="string">status</span></span><br><span class="line">        <span class="string">echo</span> <span class="string">&quot;---------- git commit&quot;</span></span><br><span class="line">        <span class="string">git</span> <span class="string">commit</span> <span class="string">-a</span> <span class="string">-m</span> <span class="string">&quot;auto build task&quot;</span></span><br><span class="line">        <span class="string">echo</span> <span class="string">&quot;---------- git status&quot;</span></span><br><span class="line">        <span class="string">git</span> <span class="string">status</span></span><br><span class="line">    <span class="comment"># 这里引用其他的 Action ，上传 commit 到自己的 repository </span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">push</span> <span class="string">changes</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">ad-m/github-push-action@master</span></span><br><span class="line">      <span class="attr">with:</span></span><br><span class="line">        <span class="attr">github_token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">&#125;&#125;</span> </span><br></pre></td></tr></table></figure>
+<p>上面列出了主要的步骤和解释了，具体可以参考<a target="_blank" rel="noopener" href="https://github.com/XanderWang/android-note">我的 repository</a> </p>
+<p>到这里自动编译和发布的工作就说完了，现在我们还缺什么？</p>
+<h1 id="hexo-amp-配套主题"><a href="#hexo-amp-配套主题" class="headerlink" title="hexo &amp; 配套主题"></a>hexo &amp; 配套主题</h1><p>前面说了托管和自动编译和发布，现在我们就差一个个性化的静态 blog 模板了，这里我选择的是 hexo &amp; 配套主题。</p>
+<h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><p>这个是一个静态的博客构建软件，配合网络上的主题，可以比较方便构建出自己的博客，同时有大量的精美主题可以选择。</p>
+<p>如何安装就不具体说了，不是很难，官网有很详细的教程。</p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">点我直达 hexo 官网</a></p>
+<h2 id="hexo-配套主题"><a href="#hexo-配套主题" class="headerlink" title="hexo 配套主题"></a>hexo 配套主题</h2><p>主题的话，一般可以在 GitHub 上面找，我暂时用的 <a target="_blank" rel="noopener" href="https://volantis.js.org/">volantis</a>，可以去官网看下这个主题的具体介绍和相关配置。</p>
+<p>这里说下可能遇到的坑的，</p>
+<p>这里说下 _config.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## If your site is put in a subdirectory, set url as &#x27;http://yoursite.com/child&#x27; and root as &#x27;/child/&#x27;</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://xanderwang.github.io/android-note</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/android-note/</span></span><br><span class="line"><span class="comment"># 需要注意这里的配置，注意 url 和 root 的配置，如果不是用的GitHub 同名 repository 托管的，都需要配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Directory</span></span><br><span class="line"><span class="attr">public_dir:</span> <span class="string">docs</span>      <span class="comment"># 公共文件夹，这个文件夹用于存放生成的站点文件。</span></span><br><span class="line"><span class="comment"># public_dir 目录就是 hexo 编译后存放静态 html 的目录，在托管 GitHub Page 的时候注意选择这个目录。</span></span><br><span class="line"></span><br><span class="line"><span class="string">...</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其他的配置就是主题配置了，这个建议按照注意的 repository 或者主题的 demo 去配置，每个主题都是不一样的，只能靠自己的折腾了。 </p>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/'>
-            Read More
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/>https://xanderwang.github.io/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-25T17:07:17+00:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Feb 26, 2021</p>
+  </a>
 </div>
 
-          </div>
         
       
-    
-  </section>
+        
+          
   
-    
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/hexo/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>hexo</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Github-Action/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Github Action</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/GitHub-Page/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>GitHub Page</p></a></div>
 
 
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/&title=利用 GitHub 搭建自己的个人博客 - Xander's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/&title=利用 GitHub 搭建自己的个人博客 - Xander's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/&title=利用 GitHub 搭建自己的个人博客 - Xander's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
   
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/android-note/2021/02/24/%E5%86%99%E4%BA%86%E4%B8%AA%20Android%20%E6%80%A7%E8%83%BD%E6%A3%80%E6%B5%8B%E7%9A%84%E5%BA%93%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E7%9C%8B%E6%80%A7%E8%83%BD%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B9%88/'>
+          <p class='title'>写了个 Android 性能检测的库，还有人看性能相关的么<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>简介由于本人工作需要，需要解决一些性能问题，虽然有 Profiler 、Systrace  等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -493,248 +668,28 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box circle' href='/android-note/about/'>
-          <img no-lazy src='https://i.loli.net/2020/05/18/WO1oJwFsRb4gV79.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">Xander's blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="mailto:420640763@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/XanderWang/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/android-note/"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
 
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop">
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/android-note/categories/Android/" href="/android-note/categories/Android/"
-            id="android-notecategoriesAndroid"
-            ><div class='name'>Android</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/android-note/categories/Java/" href="/android-note/categories/Java/"
-            id="android-notecategoriesJava"
-            ><div class='name'>Java</div><div class='badge'>(3)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo"><span class="toc-text">hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo-%E9%85%8D%E5%A5%97%E4%B8%BB%E9%A2%98"><span class="toc-text">hexo 配套主题</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/android-note/tags/Android/" style="font-size: 24px; color: #555">Android</a> <a href="/android-note/tags/GitHub-Page/" style="font-size: 14px; color: #999">GitHub Page</a> <a href="/android-note/tags/Github-Action/" style="font-size: 14px; color: #999">Github Action</a> <a href="/android-note/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/android-note/tags/Performance/" style="font-size: 19px; color: #777">Performance</a> <a href="/android-note/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/android-note/tags/%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">优化</a> <a href="/android-note/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 14px; color: #999">反射</a> <a href="/android-note/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 14px; color: #999">泛型</a> <a href="/android-note/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 14px; color: #999">注解</a> <a href="/android-note/tags/%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">集合</a>
-    </div>
-  </section>
-
-
-  
-
-  
-    
-    
-
-<section class="widget shadow desktop">
-  
-  <header>
-    
-      <i class="fas fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>7 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
-        </div>
-        <script>
-          var BirthDay = new Date(new Date('2020/01/01'));
-          var today = new Date();
-          var timeold = (today.getTime() - BirthDay.getTime());
-          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
-          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
-        </script>
-      
-
-
-      
-        <div class="webinfo-item">
-          <div>本站总字数：</div>
-          <div>10k 字</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站访客数：</div>
-          
-          <div><span id="lc-uv"><span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 人</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站总访问量：</div>
-          
-          <div><span id="lc-sv"><span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 次</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          
-            <div id="last-update" style="display: none;">Thu Feb 25 2021 17:07:59 GMT+0000 (Coordinated Universal Time)</div>
-            <div id="last-update-show">2021-02-26 日</div>
-          
-        </div>
-        
-        <script>
-          function timeago(dateTimeStamp) {
-              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
-              var hour = minute * 60;
-              var day = hour * 24;
-              var week = day * 7;
-              var month = day * 30;
-              var now = new Date().getTime(); //获取当前时间毫秒
-              var diffValue = now - dateTimeStamp; //时间差
-              if (diffValue < 0) {
-                  return;
-              }
-              var minC = diffValue / minute; //计算时间差的分，时，天，周，月
-              var hourC = diffValue / hour;
-              var dayC = diffValue / day;
-              var weekC = diffValue / week;
-              var monthC = diffValue / month;
-              if (monthC >= 1 && monthC <= 3) {
-                  result = " " + parseInt(monthC) + " 月前"
-              } else if (weekC >= 1 && weekC <= 3) {
-                  result = " " + parseInt(weekC) + " 周前"
-              } else if (dayC >= 1 && dayC <= 6) {
-                  result = " " + parseInt(dayC) + " 天前"
-              } else if (hourC >= 1 && hourC <= 23) {
-                  result = " " + parseInt(hourC) + " 小时前"
-              } else if (minC >= 1 && minC <= 59) {
-                  result = " " + parseInt(minC) + " 分钟前"
-              } else if (diffValue >= 0 && diffValue <= minute) {
-                  result = "刚刚"
-              } else {
-                  var datetime = new Date();
-                  datetime.setTime(dateTimeStamp);
-                  var Nyear = datetime.getFullYear();
-                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
-                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
-                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
-                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-                  result = Nyear + "-" + Nmonth + "-" + Ndate
-              }
-              return result;
-          }
-          var lastUpDate = document.getElementById('last-update').innerHTML;
-          try {
-            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
-          } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-02-26 日';
-          }
-        </script>
-        
-      
-    </div>
-  </div>
-</section>
 
   
 
 
 </aside>
+
 
 
 		  
@@ -743,8 +698,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="利用 GitHub 搭建自己的个人博客";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
