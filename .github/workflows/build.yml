@@ -1,0 +1,79 @@
+# workflow 名字 具体的配置见  https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
+name: My Note Build Task
+# 在push *.md文件后执行任务
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
+  push:
+    # branches:    
+    #   - master
+    paths:
+      - '**.md'
+      - '**.yml'
+      - '**.yaml'
+      - '**.sh'
+    # tags:
+    #   - build**
+# on:
+#   schedule:
+#     - cron: "0 0 * * *"
+
+# on:
+#   push:
+#     paths-ignore:
+#     - 'docs/**'
+
+# on:
+#   push:
+#     tags:
+#       - "build**"
+
+# on:
+#   pull_request:
+#     paths:
+#     - '**.md'
+#     - '**.yml'
+#     - '**.sh'
+
+  # Also trigger on page_build, as well as release created events
+  # page_build:
+  # release:
+    # types: # This configuration does not affect the page_build event above
+      # - created
+
+jobs:
+  build:
+    # runs-on: macOS-latest
+    runs-on: ubuntu-latest
+    steps:
+    # 输出虚拟机的环境变量,非常有用
+    - name: print env
+      run: printenv
+    # 引用外部Action,拉取代码仓库到虚拟机工作目录
+    - name: chekout code
+      uses: actions/checkout@v1
+    # - name: pull code
+    #   run: |
+    #     git pull --rebase
+    # 编译iOS运行库
+    - name: build note
+      run: sh ./build.sh  
+    # 编译Android运行库,由于Mac预装了NDK,可以直接用;
+    # Windows上要下载ndk,下载速度非常快,忽略不计,但解压需要时间,所以直接在Mac编译Android
+    # - name: BuildAndroid
+    #   run: sh ./BuildAndroid.sh  
+    # 这里是一些额外的操作,通常不需要.这里是为了把编译好的二进制程序push到原始的GitHub仓库
+    - name: commit change
+      # env:
+      #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --local user.email "420640763@qq.com"
+        git config --local user.name "$GITHUB_ACTOR"
+        git status
+        git add ./
+        git status
+        git commit -m "auto build task run"
+    - name: push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.ACCESS_TOKEN }}
