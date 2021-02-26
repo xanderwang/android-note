@@ -62,6 +62,8 @@ jobs:
           git add ./
           echo "---------- git commit"
           git commit -m "auto build task"
+          echo "---------- git pull"
+          git pull origin master:master --rebase
           echo "---------- git status"
           git status
           echo "---------- git push"
