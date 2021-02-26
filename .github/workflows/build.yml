@@ -92,7 +92,7 @@ jobs:
         echo "---------- git commit"
         git commit -m "auto build task"
         echo "---------- git pull"
-        git pull -u origin master --rebase
+        git pull origin master:master --rebase
         echo "---------- git push"
         git push -u origin master
 
