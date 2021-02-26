@@ -37,12 +37,14 @@ jobs:
     #     sh ./build.sh  
     # 这里是一些额外的操作, 通常不需要. 这里是为了把编译好的二进制程序 push 到原始的 GitHub 仓库
     - name: commit changes
+      env:
+        GH_NAME: ${{ secrets.GH_NAME }}
+        GH_EMAIL: ${{ secrets.GH_EMAIL }}
       run: |
         echo "--------------------------------------------"
-        echo ${{ secrets.GH_NAME }}
-        echo "GH_NAME:${{ secrets.GH_NAME }} , GH_EMAIL:${{ secrets.GH_EMAIL }}"
-        git config --local user.name ${{ secrets.GH_NAME }}
-        git config --local user.email ${{ secrets.GH_EMAIL }}
+        echo "GH_NAME: $GH_NAME , GH_EMAIL: $GH_EMAIL "
+        git config --local user.name "$GH_NAME"
+        git config --local user.email "$GH_EMAIL"
         echo "---------- git config --list"
         git config --list
         echo "---------- git status"
@@ -63,13 +65,17 @@ jobs:
     #     cp ./_config_gitee.yml ./_config.yml
     #     sh ./build.sh  
     - name: commit changes and push
+      env: 
+        GITEE_NAME: ${{ secrets.GITEE_NAME }} 
+        GITEE_EMAIL: ${{ secrets.GITEE_EMAIL }}
+        GITEE_PATH: ${{ secrets.GITEE_PATH }}
       run: |
-        echo "GITEE_NAME:${{ secrets.GITEE_NAME }} , GITEE_EMAIL:${{ secrets.GITEE_EMAIL }}"
-        git config --local user.name ${{ secrets.GITEE_NAME }}
-        git config --local user.email ${{ secrets.GITEE_EMAIL }}
+        echo "GITEE_NAME: $GITEE_NAME , GITEE_EMAIL: $GITEE_EMAIL "
+        git config --local user.name "$GITEE_NAME"
+        git config --local user.email "GITEE_EMAIL"
         git remote rm origin
-        echo "GITEE_PATH:${{ secrets.GITEE_PATH }} "
-        git remote add origin ${{ secrets.GITEE_PATH }}
+        echo "GITEE_PATH: $GITEE_PATH "
+        git remote add origin $GITEE_PATH
         echo "---------- git config --list"
         git config --list
         echo "---------- git status"
