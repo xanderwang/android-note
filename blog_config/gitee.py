@@ -10,11 +10,11 @@ print("GITEE_PATH:", GITEE_PATH)
 
 # 设置邮箱等配置
 cmd_list = [
-    "git config --local user.name " + GITEE_NAME,
-    "git config --local user.email " + GITEE_EMAIL,
+    "git config --local user.name \"{0}\"".format(GITEE_NAME),
+    "git config --local user.email \"{0}\"".format(GITEE_EMAIL),
     "git config --list"
 ]
 
 for cmd in cmd_list:
+    print("cmd:", cmd)
     call(cmd)
-
