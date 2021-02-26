@@ -38,6 +38,8 @@ jobs:
     # 这里是一些额外的操作, 通常不需要. 这里是为了把编译好的二进制程序 push 到原始的 GitHub 仓库
     - name: commit changes
       run: |
+        echo "--------------------------------------------"
+        echo ${{ secrets.GH_NAME }}
         echo "GH_NAME:${{ secrets.GH_NAME }} , GH_EMAIL:${{ secrets.GH_EMAIL }}"
         git config --local user.name ${{ secrets.GH_NAME }}
         git config --local user.email ${{ secrets.GH_EMAIL }}
