@@ -9,17 +9,25 @@ print("GITEE_NAME:", GITEE_NAME, ",GITEE_EMAIL:", GITEE_EMAIL)
 print("GITEE_PATH:", GITEE_PATH)
 
 
-def doGit(args):
-    print("git", args)
-    call('git', args)
+def doGit(git_cmd):
+    print(git_cmd)
+    call(git_cmd)
 
 
 # 设置邮箱等配置
 cmd_list = [
-    "config --local user.name \"{0}\"".format(GITEE_NAME),
-    "config --local user.email \"{0}\"".format(GITEE_EMAIL), 
-    "config --list"
+    "git config --local user.name \"{0}\"".format(GITEE_NAME),
+    "git config --local user.email \"{0}\"".format(GITEE_EMAIL),
+    "git remote rm origin",
+    "git remote add origin {0}".format(GITEE_PATH),
+    "git config --list",
+    "git add ./",
+    "git commit -m \"auto build task\"",
 ]
 
-for cmd in cmd_list:
-    doGit(cmd)
+try :
+    for cmd in cmd_list:
+        doGit(cmd)
+except Exception as e:
+    print(e)
+
