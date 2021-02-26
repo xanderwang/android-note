@@ -24,20 +24,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # 输出虚拟机的环境变量, 非常有用
-    # - name: print env
-      # run: printenv
+    - name: print env
+      run: printenv
     # 引用外部 Action, 拉取代码仓库到虚拟机工作目录
     - name: chekout code
       uses: actions/checkout@v1
     # 开启编译脚本
-    - name: build github page
-      run: |
-        rm ./_config.yml
-        cp ./_config_github.yml ./_config.yml
-        sh ./build.sh  
+    # - name: build github page
+    #   run: |
+    #     rm ./_config.yml
+    #     cp ./_config_github.yml ./_config.yml
+    #     sh ./build.sh  
     # 这里是一些额外的操作, 通常不需要. 这里是为了把编译好的二进制程序 push 到原始的 GitHub 仓库
     - name: commit changes
       run: |
+        echo "GH_NAME:${{ secrets.GH_NAME }} , GH_EMAIL:${{ secrets.GH_EMAIL }}"
         git config --local user.name ${{ secrets.GH_NAME }}
         git config --local user.email ${{ secrets.GH_EMAIL }}
         echo "---------- git config --list"
@@ -50,21 +51,22 @@ jobs:
         git commit -m "auto build task"
         echo "---------- git status"
         git status
-    - name: push changes to github
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}        
-    - name: build gitee page 
-      run: |
-        rm ./_config.yml
-        cp ./_config_gitee.yml ./_config.yml
-        sh ./build.sh  
+    # - name: push changes to github
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}        
+    # - name: build gitee page 
+    #   run: |
+    #     rm ./_config.yml
+    #     cp ./_config_gitee.yml ./_config.yml
+    #     sh ./build.sh  
     - name: commit changes and push
       run: |
+        echo "GITEE_NAME:${{ secrets.GITEE_NAME }} , GITEE_EMAIL:${{ secrets.GITEE_EMAIL }}"
         git config --local user.name ${{ secrets.GITEE_NAME }}
         git config --local user.email ${{ secrets.GITEE_EMAIL }}
         git remote rm origin
-        # git remote add origin https://gitee.com/xander_wang/android-note.git
+        echo "GITEE_PATH:${{ secrets.GITEE_PATH }} "
         git remote add origin ${{ secrets.GITEE_PATH }}
         echo "---------- git config --list"
         git config --list
