@@ -12,6 +12,7 @@ on:
       - '**.yml'
       - '**.yaml'
       - '**.sh'
+      - '**.py'
     # tags:
     #   - build**
 # on:
