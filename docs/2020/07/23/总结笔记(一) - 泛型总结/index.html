@@ -496,14 +496,16 @@ listA.add(new B()); // 错误的，
 <h2 id="泛型的通配符-、extends-和-super"><a href="#泛型的通配符-、extends-和-super" class="headerlink" title="泛型的通配符 ?、extends 和 super"></a>泛型的通配符 <code>?</code>、<code>extends</code> 和 <code>super</code></h2><p>在理解通配符之前，我们需要知道的是，通配符的发明是为了解决什么问题？至少要解决的一个问题是：容器里面放进去的是什么，取出来的就是什么。</p>
 <p>这个问题，其实分两步，放进去，是说放进去同一种类型的东西。取出来，是说取出同一种类型的东西。或者说，用到通配符的地方应该是在不同的地方，一个地方把数据写到容器，另外一个地方把数据从容器拿出来，如果实在同一个代码块里写入和读取数据到同一个容器，应该是知道具体类型的，是不需要用到通配符的。</p>
 <h3 id="通配符"><a href="#通配符" class="headerlink" title="? 通配符"></a><code>?</code> 通配符</h3><p><code>?</code> 通配符称为无限通配符，表示不确定或者不关心类型。</p>
-<h3 id="extends-通配符"><a href="#extends-通配符" class="headerlink" title="extends 通配符"></a>extends 通配符</h3><p>一般称为上界通配符，表示的意思是：取值范围为 (某个类的子类, 某个类]。再想想我们之前说的，通配符要解决的问题？放进去的是什么，取出来的就应该是什么。放数据和取数据应用在不同的场景。</p>
+<h3 id="extends-通配符"><a href="#extends-通配符" class="headerlink" title="extends 通配符"></a>extends 通配符</h3><p>一般称为上界通配符，表示的意思是：取值范围为 (某个类的子类, 某个类]。再想想我们之前说的，通配符要解决的问题？放进去的是什么，取出来的就应该是什么。放数据和取数据应用在不同的场景。如果我们在同一个场景，就不需要用到通配符了，因为类型是已知的。</p>
 <p>通过上面的表述，容易推断出来 <code>&lt;? extends E&gt;</code> 的集合只能往外拿数据，因为取出来的一定是 <code>E</code> ，但是放进去的不知道是什么，可能是 <code>E</code> ，也可能是 <code>E</code> 的子类，如果允许往集合里面放东西，就不能保证放进去的是什么，拿出来的就是什么了。因为只能保证拿出来的是 <code>E</code> 。</p>
+<p>这个特性也叫做协变。</p>
 <h3 id="super-通配符"><a href="#super-通配符" class="headerlink" title="super 通配符"></a>super 通配符</h3><p>一般称为下界通配符，表示的意思是：取值范围为 [某个类，这个类的父类)。结合上面小节的解释，可以推断出 <code>&lt;? super S&gt;</code> 的集合只能往里面放数据，而不能从里面拿东西，为什么呢？因为 <code>&lt;? extends E&gt;</code> 解决的就是拿出来的问题啊，所以这个解决的就是放进去的问题啊，囧。里面放的是下限或者下限的子类。</p>
+<p>这个特性也叫做逆变。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>通配符与一个规则， <code>PE-CS</code>。</p>
 <ul>
-<li><p><code>PE</code> 是说，如果 T 表示的是一个生产者，应该用 <code>extends</code> 通配符。因为生产者有上限，比如生产笔的公司，上限就是能生产笔，但是不能生产布。</p>
+<li><p><code>PE</code> 简单的说，当只想从集合中获取元素，请<strong>把这个集合</strong>看成生产者，请使用&lt;? extends T&gt;，这就是 Producer extends 原则，PECS原则中的PE部分。集合生产元素后，就可以拿过来用了。</p>
 </li>
-<li><p><code>CS</code> 是说，如果某个集合表示一个消费者，应该用 <code>super</code> 通配符。因为消费者是有下限的，好比去买笔，购物车里面可以放铅笔、钢笔或者毛笔。这些下限就是笔，就是说都是笔。</p>
+<li><p><code>CS</code> 简单的说，当你仅仅想增加元素到集合，<strong>把这个集合</strong>看成消费者，请使用&lt;? super T&gt;。这就是 Consumer super 原则，PECS原则中的CS部分。集合消费元素，这样就可以往里面放了</p>
 </li>
 <li><p>同时作为生产者和消费者的情况不存在，因为你可以指定具体的泛型。</p>
 </li>
@@ -546,7 +548,7 @@ listA.add(new B()); // 错误的，
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-26T07:18:42+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-26T13:25:31+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Feb 26, 2021</p>
