@@ -43,9 +43,9 @@ jobs:
       run: |
         printenv
         echo "--------------------------------------------"
-        echo "GH_NAME: $GH_NAME , GH_EMAIL: $GH_EMAIL "
-        git config --local user.name "$GH_NAME"
-        git config --local user.email "$GH_EMAIL"
+        echo "GH_NAME: ${GH_NAME} , GH_EMAIL: ${GH_EMAIL} "
+        git config --local user.name "${GH_NAME}"
+        git config --local user.email "${GH_EMAIL}"
         echo "---------- git config --list"
         git config --list
         echo "---------- git status"
