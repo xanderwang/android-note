@@ -110,10 +110,14 @@ jobs:
         if [ "$(git pull origin master:master --rebase)" -eq 0 ];then
           echo "---------- git status"
           git status
+        else 
+          echo "---------- git pull fail"
         fi
         echo "---------- git push"
         if [ "$(git push origin HEAD:master)" -ne 0 ];then # 如果推送失败，就强制推送
           git push -f origin HEAD:master
+        else 
+          echo "---------- git push success"
         fi
     - name: publish gitee page
       uses: yanglbme/gitee-pages-action@main
