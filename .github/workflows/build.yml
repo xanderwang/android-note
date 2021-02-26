@@ -79,10 +79,11 @@ jobs:
         # python ./blog_config/gitee.py
         echo "GITEE_NAME: $GITEE_NAME , GITEE_EMAIL: $GITEE_EMAIL "
         git config --local user.name "$GITEE_NAME"
-        git config --local user.email "GITEE_EMAIL"
-        git remote rm origin
+        git config --local user.email "$GITEE_EMAIL"
+        # git remote rm origin
         echo "GITEE_PATH: $GITEE_PATH "
-        git remote add origin $GITEE_PATH
+        # git remote add origin $GITEE_PATH
+        git remote set-url origin $GITEE_PATH
         echo "---------- git config --list"
         git config --list
         echo "---------- git status"
