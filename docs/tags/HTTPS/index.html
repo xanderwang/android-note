@@ -5,6 +5,8 @@
   <!-- SEO相关 -->
   
     
+      <meta name="robots" content="noindex,follow">
+    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -22,9 +24,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>总结笔记(三) - Java 集合总结 - Xander&#39;s blog</title>
-  
-    <meta name="keywords" content="Android,集合">
+  <title>标签：HTTPS - Xander&#39;s blog</title>
   
 
   
@@ -343,7 +343,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper post dock' style="display: none;">
+        <div id="full" class='cover-wrapper  dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -413,344 +413,87 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
+
 <div class='l_main'>
-  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
-
-
-  
-  <div class="article-meta" id="top">
     
-    
-    
-      <h1 class="title">
-        总结笔记(三) - Java 集合总结
-      </h1>
-      <div class='new-meta-box'>
-        
-          
-            
-<div class='new-meta-item author'>
-  <a class='author' target="_blank" href="https://github.com/XanderWang/" rel="nofollow noopener">
-    <img no-lazy src="https://i.loli.net/2020/05/18/WO1oJwFsRb4gV79.png">
-    <p>XanderWang</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  <div class='new-meta-item category'>
-    <a class='notlink'>
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <a class="category-link" href="/android-note/categories/Java/">Java</a>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Feb 7, 2021</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  <div class="new-meta-item browse leancloud">
-    <a class='notlink'>
       
-      <div id="lc-pv" data-title="总结笔记(三) - Java 集合总结" data-path="/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%89)%20-%20Java%20%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/">
-        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-        次浏览
-      </div>
-    </a>
-  </div>
-
-
+  <section class="post-list">
+    
+      
+        
           
+        
+      
+    
+    
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/android-note/2021/02/26/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E5%85%AD)%20-%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/">
+        总结笔记(六) - 网络编程总结
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        网络编程总结网络协议总览网络协议分层
+网络协议框架
+各层协议之间的区别合联系应用层: Http WebSocket FTP 等
+传输层: TCP UDP
+网络层: IP
+链路层: -
+
+
+TCP 和 UDP
+
+
+TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端和服务器可以互相发送和接收消息。在客户端或者服务端没有主动断开链接的情况下，链接一直存在，所以一般 TCP 也成为长链...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-02-26</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/android-note/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
         
       </div>
-    
-  </div>
-
-
-  
-  
-  <h1 id="Java-集合总结"><a href="#Java-集合总结" class="headerlink" title="Java 集合总结"></a>Java 集合总结</h1><h2 id="Java-有哪些集合，继承关系是怎么样的"><a href="#Java-有哪些集合，继承关系是怎么样的" class="headerlink" title="Java 有哪些集合，继承关系是怎么样的"></a>Java 有哪些集合，继承关系是怎么样的</h2><p><img src="https://i.loli.net/2020/06/25/1WJPcAhjOQtyINo.png" class="lazyload placeholder" data-srcset="https://i.loli.net/2020/06/25/1WJPcAhjOQtyINo.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg" alt="集合框架图"></p>
-<h2 id="平时常用的集合有哪些"><a href="#平时常用的集合有哪些" class="headerlink" title="平时常用的集合有哪些"></a>平时常用的集合有哪些</h2><ul>
-<li>Collection<ul>
-<li>List 可以重复添加元素<ul>
-<li>ArrayList</li>
-<li>LinkedList</li>
-</ul>
-</li>
-<li>Set 不能重复添加元素<ul>
-<li>HashSet 不接受 null </li>
-<li>TreeSet</li>
-</ul>
-</li>
-<li>Queue<ul>
-<li>Deque</li>
-<li>PriorityQueue 数组实现，堆</li>
-<li>ArrayDeque 数组实现， 2 个游标</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Map 以键值对的形式保存值<ul>
-<li>HashMap<ul>
-<li>LinkedHashMap</li>
-</ul>
-</li>
-<li>TreeMap</li>
-<li>Hashtable</li>
-</ul>
-</li>
-</ul>
-<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p>数组实现，初始容量为 10，不够的时候扩容，扩容就是数组在当前长度基础上增大一倍。添加数据的时候，先判断容量是否够，不够就扩容，扩容完成后再添加。</p>
-<p>缺点: 线程不安全</p>
-<h4 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h4><p>链表实现。尾插法，即新节点插入到链表尾部。</p>
-<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><p>Java 1.8 底层基于 <code>HashMap</code> 实现，<code>HashMap</code> 的 <code>value</code> 都是同一个对象。</p>
-<h4 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h4><p>Java 1.8 默认是 <code>TreeMap</code> 实现，也可以给构造方法传入一个  <code>NavigableMap(接口)</code> 的实现实例。</p>
-<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><h4 id="Deque"><a href="#Deque" class="headerlink" title="Deque"></a>Deque</h4><p>双端队列，</p>
-<h4 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h4><p>堆，数组实现的</p>
-<h4 id="ArrayDeque"><a href="#ArrayDeque" class="headerlink" title="ArrayDeque"></a>ArrayDeque</h4><h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p>最常用的一种结构，以数组为基础，数组元素为链表的复合结构。</p>
-<p>需要注意的是：</p>
-<blockquote>
-<p>初始容量为 16，默认承载因子为 0.75 ，需要注意的是，在指定容量的时候，如果不是 2 的指数，会计算一个大于指定容量，但是同时又是符合要求里面最小的一个 2 的指数作为容量。</p>
-</blockquote>
-<blockquote>
-<p>当元素个数大于或等于(当前容量 * 承载因子)，就会扩容。</p>
-</blockquote>
-<blockquote>
-<p>Java 1.7 插入数据的时候是头插法，即新的节点在链表头部。Java 1.8 及以后是尾插法，即新的节点在链表尾部。这个修改是为了解决扩容的时候可能会发生的死循环的问题。</p>
-</blockquote>
-<blockquote>
-<p>Java 1.8 及以后，当同一个链表元素个数大于等于 (8 - 1) 的时候，会变成红黑树来存储，目的是提高效率。红黑树的转变是先比较 key 的 hash 大小，如果相同就尝试比较 key 自身。</p>
-</blockquote>
-<blockquote>
-<p>无论是扩容，还是转成红黑树，都是先把节点放进去后再做扩容或者转换。</p>
-</blockquote>
-<blockquote>
-<p>hash 碰撞，是指不同的 key, key 的 hash 和数组大小再次计算后,得出的索引一致。 hash 碰撞越少，HashMap 的效率越高。1.7 和 1.8 hash 算法有区别。</p>
-</blockquote>
-<h4 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h4><p>基于 <code>HashMap</code> 实现的，同时还是一个双向循环链表(比 HashMap 的节点多了个 before 和 after 指针)，在开启排序的情况下，最近使用过的节点(put、get)会放在链表尾部。</p>
-<p>这个特性很适合 <code>LRU</code> 算法的实现，大概原理就是 <code>LinkedHashMap</code> 开启排序，然后最近使用的元素都在链表<strong>尾部</strong>，当链表长度大于指定长度的时候，就从链表头部开始删除，因为链表头部是最近没有使用的。</p>
-<h4 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h4><p><code>synchroinzed</code> 实现线程安全，效率低下。</p>
-<h4 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h4><p>TreeMap 在 Java 1.8 底层实现是一个<strong>红黑树</strong>，排序的规则是比较 key 的 “大小”。并且要求 key 的类型是需要可以比较的，并且 key 值不能为 null。</p>
-<p>和 <code>HashMap</code> 一样，先插入数据，然后在重排序。</p>
-<h2 id="碰到的常见问题"><a href="#碰到的常见问题" class="headerlink" title="碰到的常见问题"></a>碰到的常见问题</h2><h3 id="线程安全问题"><a href="#线程安全问题" class="headerlink" title="线程安全问题"></a>线程安全问题</h3><p>由于以上的都不是线程安全的，所以多线程的时候容易出问题，对于安全的线程有以下的几种</p>
-<ul>
-<li>List<ul>
-<li>Vector 通过方法添加 <code>synchizoned</code> 关键字实现，效率低下。</li>
-<li>CopyOnWriteArrayList <strong>每次</strong><code>写(添加，删除，修改)</code>的时候，都会生成一个新副本，所以频繁的写操作会消耗大量内存。</li>
-</ul>
-</li>
-<li>Set<ul>
-<li>CopyOnWriteArraySet 类似 CopyOnWriteArrayList</li>
-</ul>
-</li>
-<li>Map<ul>
-<li>ConcurrentHashMap  Java 1.7 是通过分段锁实现，Java 1.8 是 <code>CAS</code> 和 <code>synchroinzed</code> 实现</li>
-</ul>
-</li>
-</ul>
-<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p>分段锁来实现，分段锁可以提高效率，是因为如果不同线程的读写发生在不同的段上，实际上是没有锁竞争的，也就是没有线程被阻塞，所以效率高。</p>
-<h4 id="Java-1-7-及以前实现原理"><a href="#Java-1-7-及以前实现原理" class="headerlink" title="Java 1.7 及以前实现原理"></a>Java 1.7 及以前实现原理</h4><p>ConcurrentHashMap 有一个 segments 数组，这个数组元素的类型是 Segment，它继承自 ReentrantLock ，也就是说 Segment 是一个锁。</p>
-<p>ConcurrentHashMap 插入或者修改数据的时候，会先找到是哪一个 segment , 然后在这个 segment 上面插入或者修改数据，而 segment 插入或者修改数据的时候，会先尝试获取锁，如果获取失败，说明有锁竞争，然后先尝试自旋，自旋超过次后，就开始阻塞线程。因此是线程安全的。</p>
-<p>另外需要注意的是获取数据的时候没有加锁，因为是 <code>volatile</code> 变量，可以拿到最新的数据，但是呢，</p>
-<h4 id="Java-1-8-及以后实现原理"><a href="#Java-1-8-及以后实现原理" class="headerlink" title="Java 1.8 及以后实现原理"></a>Java 1.8 及以后实现原理</h4><p>类似 HashMap ,放弃了分段锁，在插入或者修改数据的时候利用 cas 和 synchionzed 来保证线程安全，大概的原理就是先利用 cas 来设置，设置失败的时候说明有线程竞争，这个时候就用  synchionzed 来加锁，保证线程安全。</p>
-<h4 id="Java-1-8-之后，为何放弃了分段锁"><a href="#Java-1-8-之后，为何放弃了分段锁" class="headerlink" title="Java 1.8 之后，为何放弃了分段锁"></a>Java 1.8 之后，为何放弃了分段锁</h4><p>分段后，数据不连续，碎片较多，内存浪费严重，扩容等操作耗费大量的时间。</p>
-<p>Java 1.8 是用的 synchornized + HashMap 来做的， synchornized jvm 层做了优化，同时 HashMap 也做了红黑树的优化，所以效率方面有保障。</p>
-<h2 id="主要方法总结"><a href="#主要方法总结" class="headerlink" title="主要方法总结"></a>主要方法总结</h2><h3 id="List-接口"><a href="#List-接口" class="headerlink" title="List 接口"></a>List 接口</h3><pre><code>- add(E):boolean
-- add(int, E):boolean
-- remove(int):E
-- remove(E):boolean
-- size():int
-</code></pre>
-<h4 id="Stack-类"><a href="#Stack-类" class="headerlink" title="Stack 类"></a>Stack 类</h4><p>继承自 Vector , Vector 是一个同步安全的 List</p>
-<pre><code>- push(E):E 入栈
-- pop():E 出栈
-- peek():E 查看顶部第一个元素
-- search(Object):int
-- empty() 是否是空的
-</code></pre>
-<h3 id="Set-接口"><a href="#Set-接口" class="headerlink" title="Set 接口"></a>Set 接口</h3><pre><code>- add(E):boolean
-- contains(Object):boolean
-- remove(Object):boolean
-- size():int
-</code></pre>
-<h3 id="Queue-1"><a href="#Queue-1" class="headerlink" title="Queue"></a>Queue</h3><pre><code>- add 添加元素，返回添加结果，如果不能添加就抛出异常
-- remove 删除队列头，空队列异常
-- element 返回队列头，空队列异常
-
-- offer 添加元素，返回添加结果
-- poll 返回并删除队列头，空队列的话返回 null
-- peek 返回队列头，空队列的话返回 null
-</code></pre>
-<h3 id="Map-接口"><a href="#Map-接口" class="headerlink" title="Map 接口"></a>Map 接口</h3><pre><code>- put(K, V):V
-- remove(Object):V
-- containsKey(Object):boolean
-- containsValue(Object):boolean
-- size():int
-</code></pre>
-<h3 id="ArrayMap-和-HashMap"><a href="#ArrayMap-和-HashMap" class="headerlink" title="ArrayMap 和 HashMap"></a>ArrayMap 和 HashMap</h3><p>ArrayMap 有缓存， HashMap 没有</p>
-<p>内存小</p>
-<p><a target="_blank" rel="noopener" href="http://gityuan.com/2019/01/13/arraymap/">深度解读ArrayMap优势与缺陷</a></p>
-<p>SparseArray 和 ArrayList</p>
-
-  
-  
-    
-    <div class='footer'>
       
-      
-      
-        <div class='copyright'>
-          <blockquote>
-            
-              
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
-
-              
-            
-              
-                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%89)%20-%20Java%20%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/>https://xanderwang.github.io/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%89)%20-%20Java%20%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/</a></p>
-              
-            
-          </blockquote>
+        <div>
+          <a class='readmore' href='/android-note/2021/02/26/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E5%85%AD)%20-%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/'>
+            阅读全文
+          </a>
         </div>
       
-      
     </div>
   
-  
-    
 
-
-  <div class='article-meta' id="bottom">
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-26T15:06:37+00:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Feb 26, 2021</p>
-  </a>
 </div>
 
+          </div>
         
       
-        
-          
+    
+  </section>
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/%E9%9B%86%E5%90%88/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>集合</p></a></div>
-
-
-        
-      
-        
-          
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
     
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%89)%20-%20Java%20%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/&title=总结笔记(三) - Java 集合总结 - Xander's blog&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%89)%20-%20Java%20%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/&title=总结笔记(三) - Java 集合总结 - Xander's blog&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%89)%20-%20Java%20%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/&title=总结笔记(三) - Java 集合总结 - Xander's blog&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg">
-          
-        </a>
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
-
-
-
-        
-      
-    </div>
-  </div>
-
-
-  
   
 
-  
-    <div class="prev-next">
-      
-        <a class='prev' href='/android-note/2021/02/24/%E5%86%99%E4%BA%86%E4%B8%AA%20Android%20%E6%80%A7%E8%83%BD%E6%A3%80%E6%B5%8B%E7%9A%84%E5%BA%93%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E7%9C%8B%E6%80%A7%E8%83%BD%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B9%88/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>写了个 Android 性能检测的库，还有人看性能相关的么</p>
-          <p class='content'>简介由于本人工作需要，需要解决一些性能问题，虽然有 Profiler 、Systrace  等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，...</p>
-        </a>
-      
-      
-        <a class='next' href='/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/'>
-          <p class='title'>总结笔记(二) - Java 反射和注解总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>反射总结什么是反射反射是 Java 语言的一个特性，就是在程序运行状态中，对于任何一个类，都可以通过反射知道这个类所有的方法和属性。对于任何一个实例，都可以调用这个实例的任何方法和属性。这个在运...</p>
-        </a>
-      
-    </div>
-  
-</article>
 
-
-  
-
-  <article class="post white-box reveal shadow" id="comments">
-    <p ct><i class='fas fa-comments'></i> 评论</p>
     
-    <div id="valine_container" class="valine_thread">
-  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-</div>
-
-  </article>
-
-
-
-
-
-
+  
 </div>
 <aside class='l_side'>
   
@@ -758,28 +501,253 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
 
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box circle' href='/android-note/about/'>
+          <img no-lazy src='https://i.loli.net/2020/05/18/WO1oJwFsRb4gV79.png'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">Xander's blog</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:420640763@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/XanderWang/"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/android-note/"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
 
+  
 
-  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
     
   <header>
     
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
     
   </header>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9B%86%E5%90%88%EF%BC%8C%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84"><span class="toc-text">Java 有哪些集合，继承关系是怎么样的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E6%97%B6%E5%B8%B8%E7%94%A8%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-text">平时常用的集合有哪些</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#List"><span class="toc-text">List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList"><span class="toc-text">ArrayList</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LinkedList"><span class="toc-text">LinkedList</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashSet"><span class="toc-text">HashSet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TreeSet"><span class="toc-text">TreeSet</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Queue"><span class="toc-text">Queue</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Deque"><span class="toc-text">Deque</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PriorityQueue"><span class="toc-text">PriorityQueue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayDeque"><span class="toc-text">ArrayDeque</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map"><span class="toc-text">Map</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap"><span class="toc-text">HashMap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LinkedHashMap"><span class="toc-text">LinkedHashMap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hashtable"><span class="toc-text">Hashtable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TreeMap"><span class="toc-text">TreeMap</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A2%B0%E5%88%B0%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">碰到的常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="toc-text">线程安全问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ConcurrentHashMap"><span class="toc-text">ConcurrentHashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-1-7-%E5%8F%8A%E4%BB%A5%E5%89%8D%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-text">Java 1.7 及以前实现原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-1-8-%E5%8F%8A%E4%BB%A5%E5%90%8E%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-text">Java 1.8 及以后实现原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-1-8-%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%B8%BA%E4%BD%95%E6%94%BE%E5%BC%83%E4%BA%86%E5%88%86%E6%AE%B5%E9%94%81"><span class="toc-text">Java 1.8 之后，为何放弃了分段锁</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93"><span class="toc-text">主要方法总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#List-%E6%8E%A5%E5%8F%A3"><span class="toc-text">List 接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Stack-%E7%B1%BB"><span class="toc-text">Stack 类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set-%E6%8E%A5%E5%8F%A3"><span class="toc-text">Set 接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Queue-1"><span class="toc-text">Queue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map-%E6%8E%A5%E5%8F%A3"><span class="toc-text">Map 接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayMap-%E5%92%8C-HashMap"><span class="toc-text">ArrayMap 和 HashMap</span></a></li></ol></li></ol>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/android-note/categories/Android/" href="/android-note/categories/Android/"
+            id="android-notecategoriesAndroid"
+            ><div class='name'>Android</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/android-note/categories/Java/" href="/android-note/categories/Java/"
+            id="android-notecategoriesJava"
+            ><div class='name'>Java</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/android-note/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" href="/android-note/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"
+            id="android-notecategoriesE7BC96E7A88BE59FBAE7A180"
+            ><div class='name'>编程基础</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
     </div>
   </section>
 
 
   
 
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop mobile">
+    
+  <header>
+    
+      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/android-note/tags/Android/" style="font-size: 24px; color: #555">Android</a> <a href="/android-note/tags/GitHub-Page/" style="font-size: 14px; color: #999">GitHub Page</a> <a href="/android-note/tags/Github-Action/" style="font-size: 14px; color: #999">Github Action</a> <a href="/android-note/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/android-note/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/android-note/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/android-note/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/android-note/tags/Java-%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">Java 线程</a> <a href="/android-note/tags/Performance/" style="font-size: 19px; color: #777">Performance</a> <a href="/android-note/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/android-note/tags/%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">优化</a> <a href="/android-note/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 14px; color: #999">反射</a> <a href="/android-note/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 14px; color: #999">泛型</a> <a href="/android-note/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 14px; color: #999">注解</a> <a href="/android-note/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 14px; color: #999">网络编程</a> <a href="/android-note/tags/%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">集合</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+<section class="widget shadow desktop">
+  
+  <header>
+    
+      <i class="fas fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="webinfo">
+      
+        <div class="webinfo-item">
+          <div>文章数目：</div>
+          <div>10 篇</div>
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>已运行时间：</div>
+          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
+        </div>
+        <script>
+          var BirthDay = new Date(new Date('2020/01/01'));
+          var today = new Date();
+          var timeold = (today.getTime() - BirthDay.getTime());
+          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
+          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
+        </script>
+      
+
+
+      
+        <div class="webinfo-item">
+          <div>本站总字数：</div>
+          <div>18.7k 字</div>
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>本站访客数：</div>
+          
+          <div><span id="lc-uv"><span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 人</div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>本站总访问量：</div>
+          
+          <div><span id="lc-sv"><span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 次</div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>最后活动时间：</div>
+          
+            <div id="last-update" style="display: none;">Fri Feb 26 2021 15:07:12 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update-show">2021-02-26 日</div>
+          
+        </div>
+        
+        <script>
+          function timeago(dateTimeStamp) {
+              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
+              var hour = minute * 60;
+              var day = hour * 24;
+              var week = day * 7;
+              var month = day * 30;
+              var now = new Date().getTime(); //获取当前时间毫秒
+              var diffValue = now - dateTimeStamp; //时间差
+              if (diffValue < 0) {
+                  return;
+              }
+              var minC = diffValue / minute; //计算时间差的分，时，天，周，月
+              var hourC = diffValue / hour;
+              var dayC = diffValue / day;
+              var weekC = diffValue / week;
+              var monthC = diffValue / month;
+              if (monthC >= 1 && monthC <= 3) {
+                  result = " " + parseInt(monthC) + " 月前"
+              } else if (weekC >= 1 && weekC <= 3) {
+                  result = " " + parseInt(weekC) + " 周前"
+              } else if (dayC >= 1 && dayC <= 6) {
+                  result = " " + parseInt(dayC) + " 天前"
+              } else if (hourC >= 1 && hourC <= 23) {
+                  result = " " + parseInt(hourC) + " 小时前"
+              } else if (minC >= 1 && minC <= 59) {
+                  result = " " + parseInt(minC) + " 分钟前"
+              } else if (diffValue >= 0 && diffValue <= minute) {
+                  result = "刚刚"
+              } else {
+                  var datetime = new Date();
+                  datetime.setTime(dateTimeStamp);
+                  var Nyear = datetime.getFullYear();
+                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
+                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+                  result = Nyear + "-" + Nmonth + "-" + Ndate
+              }
+              return result;
+          }
+          var lastUpDate = document.getElementById('last-update').innerHTML;
+          try {
+            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
+          } catch (error) {
+            document.getElementById('last-update-show').innerHTML = '2021-02-26 日';
+          }
+        </script>
+        
+      
+    </div>
+  </div>
+</section>
+
+  
+
 
 </aside>
-
 
 
 		  
@@ -788,8 +756,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=true;
-  pdata.postTitle="总结笔记(三) - Java 集合总结";
+  pdata.ispage=false;
+  pdata.postTitle="";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
