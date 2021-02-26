@@ -34,7 +34,7 @@ categories:
 
 找到你的 `repository` ，然后
 
-> settings -> GitHub Pages -> Source -> 选择分支和静态博客的根目录
+> settings -> GitHub Pages -> Source -> 选择分支和静态博客的目录(貌似只能选 `/` 或者 `/doc`)
 
 到这里 GitHub 托管就设置好了。按照之前的规则你就可以访问你托管 blog 了。
 
@@ -76,29 +76,26 @@ jobs: # 配置具体任务
       uses: actions/checkout@v1
     # 执行 .sh 脚本文件，很多的任务可以在这个脚本里面执行
     - name: build note
-      run: sh ./build.sh  
-    # 这里是一些额外的操作, 通常不需要. 这里是为了把编译好的静态 blog 文件 push 到 GitHub 仓库
-    - name: commit change
-      run: |
-        git config --local user.email "420640763@qq.com"
-        git config --local user.name "$GITHUB_ACTOR"
-        echo "---------- git config --list"
-        git config --list
-        echo "---------- git status"
-        git status
-        echo "---------- git add ./"
-        git add ./
-        echo "---------- git commit"
-        git commit -m "auto build task"
-        echo "---------- git status"
-        git status
-    # 这里引用其他的 Action ，上传 commit 到自己的 repository 
-    - name: push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }} 
+      run: sh ./blog_config/build.sh
+...  
 ```
 上面列出了主要的步骤和解释了，具体可以参考[我的 repository](https://github.com/XanderWang/android-note) 
+
+这里需要说明的是，如果你需要额外传一些参数，比如密码是的，你需要现在 repository 做一些设置，具体参考如下：
+
+> settings -> secrets -> 新建一个 secret 
+
+然后在你的 `build.yml` 里面使用
+```yml
+steps:
+  - name: Hello world action
+    with: # Set the secret as an input
+      super_secret: ${{ secrets.SuperSecret }}
+    env: # Or as an environment variable
+      super_secret: ${{ secrets.SuperSecret }}
+    run: |
+      example-command "$super_secret"
+```
 
 到这里自动编译和发布的工作就说完了，现在我们还缺什么？
 
@@ -130,7 +127,7 @@ jobs: # 配置具体任务
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://xanderwang.github.io/android-note
 root: /android-note/
-# 需要注意这里的配置，注意 url 和 root 的配置，如果不是用的GitHub 同名 repository 托管的，都需要配置
+# 需要注意这里的配置，注意 url 和 root 的配置，如果不是用的 GitHub 同名 repository 托管的，都需要配置
 
 # Directory
 public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的站点文件。
