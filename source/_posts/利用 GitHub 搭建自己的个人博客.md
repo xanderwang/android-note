@@ -71,9 +71,6 @@ jobs: # 配置具体任务
     # runs-on: macOS-latest
     runs-on: ubuntu-latest
     steps:
-    # 输出虚拟机的环境变量, 非常有用
-    # - name: print env
-      # run: printenv
     # 引用外部 Action, 拉取代码仓库到虚拟机工作目录
     - name: chekout code
       uses: actions/checkout@v1
