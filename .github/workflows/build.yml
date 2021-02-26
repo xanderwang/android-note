@@ -95,7 +95,7 @@ jobs:
           git status
         fi
         echo "---------- git pull"
-        git pull --rebase
+        git pull origin master:master --rebase
         echo "---------- git status"
         git status
         echo "---------- git push"
