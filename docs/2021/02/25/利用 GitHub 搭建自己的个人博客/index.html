@@ -500,7 +500,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>后来我发现不是这样，至少目前不是这样，我发现任意的 <code>repository</code> 都可以托管，只需要做一些特别的设置，如何设置呢？</p>
 <p>找到你的 <code>repository</code> ，然后</p>
 <blockquote>
-<p>settings -&gt; GitHub Pages -&gt; Source -&gt; 选择分支和静态博客的根目录</p>
+<p>settings -&gt; GitHub Pages -&gt; Source -&gt; 选择分支和静态博客的目录(貌似只能选 <code>/</code> 或者 <code>/doc</code>)</p>
 </blockquote>
 <p>到这里 GitHub 托管就设置好了。按照之前的规则你就可以访问你托管 blog 了。</p>
 <h1 id="GitHub-Action"><a href="#GitHub-Action" class="headerlink" title="GitHub Action"></a>GitHub Action</h1><p>刚刚说了，如果有个自动编译和上传 blog 的工具或者平台，每次我们写好 blog 后，自动帮我们编译上传好，那我们就可以省很多事。GitHub Action 正好可以做这个的，而且可以和 GitHub 无缝对接。那如何使用呢？</p>
@@ -534,29 +534,24 @@ jobs: # 配置具体任务
       uses: actions/checkout@v1
     # 执行 .sh 脚本文件，很多的任务可以在这个脚本里面执行
     - name: build note
-      run: sh ./build.sh  
-    # 这里是一些额外的操作, 通常不需要. 这里是为了把编译好的静态 blog 文件 push 到 GitHub 仓库
-    - name: commit change
-      run: |
-        git config --local user.email &quot;420640763@qq.com&quot;
-        git config --local user.name &quot;$GITHUB_ACTOR&quot;
-        echo &quot;---------- git config --list&quot;
-        git config --list
-        echo &quot;---------- git status&quot;
-        git status
-        echo &quot;---------- git add ./&quot;
-        git add ./
-        echo &quot;---------- git commit&quot;
-        git commit -m &quot;auto build task&quot;
-        echo &quot;---------- git status&quot;
-        git status
-    # 这里引用其他的 Action ，上传 commit 到自己的 repository 
-    - name: push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: $&#123;&#123; secrets.GITHUB_TOKEN &#125;&#125; 
+      run: sh ./blog_config/build.sh
+...  
 </code></pre>
 <p>上面列出了主要的步骤和解释了，具体可以参考<a target="_blank" rel="noopener" href="https://github.com/XanderWang/android-note">我的 repository</a> </p>
+<p>这里需要说明的是，如果你需要额外传一些参数，比如密码是的，你需要现在 repository 做一些设置，具体参考如下：</p>
+<blockquote>
+<p>settings -&gt; secrets -&gt; 新建一个 secret </p>
+</blockquote>
+<p>然后在你的 <code>build.yml</code> 里面使用</p>
+<pre><code class="yml">steps:
+  - name: Hello world action
+    with: # Set the secret as an input
+      super_secret: $&#123;&#123; secrets.SuperSecret &#125;&#125;
+    env: # Or as an environment variable
+      super_secret: $&#123;&#123; secrets.SuperSecret &#125;&#125;
+    run: |
+      example-command &quot;$super_secret&quot;
+</code></pre>
 <p>到这里自动编译和发布的工作就说完了，现在我们还缺什么？</p>
 <h1 id="hexo-amp-配套主题"><a href="#hexo-amp-配套主题" class="headerlink" title="hexo &amp; 配套主题"></a>hexo &amp; 配套主题</h1><p>前面说了托管和自动编译和发布，现在我们就差一个个性化的静态 blog 模板了，这里我选择的是 hexo &amp; 配套主题。</p>
 <h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><p>这个是一个静态的博客构建软件，配合网络上的主题，可以比较方便构建出自己的博客，同时有大量的精美主题可以选择。</p>
@@ -571,7 +566,7 @@ jobs: # 配置具体任务
 ## If your site is put in a subdirectory, set url as &#39;http://yoursite.com/child&#39; and root as &#39;/child/&#39;
 url: https://xanderwang.github.io/android-note
 root: /android-note/
-# 需要注意这里的配置，注意 url 和 root 的配置，如果不是用的GitHub 同名 repository 托管的，都需要配置
+# 需要注意这里的配置，注意 url 和 root 的配置，如果不是用的 GitHub 同名 repository 托管的，都需要配置
 
 # Directory
 public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的站点文件。
@@ -614,7 +609,7 @@ public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的�
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-26T05:33:57+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-26T06:39:39+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Feb 26, 2021</p>
