@@ -23,13 +23,15 @@ jobs:
     # runs-on: macOS-latest
     runs-on: ubuntu-latest
     steps:
-    # 输出虚拟机的环境变量, 非常有用
-    - name: print env
-      run: printenv
+    # 设置 python 环境
+    - name: 'Set python'
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
     # 引用外部 Action, 拉取代码仓库到虚拟机工作目录
     - name: chekout code
       uses: actions/checkout@v1
-    # 开启编译脚本
+    # 运行编译脚本
     # - name: build github page
     #   run: |
     #     rm ./_config.yml
@@ -40,24 +42,24 @@ jobs:
       env:
         GH_NAME: ${{ secrets.GH_NAME }}
         GH_EMAIL: ${{ secrets.GH_EMAIL }}
-      run: |
-        printenv
-        echo "--------------------------------------------"
-        echo "GH_NAME: ${GH_NAME} , GH_EMAIL: ${GH_EMAIL} "
-        git config --local user.name "${GH_NAME}"
-        git config --local user.email "${GH_EMAIL}"
-        echo "---------- git config --list"
-        git config --list
-        echo "---------- git status"
-        git status
-        if [ -n "$(git status -s)" ];then
-          echo "---------- git add ./"
-          git add ./
-          echo "---------- git commit"
-          git commit -m "auto build task"
-          echo "---------- git status"
-          git status
-        fi
+      run: python ./github.py
+        # printenv
+        # echo "--------------------------------------------"
+        # echo "GH_NAME: ${GH_NAME} , GH_EMAIL: ${GH_EMAIL} "
+        # git config --local user.name "${GH_NAME}"
+        # git config --local user.email "${GH_EMAIL}"
+        # echo "---------- git config --list"
+        # git config --list
+        # echo "---------- git status"
+        # git status
+        # if [ -n "$(git status -s)" ];then
+        #   echo "---------- git add ./"
+        #   git add ./
+        #   echo "---------- git commit"
+        #   git commit -m "auto build task"
+        #   echo "---------- git status"
+        #   git status
+        # fi
     # - name: push changes to github
     #   uses: ad-m/github-push-action@master
     #   with:
@@ -72,23 +74,23 @@ jobs:
         GITEE_NAME: ${{ secrets.GITEE_NAME }} 
         GITEE_EMAIL: ${{ secrets.GITEE_EMAIL }}
         GITEE_PATH: ${{ secrets.GITEE_PATH }}
-      run: |
-        echo "GITEE_NAME: $GITEE_NAME , GITEE_EMAIL: $GITEE_EMAIL "
-        git config --local user.name "$GITEE_NAME"
-        git config --local user.email "GITEE_EMAIL"
-        git remote rm origin
-        echo "GITEE_PATH: $GITEE_PATH "
-        git remote add origin $GITEE_PATH
-        echo "---------- git config --list"
-        git config --list
-        echo "---------- git status"
-        git status
-        echo "---------- git add ./"
-        git add ./
-        echo "---------- git commit"
-        git commit -m "auto build task"
-        echo "---------- git pull"
-        git pull --rebase
-        echo "---------- git push"
-        git push -u origin master
+      run: python gitee.py
+        # echo "GITEE_NAME: $GITEE_NAME , GITEE_EMAIL: $GITEE_EMAIL "
+        # git config --local user.name "$GITEE_NAME"
+        # git config --local user.email "GITEE_EMAIL"
+        # git remote rm origin
+        # echo "GITEE_PATH: $GITEE_PATH "
+        # git remote add origin $GITEE_PATH
+        # echo "---------- git config --list"
+        # git config --list
+        # echo "---------- git status"
+        # git status
+        # echo "---------- git add ./"
+        # git add ./
+        # echo "---------- git commit"
+        # git commit -m "auto build task"
+        # echo "---------- git pull"
+        # git pull --rebase
+        # echo "---------- git push"
+        # git push -u origin master
 
