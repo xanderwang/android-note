@@ -9,8 +9,6 @@ categories:
 - Java
 ---
 
-[toc]
-
 # Java 集合总结
 
 ## Java 有哪些集合，继承关系是怎么样的
