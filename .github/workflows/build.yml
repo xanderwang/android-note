@@ -43,6 +43,8 @@ jobs:
       env:
         GH_NAME: ${{ secrets.GH_NAME }}
         GH_EMAIL: ${{ secrets.GH_EMAIL }}
+        # https://username:password@github.com/username/repo_name.git #这个格式可以用账户和密码登录来控制上传代码
+        GH_PATH: ${{ secrets.GH_PATH }}
       run: |
         # python ./blog_config/github.py
         # printenv
@@ -50,6 +52,7 @@ jobs:
         echo "GH_NAME: ${GH_NAME} , GH_EMAIL: ${GH_EMAIL} "
         git config --local user.name "${GH_NAME}"
         git config --local user.email "${GH_EMAIL}"
+        git remote set-url origin $GH_PATH
         echo "---------- git config --list"
         git config --list
         echo "---------- git status"
@@ -61,11 +64,16 @@ jobs:
           git commit -m "auto build task"
           echo "---------- git status"
           git status
+          echo "---------- git push"
+          git push origin HEAD:master
+        else
+        then
+          echo "---------- no change"
         fi
-    - name: push changes to github
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}        
+    # - name: push changes to github
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}        
     - name: build gitee page 
       run: |
         rm ./_config.yml
@@ -94,11 +102,14 @@ jobs:
           git commit -m "auto build task"
           echo "---------- git status"
           git status
+          echo "---------- git pull"
+          git pull origin master:master --rebase
+          echo "---------- git status"
+          git status
+          echo "---------- git push"
+          git push origin HEAD:master
+        else
+        then
+          echo "---------- no change"
         fi
-        echo "---------- git pull"
-        git pull origin master:master --rebase
-        echo "---------- git status"
-        git status
-        echo "---------- git push"
-        git push origin HEAD:master
 
