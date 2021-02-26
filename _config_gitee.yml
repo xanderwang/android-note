@@ -5,7 +5,7 @@
 # Site
 title: Xander's blog
 subtitle: Android blog
-description: My blog for Android
+description: A blog for Android
 author: Xander Wang
 language: zh-Hans
 timezone: Asia/Shanghai
@@ -18,10 +18,10 @@ github_username: XanderWang
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://xanderwang.github.io/android-note
+url: http://xander_wang.gitee.io/android-note
 root: /android-note/
 permalink: :year/:month/:day/:title/
-permalink_defaults: https://xanderwang.github.io/android-note
+permalink_defaults: http://xander_wang.gitee.io/android-note
 
 # Directory
 source_dir: source    # 资源文件夹，这个文件夹用来存放内容。
