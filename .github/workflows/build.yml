@@ -99,5 +99,5 @@ jobs:
         echo "---------- git status"
         git status
         echo "---------- git push"
-        git push 
+        git push origin HEAD:master
 
