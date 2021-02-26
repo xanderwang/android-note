@@ -4,7 +4,6 @@ ls -la
 echo '------------------------------- start npm install '
 # 安装依赖的环境
 # npm install
-# sudo npm install hexo -g
 sudo npm install hexo-cli -g
 npm install hexo-generator-archive
 npm install hexo-generator-category
@@ -31,10 +30,8 @@ echo '-------------------------------'
 # rm -rf ./doc
 hexo clean --debug
 echo '-------------------------------'
-# 编译
+# 生成静态网页
 hexo generate --debug
-# 拷贝内容
-# cp -R ./public/* ./
 ls -la
 echo '============= end build.sh ==================='
 

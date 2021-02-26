@@ -35,14 +35,14 @@ jobs:
     # - name: build github page
     #   run: |
     #     rm ./_config.yml
-    #     cp ./_config_github.yml ./_config.yml
+    #     cp ./blog_config/_config_github.yml ./_config.yml
     #     sh ./build.sh  
     # 这里是一些额外的操作, 通常不需要. 这里是为了把编译好的二进制程序 push 到原始的 GitHub 仓库
     - name: commit changes
       env:
         GH_NAME: ${{ secrets.GH_NAME }}
         GH_EMAIL: ${{ secrets.GH_EMAIL }}
-      run: python ./github.py
+      run: python ./blog_config/github.py
         # printenv
         # echo "--------------------------------------------"
         # echo "GH_NAME: ${GH_NAME} , GH_EMAIL: ${GH_EMAIL} "
@@ -67,14 +67,14 @@ jobs:
     # - name: build gitee page 
     #   run: |
     #     rm ./_config.yml
-    #     cp ./_config_gitee.yml ./_config.yml
+    #     cp ./blog_config/_config_gitee.yml ./_config.yml
     #     sh ./build.sh  
     - name: commit changes and push
       env: 
         GITEE_NAME: ${{ secrets.GITEE_NAME }} 
         GITEE_EMAIL: ${{ secrets.GITEE_EMAIL }}
         GITEE_PATH: ${{ secrets.GITEE_PATH }}
-      run: python gitee.py
+      run: python ./blog_config/gitee.py
         # echo "GITEE_NAME: $GITEE_NAME , GITEE_EMAIL: $GITEE_EMAIL "
         # git config --local user.name "$GITEE_NAME"
         # git config --local user.email "GITEE_EMAIL"
