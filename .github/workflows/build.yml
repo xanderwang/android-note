@@ -103,12 +103,12 @@ jobs:
           git commit -m "auto build task"
           echo "---------- git status"
           git status
-          echo "---------- git pull"
-          git pull origin master:master --rebase
-          echo "---------- git status"
-          git status
+          # echo "---------- git pull"
+          # git pull origin master:master --rebase
+          # echo "---------- git status"
+          # git status
           echo "---------- git push"
-          git push origin HEAD:master
+          git push -f origin HEAD:master
         else 
           echo "---------- no change"
         fi
