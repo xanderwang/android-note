@@ -84,15 +84,15 @@ jobs:
         echo "GITEE_PATH: $GITEE_PATH "
         git remote add origin $GITEE_PATH
         echo "---------- git config --list"
-        # git config --list
-        # echo "---------- git status"
-        # git status
-        # echo "---------- git add ./"
-        # git add ./
-        # echo "---------- git commit"
-        # git commit -m "auto build task"
-        # echo "---------- git pull"
-        # git pull --rebase
-        # echo "---------- git push"
-        # git push -u origin master
+        git config --list
+        echo "---------- git status"
+        git status
+        echo "---------- git add ./"
+        git add ./
+        echo "---------- git commit"
+        git commit -m "auto build task"
+        echo "---------- git pull"
+        git pull --rebase
+        echo "---------- git push"
+        git push -u origin master
 
