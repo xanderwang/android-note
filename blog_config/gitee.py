@@ -17,7 +17,7 @@ def doGit(git_cmd):
 
 # 设置邮箱等配置
 cmd_list = [
-    "git remote rm origin",
+    # "git remote rm origin",
     "git config --local user.name {0}".format("420640763@qq.com"),
     "git config --local user.email {0}".format("XanderWang"),
     "git remote add origin {0}".format(GITEE_PATH),
