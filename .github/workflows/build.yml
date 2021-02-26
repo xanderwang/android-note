@@ -77,6 +77,7 @@ jobs:
     #     github_token: ${{ secrets.GITHUB_TOKEN }}        
     - name: build gitee page 
       run: |
+        git reset --hard HEAD^ # 回退 github 上的提交
         rm ./_config.yml
         cp ./blog_config/_config_gitee.yml ./_config.yml
         sh ./blog_config/build.sh  
