@@ -49,12 +49,14 @@ jobs:
         git config --list
         echo "---------- git status"
         git status
-        echo "---------- git add ./"
-        git add ./
-        echo "---------- git commit"
-        git commit -m "auto build task"
-        echo "---------- git status"
-        git status
+        if [ -n "$(git status -s)" ];then
+          echo "---------- git add ./"
+          git add ./
+          echo "---------- git commit"
+          git commit -m "auto build task"
+          echo "---------- git status"
+          git status
+        fi
     # - name: push changes to github
     #   uses: ad-m/github-push-action@master
     #   with:
