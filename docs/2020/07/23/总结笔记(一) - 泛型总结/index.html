@@ -488,8 +488,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <h2 id="Java-是如何实现泛型的？"><a href="#Java-是如何实现泛型的？" class="headerlink" title="Java 是如何实现泛型的？"></a>Java 是如何实现泛型的？</h2><p>泛型是很多高级语言都有的特性。根据定义，泛型在运行时表示同一个类型，我们比较容易想到 <code>List&lt;A&gt;</code> 和 <code>List&lt;B&gt;</code> 用 2 个不同的 Class 表示，这个是可行的，但是 Java 由于需要兼容支持旧的代码，而且在推出泛型前就提供了容器类，这种方式(<code>List&lt;A&gt;</code> 和 <code>List&lt;B&gt;</code> 用 2 个不同的 Class)无法兼容以前的老代码，所以这个实现方法不适用。所以 Java 大佬们想了另外一种方式来实现泛型,这种方式就是<code>类型擦除</code>。</p>
 <h2 id="什么是泛型的类型擦除呢？"><a href="#什么是泛型的类型擦除呢？" class="headerlink" title="什么是泛型的类型擦除呢？"></a>什么是泛型的类型擦除呢？</h2><p>类型擦除就是在实际生成字节码的时候，编译器源码里面定义的 <code>List&lt;A&gt;</code> 变成了 <code>List&lt;Object&gt;</code>,源码里面定义的 <code>A Class</code> 被<code>擦除</code>了，变成了 <code>Object</code>，同时在使用的时候，会强制类型转换，把取出来的 <code>object</code> 转成 <code>A</code> 的实例去使用。这就是类型擦除。</p>
 <p>初步看，泛型擦除好像是没什么大的问题，但是仔细想想，在强制类型转换的时候，由于会丢掉类型的一些信息，会导致一些不符合预期的事情。比如有个基类 A，和它的两个子类 B 和 C ，然后我们有下面的一段代码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;A&gt; listA &#x3D; new ArrayList&lt;A&gt;();</span><br><span class="line">listA.add(new B()); &#x2F;&#x2F; 错误的，</span><br></pre></td></tr></table></figure>
-
+<pre><code>List&lt;A&gt; listA = new ArrayList&lt;A&gt;();
+listA.add(new B()); // 错误的，
+</code></pre>
 <p>第二行代码是不符合预期的，因为 <code>listA</code> 里面期望放的是 <code>A</code> 而不是 <code>B</code>。 但是这个好像不太符合预期，我们有时候希望子类是可以放进容器里面的。但是如果支持这个操作的话，会发生什么呢？取出来来的是 <code>B</code> 还是 <code>C</code> ？如果不能明确，那么就没有实现“泛型”。</p>
 <p>为了解决这个问题， Java 大佬们想了个方法，提出了一些通配符来解决这些问题。</p>
 <h2 id="泛型的通配符-、extends-和-super"><a href="#泛型的通配符-、extends-和-super" class="headerlink" title="泛型的通配符 ?、extends 和 super"></a>泛型的通配符 <code>?</code>、<code>extends</code> 和 <code>super</code></h2><p>在理解通配符之前，我们需要知道的是，通配符的发明是为了解决什么问题？至少要解决的一个问题是：容器里面放进去的是什么，取出来的就是什么。</p>
@@ -545,7 +546,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-25T17:12:03+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-26T02:19:02+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Feb 26, 2021</p>

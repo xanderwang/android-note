@@ -491,10 +491,28 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>调用某个方法( method.invoke 方法 )</li>
 <li>修改或者获取某个字段的值</li>
 </ul>
-<h3 id="反射的常用方法介绍"><a href="#反射的常用方法介绍" class="headerlink" title="反射的常用方法介绍"></a>反射的常用方法介绍</h3><h4 id="Class-常用方法介绍"><a href="#Class-常用方法介绍" class="headerlink" title="Class 常用方法介绍"></a>Class 常用方法介绍</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">getDeclaringClass  一般针对内部类，如 B 是 A 的内部类，在 B 的 class 上调用这个方法，返回的是 A </span><br><span class="line"></span><br><span class="line">getDeclaredClasses 获取当前类声明的内部类</span><br><span class="line"></span><br><span class="line">getClasses  包含当前类的父类和声明的 public 的内部类</span><br><span class="line"></span><br><span class="line">newInstance  创建一个类的实例</span><br><span class="line"></span><br><span class="line">forName 获取一个类，如果类没有加载会加载</span><br><span class="line"></span><br><span class="line">getConstructor 系列方法，可以获取构造方法类实例，然后调用实例的 newInstance 方法可以获得一个实例</span><br></pre></td></tr></table></figure>
-<h4 id="Method-常用方法介绍"><a href="#Method-常用方法介绍" class="headerlink" title="Method 常用方法介绍"></a>Method 常用方法介绍</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getMethod  获取 public 的方法，包括继承的</span><br><span class="line"></span><br><span class="line">getDeclaredMethod  该类里面的定义的方法，包括私有的和实现的接口的方法。</span><br><span class="line"></span><br><span class="line">invoke 该方法可以调用某个实例的某个方法。第一个参数为 null 时表示调用静态方法，第一个参数传入某个实例的时候，表示调用实例的某个方法。</span><br></pre></td></tr></table></figure>
-<h4 id="Filed-常用方法介绍"><a href="#Filed-常用方法介绍" class="headerlink" title="Filed 常用方法介绍"></a>Filed 常用方法介绍</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getField 获取字段</span><br><span class="line"></span><br><span class="line">getDeclaredField </span><br></pre></td></tr></table></figure>
+<h3 id="反射的常用方法介绍"><a href="#反射的常用方法介绍" class="headerlink" title="反射的常用方法介绍"></a>反射的常用方法介绍</h3><h4 id="Class-常用方法介绍"><a href="#Class-常用方法介绍" class="headerlink" title="Class 常用方法介绍"></a>Class 常用方法介绍</h4><pre><code>getDeclaringClass  一般针对内部类，如 B 是 A 的内部类，在 B 的 class 上调用这个方法，返回的是 A 
 
+getDeclaredClasses 获取当前类声明的内部类
+
+getClasses  包含当前类的父类和声明的 public 的内部类
+
+newInstance  创建一个类的实例
+
+forName 获取一个类，如果类没有加载会加载
+
+getConstructor 系列方法，可以获取构造方法类实例，然后调用实例的 newInstance 方法可以获得一个实例
+</code></pre>
+<h4 id="Method-常用方法介绍"><a href="#Method-常用方法介绍" class="headerlink" title="Method 常用方法介绍"></a>Method 常用方法介绍</h4><pre><code>getMethod  获取 public 的方法，包括继承的
+
+getDeclaredMethod  该类里面的定义的方法，包括私有的和实现的接口的方法。
+
+invoke 该方法可以调用某个实例的某个方法。第一个参数为 null 时表示调用静态方法，第一个参数传入某个实例的时候，表示调用实例的某个方法。
+</code></pre>
+<h4 id="Filed-常用方法介绍"><a href="#Filed-常用方法介绍" class="headerlink" title="Filed 常用方法介绍"></a>Filed 常用方法介绍</h4><pre><code>getField 获取字段
+
+getDeclaredField 
+</code></pre>
 <h2 id="常用的场景"><a href="#常用的场景" class="headerlink" title="常用的场景"></a>常用的场景</h2><h3 id="动态配置"><a href="#动态配置" class="headerlink" title="动态配置"></a>动态配置</h3><p>可以通过 <code>Class.forName</code> 方法加载指定的配置类，然后读取配置，以达到动态配置的效果。</p>
 <h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p>动态代理底层用到了反射。</p>
 <h3 id="hook-框架"><a href="#hook-框架" class="headerlink" title="hook 框架"></a>hook 框架</h3><p>动态生成实例，修改字段值、调用非 <code>public</code> 方法</p>
@@ -503,8 +521,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <h1 id="注解总结"><a href="#注解总结" class="headerlink" title="注解总结"></a>注解总结</h1><h2 id="什么是注解"><a href="#什么是注解" class="headerlink" title="什么是注解"></a>什么是注解</h2><p>注解是 JDK 1.5 引入的一个特性，用来给 Java 代码提供元数据。注解本身不直接影响代码的执行。</p>
 <p>如何理解呢？<strong>注解是 Java 的一个特性，元数据可以理解为给编译器或者 jvm 看的++注释++，不直接影响程序的运行</strong>。但是可以在运行时通过读取注解做一些事情。可以把元数据理解为额外的一些可用可不用的额外信息。</p>
 <h3 id="注解定义"><a href="#注解定义" class="headerlink" title="注解定义"></a>注解定义</h3><p>和定义接口类似，只不过关键字是 <code>@interface</code>。下面一段代码演示了如何定义个注解</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> TestAnnotation &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">id</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">String <span class="title">msg</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface TestAnnotation &#123;
+    int id();
+    String msg();
+&#125;
+</code></pre>
 <h2 id="注解的应用场景"><a href="#注解的应用场景" class="headerlink" title="注解的应用场景"></a>注解的应用场景</h2><ul>
 <li>提供信息给编译器  这个接触的不多</li>
 <li>编译阶段的处理    比如生产文档，这个有时候会用</li>
@@ -546,7 +569,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-25T17:12:03+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-26T02:19:02+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Feb 26, 2021</p>
