@@ -8,13 +8,18 @@ GITEE_PATH = os.environ["GITEE_PATH"]
 print("GITEE_NAME:", GITEE_NAME, ",GITEE_EMAIL:", GITEE_EMAIL)
 print("GITEE_PATH:", GITEE_PATH)
 
+
+def doGit(args):
+    print("git", args)
+    call('git', args)
+
+
 # 设置邮箱等配置
 cmd_list = [
-    "git config --local user.name \"{0}\"".format(GITEE_NAME),
-    "git config --local user.email \"{0}\"".format(GITEE_EMAIL),
-    "git config --list"
+    "config --local user.name \"{0}\"".format(GITEE_NAME),
+    "config --local user.email \"{0}\"".format(GITEE_EMAIL), 
+    "config --list"
 ]
 
 for cmd in cmd_list:
-    print("cmd:", cmd)
-    call(cmd)
+    doGit(cmd)
