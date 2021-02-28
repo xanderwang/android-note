@@ -120,7 +120,8 @@ jobs:
           echo "---------- git pull fail"
         fi
         echo "---------- git push"
-        if [ "$(git push origin HEAD:master)" -ne 0 ];then # 如果推送失败，就强制推送
+        if [ "$(git push)" -ne 0 ];then # 如果推送失败，就强制推送
+          echo "---------- git push fail , try push force"
           git push -f origin HEAD:master
         else 
           echo "---------- git push success"
