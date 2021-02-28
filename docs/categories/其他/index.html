@@ -24,7 +24,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>Category: Java - Xander&#39;s blog</title>
+  <title>Category: 其他 - Xander&#39;s blog</title>
   
 
   
@@ -424,14 +424,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
       
     
     
@@ -445,17 +437,21 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/android-note/2021/02/26/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%94)%20-%20Java%20%E7%BA%BF%E7%A8%8B%E6%80%BB%E7%BB%93/">
-        总结笔记(五) - Java 线程总结
+      <a href="/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+        利用 GitHub 搭建自己的个人博客
       </a>
     </h2>
   
   <div class='md'>
     
       
-        Java 线程总结Java 线程安全什么是线程安全在上一节的 Java 内存模型里面说到，程序在运行的时候，线程并不是直接从主存里面，而是先从主内存拷贝一份到工作内存(线程私有的)，然后执行代码，最后把计算结果从工作内存写回到主内存。
-有个小问题，为是么需要 JMM ？
-cpu 在存取数据或者存取指令的时候，如果都是在一片连续的区域，效率会高，所以栈里面会有一个变量的副本，这样会把需要参与计...
+        先看下预览图吧。
+
+先说下方案:
+
+ GitHub Page + GitHub Action + hexo &amp; 配套主题 
+
+GitHub Page这个都不陌生吧，注册 GitHub 账号后，可以帮你托管你的 repository 下的静态网页，比如我有个 repository 叫  android-note ，我的 github 账号叫 xanderwang ，那么我的 andro...
       
     
   </div>
@@ -463,231 +459,15 @@ cpu 在存取数据或者存取指令的时候，如果都是在一片连续的�
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2021-02-26</time>
+        <time>2021-02-25</time>
         
           <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/Java/">Java</a>
+          <a class="category-link" href="/android-note/categories/%E5%85%B6%E4%BB%96/">其他</a>
         
       </div>
       
         <div>
-          <a class='readmore' href='/android-note/2021/02/26/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%94)%20-%20Java%20%E7%BA%BF%E7%A8%8B%E6%80%BB%E7%BB%93/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2021/02/26/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E5%9B%9B)%20-%20JVM%20%E6%80%BB%E7%BB%93/">
-        总结笔记(四) - JVM 总结
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        JVM 总结什么是 JVMJVM 是 Java 虚拟机，是一个虚拟出来的计算机，仿真模拟计算机。
-JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM 的内存主要分为五块
-
-程序计算器
-
-程序计算器是用来记录当前线程的执行的位置，通过程序计数器的记录，程序就可以继续进行下去。
-线程私有的，就是每个线程都不一样。
-需要注意的是这里面没有 OutOfMemory 的异常，在执行 ...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-02-26</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/Java/">Java</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/android-note/2021/02/26/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E5%9B%9B)%20-%20JVM%20%E6%80%BB%E7%BB%93/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%89)%20-%20Java%20%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/">
-        总结笔记(三) - Java 集合总结
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        Java 集合总结Java 有哪些集合，继承关系是怎么样的
-平时常用的集合有哪些
-Collection
-List 可以重复添加元素
-ArrayList
-LinkedList
-
-
-Set 不能重复添加元素
-HashSet 不接受 null 
-TreeSet
-
-
-Queue
-Deque
-PriorityQueue 数组实现，堆
-ArrayDeque 数组实现， 2 个游标
-
-
-
-
-Map 以键值...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-02-07</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/Java/">Java</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%89)%20-%20Java%20%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/">
-        总结笔记(二) - Java 反射和注解总结
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        反射总结什么是反射反射是 Java 语言的一个特性，就是在程序运行状态中，对于任何一个类，都可以通过反射知道这个类所有的方法和属性。对于任何一个实例，都可以调用这个实例的任何方法和属性。这个在运行时动态获取类或者实例的属性和方法，动态调用属性和方法的特性就叫反射。
-反射有什么用从特性可以看出，在运行时可以动态调整属性的值和调用代码，可以让程序更灵活。主要用于以下几点
-
-动态创建实例( cla...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-02-07</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/Java/">Java</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2020/07/23/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%80)%20-%20%E6%B3%9B%E5%9E%8B%E6%80%BB%E7%BB%93/">
-        总结笔记(一) - 泛型总结
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        泛型总结泛型是什么？一句话说就是类型参数化。什么意思呢？参数化的意思就是我们在定义的时候不知道具体的值，我们在到我们实际运行的时候才知道具体的值。类型参数化就是具体类型在定义的时候不知道，在实际运行的时候是确定的某一个类型。
-Java 是如何实现泛型的？泛型是很多高级语言都有的特性。根据定义，泛型在运行时表示同一个类型，我们比较容易想到 List&lt;A&gt; 和 List&lt;B&g...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-07-23</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/Java/">Java</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/android-note/2020/07/23/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%80)%20-%20%E6%B3%9B%E5%9E%8B%E6%80%BB%E7%BB%93/'>
+          <a class='readmore' href='/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/'>
             Read More
           </a>
         </div>
@@ -792,17 +572,17 @@ Java 是如何实现泛型的？泛型是很多高级语言都有的特性。根
           <li><a class="flat-box"
             title="/android-note/categories/Android/" href="/android-note/categories/Android/"
             id="android-notecategoriesAndroid"
-            ><div class='name'>Android</div><div class='badge'>(4)</div></a></li>
+            ><div class='name'>Android</div><div class='badge'>(3)</div></a></li>
         
           <li><a class="flat-box"
-            title="/android-note/categories/Java/" href="/android-note/categories/Java/"
-            id="android-notecategoriesJava"
-            ><div class='name'>Java</div><div class='badge'>(5)</div></a></li>
+            title="/android-note/categories/%E5%85%B6%E4%BB%96/" href="/android-note/categories/%E5%85%B6%E4%BB%96/"
+            id="android-notecategoriesE585B6E4BB96"
+            ><div class='name'>其他</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box"
-            title="/android-note/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" href="/android-note/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"
-            id="android-notecategoriesE7BC96E7A88BE59FBAE7A180"
-            ><div class='name'>编程基础</div><div class='badge'>(1)</div></a></li>
+            title="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/" href="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/"
+            id="android-notecategoriesE680BBE7BB93E7AC94E8AEB0"
+            ><div class='name'>总结笔记</div><div class='badge'>(6)</div></a></li>
         
       </ul>
     </div>
@@ -826,7 +606,7 @@ Java 是如何实现泛型的？泛型是很多高级语言都有的特性。根
 
 
     <div class='content'>
-      <a href="/android-note/tags/Android/" style="font-size: 24px; color: #555">Android</a> <a href="/android-note/tags/GitHub-Page/" style="font-size: 14px; color: #999">GitHub Page</a> <a href="/android-note/tags/Github-Action/" style="font-size: 14px; color: #999">Github Action</a> <a href="/android-note/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/android-note/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/android-note/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/android-note/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/android-note/tags/Java-%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">Java 线程</a> <a href="/android-note/tags/Performance/" style="font-size: 19px; color: #777">Performance</a> <a href="/android-note/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/android-note/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" style="font-size: 14px; color: #999">三次握手</a> <a href="/android-note/tags/%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">优化</a> <a href="/android-note/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 14px; color: #999">反射</a> <a href="/android-note/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 14px; color: #999">泛型</a> <a href="/android-note/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 14px; color: #999">注解</a> <a href="/android-note/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 14px; color: #999">网络编程</a> <a href="/android-note/tags/%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">集合</a>
+      <a href="/android-note/tags/Android/" style="font-size: 24px; color: #555">Android</a> <a href="/android-note/tags/GitHub-Page/" style="font-size: 14px; color: #999">GitHub Page</a> <a href="/android-note/tags/Gitee/" style="font-size: 14px; color: #999">Gitee</a> <a href="/android-note/tags/Gitee-Page/" style="font-size: 14px; color: #999">Gitee Page</a> <a href="/android-note/tags/Github-Action/" style="font-size: 14px; color: #999">Github Action</a> <a href="/android-note/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/android-note/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/android-note/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/android-note/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/android-note/tags/Java-%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">Java 线程</a> <a href="/android-note/tags/Performance/" style="font-size: 19px; color: #777">Performance</a> <a href="/android-note/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/android-note/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" style="font-size: 14px; color: #999">三次握手</a> <a href="/android-note/tags/%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">优化</a> <a href="/android-note/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 14px; color: #999">反射</a> <a href="/android-note/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 14px; color: #999">泛型</a> <a href="/android-note/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 14px; color: #999">注解</a> <a href="/android-note/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 14px; color: #999">网络编程</a> <a href="/android-note/tags/%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">集合</a>
     </div>
   </section>
 
@@ -899,7 +679,7 @@ Java 是如何实现泛型的？泛型是很多高级语言都有的特性。根
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Sun Feb 28 2021 07:56:31 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update" style="display: none;">Sun Feb 28 2021 08:08:09 GMT+0000 (Coordinated Universal Time)</div>
             <div id="last-update-show">2021-02-28 日</div>
           
         </div>
