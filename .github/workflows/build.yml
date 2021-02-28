@@ -36,7 +36,7 @@ jobs:
         rm ./_config.yml
         cp ./blog_config/_config_github.yml ./_config.yml
         sh ./blog_config/build.sh  
-    # 这里是一些额外的操作, 通常不需要. 这里是为了把编译好的二进制程序 push 到原始的 GitHub 仓库
+    # 把编译好的二进制程序 push 到原始的 GitHub 仓库
     - name: commit and push to github
       env:
         GH_NAME: ${{ secrets.GH_NAME }}
@@ -44,10 +44,7 @@ jobs:
         # https://username:password@github.com/username/repo_name.git #这个格式可以用账户和密码登录来控制上传代码
         GH_PATH: ${{ secrets.GH_PATH }}
       run: |
-        # python ./blog_config/github.py
-        # printenv
         echo "--------------------------------------------"
-        echo "GH_NAME: ${GH_NAME} , GH_EMAIL: ${GH_EMAIL} "
         git config --local user.name "${GH_NAME}"
         git config --local user.email "${GH_EMAIL}"
         git remote set-url origin $GH_PATH
@@ -55,7 +52,7 @@ jobs:
         git config --list
         echo "---------- git status"
         git status
-        if [ "$(git status -s)" -ne 0 ];then
+        if [[ -n $(git status -s) ]];then
           echo "---------- git add ./"
           git add ./
           echo "---------- git commit"
@@ -67,7 +64,7 @@ jobs:
           echo "---------- git push"
           git push origin HEAD:master
         else
-          echo "---------- no change"
+          echo "---------- github no change"
         fi
     # - name: push changes to github
     #   uses: ad-m/github-push-action@master
@@ -94,7 +91,7 @@ jobs:
         git remote set-url origin $GITEE_PATH
         echo "---------- git config --list"
         git config --list
-        if [ "$(git status -s)" -ne 0 ];then
+        if [[ -n $(git status -s) ]];then
           echo "---------- git add ./"
           git add ./
           echo "---------- git commit"
@@ -104,7 +101,7 @@ jobs:
           echo "---------- git push"
           git push -f origin HEAD:master
         else
-          echo "---------- no change"
+          echo "---------- gitee no change"
         fi
     - name: publish gitee page
       uses: yanglbme/gitee-pages-action@main
