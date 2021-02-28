@@ -13,8 +13,8 @@ on:
       - '**.yaml'
       - '**.sh'
       - '**.py'
-    # tags:
-    #   - build**
+    tags:
+      - public**
 # on:
 #   schedule:
 #     - cron: "0 0 * * *"
@@ -32,12 +32,6 @@ jobs:
     # 引用外部 Action, 拉取代码仓库到虚拟机工作目录
     - name: chekout code
       uses: actions/checkout@v1
-      # env: 
-      #   GH_PATH: ${{ secrets.GH_PATH }}
-      # run: |
-      #   rm -rf android-note
-      #   git clone GH_PATH
-      #   cd android-note
     # 运行编译脚本
     - name: build github page
       run: |
@@ -63,7 +57,7 @@ jobs:
         git config --list
         echo "---------- git status"
         git status
-        if [ -n "$(git status -s)" ];then
+        if [ "$(git status -s)" -ne 0 ];then
           echo "---------- git add ./"
           git add ./
           echo "---------- git commit"
@@ -99,33 +93,20 @@ jobs:
         git config --local user.email "$GITEE_EMAIL"
         # git remote rm origin
         echo "GITEE_PATH: $GITEE_PATH "
-        # git remote add origin $GITEE_PATH
         git remote set-url origin $GITEE_PATH
         echo "---------- git config --list"
         git config --list
         if [ "$(git status -s)" -ne 0 ];then
-          echo "---------- no change"
-        fi
-        echo "---------- git add ./"
-        git add ./
-        echo "---------- git commit"
-        git commit -m "auto build task"
-        echo "---------- git status"
-        git status
-        echo "---------- git pull"
-        # if [ "$(git pull origin master:master --rebase)" -eq 0 ];then
-        #   echo "---------- git status"
-        #   git status
-        # else 
-        #   echo "---------- git pull fail"
-        #   git checkout master
-        # fi
-        echo "---------- git push"
-        if [ "$(git push -f)" -ne 0 ];then # 如果推送失败，就强制推送
-          echo "---------- git push fail , try push force"
+          echo "---------- git add ./"
+          git add ./
+          echo "---------- git commit"
+          git commit -m "auto build task"
+          echo "---------- git status"
+          git status
+          echo "---------- git push"
           git push -f origin HEAD:master
-        else 
-          echo "---------- git push success"
+        else
+          echo "---------- no change"
         fi
     - name: publish gitee page
       uses: yanglbme/gitee-pages-action@main
