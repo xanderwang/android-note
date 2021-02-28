@@ -118,6 +118,7 @@ jobs:
           git status
         else 
           echo "---------- git pull fail"
+          git checkout master
         fi
         echo "---------- git push"
         if [ "$(git push)" -ne 0 ];then # 如果推送失败，就强制推送
