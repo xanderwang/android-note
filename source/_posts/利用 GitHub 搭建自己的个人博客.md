@@ -3,11 +3,13 @@ seo_title: 利用 GitHub 搭建自己的个人博客
 title: 利用 GitHub 搭建自己的个人博客
 date: 2021-02-25 22:41:00
 tags:
-- hexo
 - Github Action
 - GitHub Page
+- Gitee Page
+- Gitee
+- hexo
 categories: 
-- Android
+- 其他
 ---
 
 先看下预览图吧。
@@ -77,7 +79,7 @@ jobs: # 配置具体任务
     # 执行 .sh 脚本文件，很多的任务可以在这个脚本里面执行
     - name: build note
       run: sh ./blog_config/build.sh
-...  
+# ... 忽略其他内容
 ```
 上面列出了主要的步骤和解释了，具体可以参考[我的 repository](https://github.com/XanderWang/android-note) 
 

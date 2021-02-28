@@ -6,7 +6,7 @@ tags:
 - Android
 - Java 线程
 categories: 
-- Java
+- 总结笔记
 ---
 
 # Java 线程总结

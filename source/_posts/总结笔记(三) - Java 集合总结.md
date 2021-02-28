@@ -6,7 +6,7 @@ tags:
 - Android
 - 集合
 categories: 
-- Java
+- 总结笔记
 ---
 
 # Java 集合总结
