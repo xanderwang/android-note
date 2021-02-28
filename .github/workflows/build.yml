@@ -13,9 +13,6 @@ on:
       - '**.yaml'
       - '**.sh'
       - '**.py'
-  push: # 推送 tag 的时候自动编译？
-    tags:
-      - public**
 # on:
 #   schedule:
 #     - cron: "0 0 * * *"
