@@ -4,7 +4,7 @@ name: Xander's Blog Task
 on:
   # Trigger the workflow on push or pull request,
   # but only for the master branch
-  push:
+  push: ## push 指定类型文件的时候自动编译
     # branches:    
     #   - master
     paths:
@@ -13,6 +13,7 @@ on:
       - '**.yaml'
       - '**.sh'
       - '**.py'
+  push: # 推送 tag 的时候自动编译？
     tags:
       - public**
 # on:
