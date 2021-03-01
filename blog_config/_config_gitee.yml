@@ -113,5 +113,5 @@ import:
     # - <link rel="manifest" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/site.webmanifest">
     # - <link rel="mask-icon" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/safari-pinned-tab.svg" color="#5bbad5">
     # - <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/favicon.ico">
-    - <link rel="shortcut icon" href="/images/xander_blog.ico">
+    - <link rel="shortcut icon" href="/android-note/images/xander_blog.ico">
 
