@@ -1,6 +1,6 @@
 ---
-seo_title: 总结笔记(六) - 网络编程总结
-title: 总结笔记(六) - 网络编程总结
+seo_title: Android 开发总结笔记(六) - 网络编程总结
+title: Android 开发总结笔记(六) - 网络编程总结
 date: 2021-02-26 21:31:00
 tags:
 - 网络编程

@@ -1,6 +1,6 @@
 ---
-seo_title: 总结笔记(四) - JVM 总结
-title: 总结笔记(四) - JVM 总结
+seo_title: Android 开发总结笔记(四) - JVM 总结
+title: Android 开发总结笔记(四) - JVM 总结
 date: 2021-02-26 21:29:00
 tags:
 - Android
