@@ -22,9 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>总结笔记(二) - Java 反射和注解总结 - Xander&#39;s blog</title>
+  <title>不会性能优化？你只差一个开源库！ - Xander&#39;s blog</title>
   
-    <meta name="keywords" content="Android,反射,注解">
+    <meta name="keywords" content="Android,Performance">
   
 
   
@@ -427,7 +427,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        总结笔记(二) - Java 反射和注解总结
+        不会性能优化？你只差一个开源库！
       </h1>
       <div class='new-meta-box'>
         
@@ -447,7 +447,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='new-meta-item category'>
     <a class='notlink'>
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <a class="category-link" href="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>
+      <a class="category-link" href="/android-note/categories/Android/">Android</a>
     </a>
   </div>
 
@@ -458,7 +458,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Feb 7, 2021</p>
+    <p>发布于：Feb 24, 2021</p>
   </a>
 </div>
 
@@ -469,7 +469,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="总结笔记(二) - Java 反射和注解总结" data-path="/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/">
+      <div id="lc-pv" data-title="不会性能优化？你只差一个开源库！" data-path="/android-note/2021/02/24/%E4%B8%8D%E4%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F%E4%BD%A0%E5%8F%AA%E5%B7%AE%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E5%BA%93%EF%BC%81/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -487,57 +487,234 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h1 id="反射总结"><a href="#反射总结" class="headerlink" title="反射总结"></a>反射总结</h1><h2 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h2><p>反射是 Java 语言的一个特性，就是在程序运行状态中，对于任何一个类，都可以通过反射知道这个类所有的方法和属性。对于任何一个实例，都可以调用这个实例的任何方法和属性。这个<strong>在运行时动态获取类或者实例的属性和方法，动态调用属性和方法的特性</strong>就叫反射。</p>
-<h2 id="反射有什么用"><a href="#反射有什么用" class="headerlink" title="反射有什么用"></a>反射有什么用</h2><p>从特性可以看出，在运行时可以动态调整属性的值和调用代码，可以让程序更灵活。主要用于以下几点</p>
+  <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>由于本人工作需要，需要解决一些性能问题，虽然有 <code>Profiler</code> 、<code>Systrace </code> 等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，最终完成了这个开源的性能实时检测库。初步能达到预期效果，这里做个记录，算是小结了。</p>
+<p>开源库的<a target="_blank" rel="noopener" href="https://github.com/XanderWang/performance">地址</a>是:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/XanderWang/performance">https://github.com/XanderWang/performance</a></p>
+</blockquote>
+<p>幸苦各位能给个小小的 star 鼓励下。</p>
+<p>这个性能检测库，可以检测以下问题：</p>
 <ul>
-<li>动态创建实例( class.newInstance 方法 )</li>
-<li>调用某个方法( method.invoke 方法 )</li>
-<li>修改或者获取某个字段的值</li>
+<li><input checked="" disabled="" type="checkbox"> UI 线程 block 检测。</li>
+<li><input checked="" disabled="" type="checkbox"> App 的 FPS 检测。</li>
+<li><input checked="" disabled="" type="checkbox"> 线程的创建和启动监控以及线程池的创建监控。</li>
+<li><input checked="" disabled="" type="checkbox"> IPC (进程间通讯)监控。</li>
 </ul>
-<h3 id="反射的常用方法介绍"><a href="#反射的常用方法介绍" class="headerlink" title="反射的常用方法介绍"></a>反射的常用方法介绍</h3><h4 id="Class-常用方法介绍"><a href="#Class-常用方法介绍" class="headerlink" title="Class 常用方法介绍"></a>Class 常用方法介绍</h4><pre><code>getDeclaringClass  一般针对内部类，如 B 是 A 的内部类，在 B 的 class 上调用这个方法，返回的是 A 
+<p>同时还实现了以下功能：</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 实时通过 logcat 打印检测到的问题。</li>
+<li><input checked="" disabled="" type="checkbox"> 保存检测到的信息到文件。</li>
+<li><input checked="" disabled="" type="checkbox"> 提供上报信息文件接口。</li>
+</ul>
+<h1 id="接入指南"><a href="#接入指南" class="headerlink" title="接入指南"></a>接入指南</h1><p>1 在 <code>APP</code> 工程目录下面的 <code>build.gradle</code> 添加如下内容。</p>
+<pre><code class="groovy">dependencies &#123;
+  // 必选
+  debugImplementation &quot;com.xander.performance:perf:0.1.12&quot;
+  releaseImplementation &quot;com.xander.performance:perf-noop:0.1.12&quot;  
+  // hook 方案封装，必须添加
+  debugImplementation &quot;com.xander.performance:perf-hook:0.1.12&quot;
+  
+  // 以下是 hook 方案选择一个就好了。如果运行报错，就换另外一个，如果还是报错，就提个 issue
+  // SandHook 方案，推荐添加。如果运行报错，可以替换为 epic 库。
+  debugImplementation &quot;com.xander.performance:perf-hook-sandhook:0.1.12&quot;
 
-getDeclaredClasses 获取当前类声明的内部类
-
-getClasses  包含当前类的父类和声明的 public 的内部类
-
-newInstance  创建一个类的实例
-
-forName 获取一个类，如果类没有加载会加载
-
-getConstructor 系列方法，可以获取构造方法类实例，然后调用实例的 newInstance 方法可以获得一个实例
-</code></pre>
-<h4 id="Method-常用方法介绍"><a href="#Method-常用方法介绍" class="headerlink" title="Method 常用方法介绍"></a>Method 常用方法介绍</h4><pre><code>getMethod  获取 public 的方法，包括继承的
-
-getDeclaredMethod  该类里面的定义的方法，包括私有的和实现的接口的方法。
-
-invoke 该方法可以调用某个实例的某个方法。第一个参数为 null 时表示调用静态方法，第一个参数传入某个实例的时候，表示调用实例的某个方法。
-</code></pre>
-<h4 id="Filed-常用方法介绍"><a href="#Filed-常用方法介绍" class="headerlink" title="Filed 常用方法介绍"></a>Filed 常用方法介绍</h4><pre><code>getField 获取字段
-
-getDeclaredField 
-</code></pre>
-<h2 id="常用的场景"><a href="#常用的场景" class="headerlink" title="常用的场景"></a>常用的场景</h2><h3 id="动态配置"><a href="#动态配置" class="headerlink" title="动态配置"></a>动态配置</h3><p>可以通过 <code>Class.forName</code> 方法加载指定的配置类，然后读取配置，以达到动态配置的效果。</p>
-<h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p>动态代理底层用到了反射。</p>
-<h3 id="hook-框架"><a href="#hook-框架" class="headerlink" title="hook 框架"></a>hook 框架</h3><p>动态生成实例，修改字段值、调用非 <code>public</code> 方法</p>
-<p>参考资料：</p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24304289">学习java应该如何理解反射？</a></p>
-<h1 id="注解总结"><a href="#注解总结" class="headerlink" title="注解总结"></a>注解总结</h1><h2 id="什么是注解"><a href="#什么是注解" class="headerlink" title="什么是注解"></a>什么是注解</h2><p>注解是 JDK 1.5 引入的一个特性，用来给 Java 代码提供元数据。注解本身不直接影响代码的执行。</p>
-<p>如何理解呢？<strong>注解是 Java 的一个特性，元数据可以理解为给编译器或者 jvm 看的++注释++，不直接影响程序的运行</strong>。但是可以在运行时通过读取注解做一些事情。可以把元数据理解为额外的一些可用可不用的额外信息。</p>
-<h3 id="注解定义"><a href="#注解定义" class="headerlink" title="注解定义"></a>注解定义</h3><p>和定义接口类似，只不过关键字是 <code>@interface</code>。下面一段代码演示了如何定义个注解</p>
-<pre><code class="java">@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface TestAnnotation &#123;
-    int id();
-    String msg();
+  // epic 方法。如果运行报错，可以替换为 SandHook。
+  // debugImplementation &quot;com.xander.performance:perf-hook-epic:0.1.12&quot;
 &#125;
 </code></pre>
-<h2 id="注解的应用场景"><a href="#注解的应用场景" class="headerlink" title="注解的应用场景"></a>注解的应用场景</h2><ul>
-<li>提供信息给编译器  这个接触的不多</li>
-<li>编译阶段的处理    比如生产文档，这个有时候会用</li>
-<li>运行时的处理   这个相对用的多，就是说运行时读取注解的值，来做一些事情，比如 Retrofit  框架库，就用到了注解。具体的原理分析在后续笔记记录。</li>
+<p>2 <code>APP</code> 工程的 <code>Application</code> 类新增类似如下初始化代码。</p>
+<p>Java 初始化示例</p>
+<pre><code class="java">  private void initPERF(final Context context) &#123;
+    final PERF.LogFileUploader logFileUploader = new PERF.LogFileUploader() &#123;
+      @Override
+      public boolean upload(File logFile) &#123;
+        return false;
+      &#125;
+    &#125;;
+    PERF.init(new PERF.Builder()
+        .checkUI(true, 100) // 检查 ui lock
+        .checkIPC(true) // 检查 ipc 调用
+        .checkFps(true, 1000) // 检查 fps
+        .checkThread(true) // 检查线程和线程池
+        .globalTag(&quot;test_perf&quot;) // 全局 logcat tag ,方便过滤
+        .cacheDirSupplier(new PERF.IssueSupplier&lt;File&gt;() &#123;
+          @Override
+          public File get() &#123;
+            // issue 文件保存目录
+            return context.getCacheDir();
+          &#125;
+        &#125;)
+        .maxCacheSizeSupplier(new PERF.IssueSupplier&lt;Integer&gt;() &#123;
+          @Override
+          public Integer get() &#123;
+            // issue 文件最大占用存储空间
+            return 10 * 1024 * 1024;
+          &#125;
+        &#125;)
+        .uploaderSupplier(new PERF.IssueSupplier&lt;PERF.LogFileUploader&gt;() &#123;
+          @Override
+          public PERF.LogFileUploader get() &#123;
+            // issue 文件上传接口
+            return logFileUploader;
+          &#125;
+        &#125;)
+        .build());
+  &#125;
+</code></pre>
+<p>kotlin 示例</p>
+<pre><code class="kotlin">  private fun doUpload(log: File): Boolean &#123;
+    return false
+  &#125;
+
+  private fun initPERF(context: Context) &#123;
+    PERF.init(PERF.Builder()
+        .checkUI(true, 100)// 检查 ui lock
+        .checkIPC(true) // 检查 ipc 调用
+        .checkFps(true, 1000) // 检查 fps
+        .checkThread(true)// 检查线程和线程池
+        .globalTag(&quot;test_perf&quot;)// 全局 logcat tag ,方便过滤
+        .cacheDirSupplier &#123; context.cacheDir &#125; // issue 文件保存目录
+        .maxCacheSizeSupplier &#123; 10 * 1024 * 1024 &#125; // issue 文件最大占用存储空间
+        .uploaderSupplier &#123; // issue 文件的上传接口实现
+          PERF.LogFileUploader &#123; logFile -&gt; doUpload(logFile) &#125;
+        &#125;
+        .build()
+    )
+  &#125;
+</code></pre>
+<h1 id="主要更新记录"><a href="#主要更新记录" class="headerlink" title="主要更新记录"></a>主要更新记录</h1><ul>
+<li>0.1.12 线程创建的监控，加入 thread name 信息收集。同时接入 startup 库做必要的初始化，以及调整 mulit dex 的时候，配置文件找不到的问题。</li>
+<li>0.1.11 优化 hook 方案的封装，通过 SandHook ,IPC 的监控可以按照耗时时间来检测。</li>
+<li>0.1.10 FPS 的检测时间间隔从默认 2s 调整为 1s，同时支持自定义时间间隔。</li>
+<li>0.1.9  优化线程池创建的监控。</li>
+<li>0.1.8  初版发布，完成基本的功能。</li>
 </ul>
-<p>参考资料：</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37701743">java注解-最通俗易懂的讲解</a></p>
+<p>不建议直接在线上使用这个库，在编写这个库，测试 hook 的时候，在不同的机器和 <code>rom</code> 上，会有不同的问题，这里建议先只在线下自测使用这个检测库。</p>
+<h1 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h1><h2 id="UI-线程-block-检测原理"><a href="#UI-线程-block-检测原理" class="headerlink" title="UI 线程 block 检测原理"></a>UI 线程 block 检测原理</h2><p>主要参考了 <code>AndroidPerformanceMonitor</code> 库的思路，对 <code>UI</code> 线程的 <code>Looper</code> 里面处理 <code>Message</code> 的过程进行监控。</p>
+<p>具体做法是，在 <code>Looper</code> 开始处理 <code>Message</code> 前，在异步线程开启一个延时任务，用于后续收集信息。如果这个 <code>Message</code> 在指定的时间段内完成了处理，那么在这个 <code>Message</code> 被处理完后，就取消之前的延时任务，说明 <code>UI</code> 线程没有 block 。如果在指定的时间段内没有完成任务，说明 <code>UI</code> 线程有 block 。此时，异步线程可以执行刚才的延时任务。如果我们在这个延时任务里面打印 <code>UI</code> 线程的方法调用栈，就可以知道 <code>UI</code> 线程在做什么了。这个就是 <code>UI</code>  线程 block 检测的基本原理。</p>
+<p>但是这个方案有一个缺点，就是无法处理 <code>InputManager</code> 的输入事件，比如 <code>TV</code> 端的遥控按键事件。通过对按键事件的调用方法链进行分析，发现最终每个按键事件都调用了 <code>DecorView</code> 类的 <code>dispatchKeyEvent</code> 方法，而非 <code>Looper</code> 的处理 <code>Message</code> 流程。所以 <code>AndroidPerformanceMonitor</code> 库是无法准确监控 TV 端应用 <code>UI</code>  block 的情况。针对 <code>TV</code> 端应用按键处理，需要找到一个新的切入点，这个切入点就是刚刚的 <code>DecorView</code> 类的 <code>dispatchKeyEvent</code> 方法。</p>
+<p>那如何介入 <code>DecorView</code> 类的 <code>dispatchKeyEvent</code> 方法呢？我们可以通过 <code>epic</code> 库来 <code>hook</code> 这个方法的调用。<code>hook</code> 成功后，我们可以在 <code>DecorView</code> 类的 <code>dispatchKeyEvent</code> 方法调用前后都接收到一个回调方法，在 <code>dispatchKeyEvent</code> 方法调用前我们可以在异步线程执行一个延时任务，在 <code>dispatchKeyEvent</code> 方法调用后，取消这个延时任务。如果 <code>dispatchKeyEvent</code> 方法耗时时间小于指定的时间阈值，延时任务在执行前被取消，可以认为没有 block ，此时移除了延时任务。如果 <code>dispatchKeyEvent</code> 方法耗时时间大于指定的时间阈值说明此时 <code>UI</code>  线程是有 block 的。此时，异步线程可以执行这个延时任务来收集必要的信息。</p>
+<p>以上就是修改后的 <code>UI</code> 线程 block 的检测原理了，目前做的还比较粗糙，后续计划考虑参考 <code>AndroidPerformanceMonitor</code> 打印 CPU 、内存等更多的信息。</p>
+<p>最终终端 log 打印效果如下：</p>
+<pre><code>com.xander.performace.demo W/demo_Issue: =================================================
+    type: UI BLOCK
+    msg: UI BLOCK
+    create time: 2021-01-13 11:24:41
+    trace:
+        java.lang.Thread.sleep(Thread.java:-2)
+        java.lang.Thread.sleep(Thread.java:442)
+        java.lang.Thread.sleep(Thread.java:358)
+        com.xander.performance.demo.MainActivity.testANR(MainActivity.kt:49)
+        java.lang.reflect.Method.invoke(Method.java:-2)
+        androidx.appcompat.app.AppCompatViewInflater$DeclaredOnClickListener.onClick(AppCompatViewInflater.java:397)
+        android.view.View.performClick(View.java:7496)
+        android.view.View.performClickInternal(View.java:7473)
+        android.view.View.access$3600(View.java:831)
+        android.view.View$PerformClick.run(View.java:28641)
+        android.os.Handler.handleCallback(Handler.java:938)
+        android.os.Handler.dispatchMessage(Handler.java:99)
+        android.os.Looper.loop(Looper.java:236)
+        android.app.ActivityThread.main(ActivityThread.java:7876)
+        java.lang.reflect.Method.invoke(Method.java:-2)
+        com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:656)
+        com.android.internal.os.ZygoteInit.main(ZygoteInit.java:967)
+</code></pre>
+<h2 id="FPS-检测的原理"><a href="#FPS-检测的原理" class="headerlink" title="FPS 检测的原理"></a>FPS 检测的原理</h2><p>FPS 检测的原理，利用了 Android 的屏幕绘制原理。这里简单说下 Android 的屏幕绘制原理。</p>
+<p>系统每隔 16 ms 就会发送一个 <code>VSync</code> 信号。 如果应用注册了这个 <code>VSync</code> 信号，就会在 <code>VSync </code> 信号到来的时候，收到回调，从而开始准备绘制。如果准备顺利，也就是 <code>CPU</code> 准备数据、<code>GPU</code> 栅格化等，如果这些任务在 16 ms 之内完成，那么下一个 <code>VSync</code> 信号到来前就可以绘制这一帧界面了。就没有掉帧，界面很流畅。如果在 16 ms 内没准备好，可能就需要更多的时间这个画面才能显示出来，在这种情况下就发生了丢帧，如果丢帧很多就卡顿了。</p>
+<p>检测 FPS 的原理其实挺简单的，就是通过一段时间内，比如 1s，统计绘制了多少个画面，就可以计算出 FPS 了。那如何知道应用 1s 内绘制了多少个界面呢？这个就要靠 <code>VSync</code> 信号监听了。</p>
+<p>在开始准备绘制前，往 <code>UI</code> 线程的 <code>MessageQueue</code> 里面放一个<strong>同步屏障</strong>，这样 <code>UI</code> 线程就只会处理异步消息，直到<strong>同步屏障</strong>被移除。刷新前，应用会注册一个 <code>VSync</code> 信号监听，当 <code>VSync</code> 信号到达的时候，系统会通知应用，让应用会给 <code>UI</code> 线程的 <code>MessageQueue</code> 里面放一个<strong>异步 <code>Message</code> <strong>。由于之前 <code>MessageQueue</code> 里有了一个</strong>同步屏障</strong>，所以后续 <code>UI</code> 线程会优先处理这个<strong>异步 <code>Message</code></strong> 。这个<strong>异步 <code>Message</code></strong> 做的事情就是从  <code>ViewRootImpl</code> 开始我们熟悉的 <code>measure</code> 、<code>layout</code> 和 <code>draw</code> 。</p>
+<p>我们可以通过 <code>Choreographer</code> 注册 <code>VSync</code> 信号监听。16ms 后，我们收到了 <code>VSync</code> 的信号，给 <code>MessageQueue</code> 里面放一个<strong>同步消息</strong>，我们不做特别处理，只是做一个计数，然后监听下一次的 <code>VSync</code> 信号，这样，我们就可以知道 1s 内我们监听到了多少个 <code>VSync</code> 信号，就可以得出帧率。</p>
+<p>为什么监听到的 <code>VSync</code> 信号数量就是帧率呢？</p>
+<p>由于 <code>Looper</code> 处理 <code>Message</code> 是串行的，就是一次只处理一个 <code>Message</code> ，处理完了这个 <code>Message</code> 才会处理下一个 <code>Message</code> 。而绘制的时候，绘制任务 <code>Message</code> 是异步消息，会优先执行，绘制任务 <code>Message</code> 执行完成后，就会执行上面说的 <code>VSync</code> 信号计数的任务。如果忽略计数任务的耗时，那么最后统计到的 <code>VSync</code> 信号数量可以粗略认为是某段时间内绘制的帧数。然后就可以通过这段时间的长度和 <code>VSync</code> 信号数量来计算帧率了。</p>
+<p>最终终端 log 打印效果如下：</p>
+<pre><code>com.xander.performace.demo W/demo_FPSTool: APP FPS is: 54 Hz
+com.xander.performace.demo W/demo_FPSTool: APP FPS is: 60 Hz
+com.xander.performace.demo W/demo_FPSTool: APP FPS is: 60 Hz
+</code></pre>
+<h2 id="线程的创建和启动监控以及线程池的创建监控"><a href="#线程的创建和启动监控以及线程池的创建监控" class="headerlink" title="线程的创建和启动监控以及线程池的创建监控"></a>线程的创建和启动监控以及线程池的创建监控</h2><p>线程和线程池的监控，主要是监控线程和线程池在哪里创建和执行的，如果我们可以知道这些信息，我们就可以比较清楚线程和线程池的创建和启动时机是否合理。从而得出优化方案。</p>
+<p>一个比较容易想到的方法就是，应用代码里面的所有线程和线程池继承同一个线程基类和线程池基类。然后在构造函数和启动函数里面打印方法调用栈，这样我们就知道哪里创建和执行了线程或者线程池。</p>
+<p>让应用所有的线程和线程池继承同一个基类，可以通过编译插件来实现，定制一个特殊的 <code>Transform</code> ，通过 <code>ASM</code> 编辑生成的字节码来改变继承关系。但是，这个方法有一定的上手难度，不太适合新手。</p>
+<p>除了这个方法，我们还有另外一种方法，就是 <code>hook</code> 。通过 <code>hook</code> 线程或者线程池的构造方法和启动方法，我们就可以在线程或者线程池的构造方法和启动方法的前后做一些切片处理，比如打印当前方法调用栈等。这个也就是线程和线程池监控的基本原理。</p>
+<p>线程池的监控没有太大难度，一般都是 <code>ThreadPoolExecutor</code> 的子类，所以我们 <code>hook</code> 一下 <code>ThreadPoolExecutor</code> 的构造方法就可以监控线程池的创建了。线程池的执行主要就是 <code>hook</code> 住 <code>ThreadPoolExecutor</code> 类的 <code>execute</code> 方法。</p>
+<p>线程的创建和执行的监控方法就稍微要费些脑筋了，因为线程池里面会创建线程，所以这个线程的创建和执行应该和线程池绑定的。需要找到线程和线程池的联系，之前看到一个库，好像是通过线程和线程池的 <code>ThreadGroup</code> 来建立关联的，本来我也计划按照这个关系来写代码的，但是我发现，我们有的小伙伴写的线程池的 <code>ThreadFactory</code> 里面创建线程并没有传入<code>ThreadGroup</code> ，这个就尴尬了，就建立不了联系了。经过查阅相关源码发现了一个关键的类，<code>ThreadPoolExecutor</code> 的内部类<code>Worker</code> ，由于这个类是内部类，所以这个类实际的构造方法里面会传入一个外部类的实例，也就是 <code>ThreadPoolExecutor</code> 实例。同时， <code>Worker</code> 这个类还是一个 <code>Runnable</code> 实现，在 <code>Worker</code> 类通过 <code>ThreadFactory</code> 创建线程的时候，会把自己作为一个 <code>Runnable</code> 传给 <code>Thread</code> 所以，我们通过这个关系，就可以知道 <code>Worker</code> 和 <code>Thread</code> 的关联了。这样，我们通过 <code>ThreadPoolExecutor</code> 和 <code>Worker</code> 的关联，以及 <code>Worker</code> 和 <code>Thread</code> 的关联，就可以得到 <code>ThreadPoolExecutor</code> 和它创建的 <code>Thread</code> 的关联了。这个也就是线程和线程池的监控原理了。</p>
+<p>最终终端 log 打印效果如下：</p>
+<pre><code>com.xander.performace.demo W/demo_Issue: =================================================
+    type: THREAD
+    msg: THREAD POOL CREATE
+    create time: 2021-01-13 11:23:47
+    create trace:
+        com.xander.performance.StackTraceUtils.list(StackTraceUtils.java:39)
+        com.xander.performance.ThreadTool$ThreadPoolExecutorConstructorHook.afterHookedMethod(ThreadTool.java:158)
+        de.robv.android.xposed.DexposedBridge.handleHookedArtMethod(DexposedBridge.java:265)
+        me.weishu.epic.art.entry.Entry64.onHookObject(Entry64.java:64)
+        me.weishu.epic.art.entry.Entry64.referenceBridge(Entry64.java:239)
+        java.util.concurrent.Executors.newSingleThreadExecutor(Executors.java:179)
+        com.xander.performance.demo.MainActivity.testThreadPool(MainActivity.kt:38)
+        java.lang.reflect.Method.invoke(Method.java:-2)
+        androidx.appcompat.app.AppCompatViewInflater$DeclaredOnClickListener.onClick(AppCompatViewInflater.java:397)
+        android.view.View.performClick(View.java:7496)
+        android.view.View.performClickInternal(View.java:7473)
+        android.view.View.access$3600(View.java:831)
+        android.view.View$PerformClick.run(View.java:28641)
+        android.os.Handler.handleCallback(Handler.java:938)
+        android.os.Handler.dispatchMessage(Handler.java:99)
+        android.os.Looper.loop(Looper.java:236)
+        android.app.ActivityThread.main(ActivityThread.java:7876)
+        java.lang.reflect.Method.invoke(Method.java:-2)
+        com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:656)
+        com.android.internal.os.ZygoteInit.main(ZygoteInit.java:967)
+</code></pre>
+<h2 id="IPC-进程间通讯-监控的原理"><a href="#IPC-进程间通讯-监控的原理" class="headerlink" title="IPC(进程间通讯)监控的原理"></a>IPC(进程间通讯)监控的原理</h2><p>进程间通讯的具体原理，也就是 <code>Binder</code> 机制，这里不做详细的说明，也不是这个框架库的原理。</p>
+<p>检测进程间通讯的方法和前面检测线程的方法类似，就是找到所有的进程间通讯的方法的共同点，然后对共同点做一些修改或者说切片，让应用在进行进程间通讯的时候，打印一下调用栈，然后继续做原来的事情。就达到了 IPC 监控的目的。</p>
+<p>那如何找到共同点，或者说切片，就是本节的重点。</p>
+<p>进程间通讯离不开 <code>Binder</code> ，需要从 <code>Binder</code> 入手。</p>
+<p>写一个 <code>AIDL</code> demo 后发现，自动生成的代码里面，接口 <code>A</code> 继承自 <code>IInterface</code> 接口，然后接口里面有个内部抽象类 <code>Stub</code> 类，继承自 <code>Binder</code> ，同时实现了接口 <code>A</code> 。这个 <code>Stub</code> 类里面还有一个内部类 <code>Proxy</code> ，实现了接口 <code>A</code> ，并持有一个 <code>IBinder</code> 实例。</p>
+<p>我们在使用 <code>AIDL</code> 的时候，会用到 <code>Stub</code> 类的 <code>asInterFace</code> 的方法，这个方法会新建一个 <code>Proxy</code> 实例，并给这个 <code>Proxy</code> 实例传入 <code>IBinder</code> , 或者如果传入的 <code>IBinder</code> 实例如果是接口 <code>A</code> 的话，就强制转化为接口 A 实例。一般而言，这个 <code>IBinder</code> 实例是 <code>ServiceConnection</code> 的回调方法里面的实例，是 <code>BinderProxy</code> 的实例。所以 <code>Stub</code> 类的 <code>asInterFace</code> 一般会创建一个 <code>Proxy</code> 实例，查看这个 <code>Proxy</code> 接口的实现方法，发现最终都会调用 <code>BinderProxy</code> 的 <code>transact</code> 方法，所以 <code>BinderProxy</code> 的 <code>transact</code> 方法是一个很好的切入点。</p>
+<p>本来我也是计划通过 <code>hook</code> 住 <code>BinderProxy</code> 类的 <code>transact</code> 方法来做 IPC 的检测的。但是 <code>epic</code> 库在 <code>hook</code> 含有 <code>Parcel</code> 类型参数的方法的时候，不稳定，会有异常。由于暂时还没能力解决这个异常，只能重新找切入点。最后发现 <code>AIDL</code> demo 生成的代码里面，除了调用了 调用 <code>BinderProxy</code> 的 <code>transact</code> 方法外，还调用了 <code>Parcel</code> 的 <code>readException</code> 方法，于是决定 <code>hook</code> 这个方法来切入 <code>IPC</code> 调用流程，从而达到 <code>IPC</code> 监控的目的。</p>
+<p>最终终端 log 打印效果如下：</p>
+<pre><code>com.xander.performace.demo W/demo_Issue: =================================================
+    type: IPC
+    msg: IPC
+    create time: 2021-01-13 11:25:04
+    trace:
+        com.xander.performance.StackTraceUtils.list(StackTraceUtils.java:39)
+        com.xander.performance.IPCTool$ParcelReadExceptionHook.beforeHookedMethod(IPCTool.java:96)
+        de.robv.android.xposed.DexposedBridge.handleHookedArtMethod(DexposedBridge.java:229)
+        me.weishu.epic.art.entry.Entry64.onHookVoid(Entry64.java:68)
+        me.weishu.epic.art.entry.Entry64.referenceBridge(Entry64.java:220)
+        me.weishu.epic.art.entry.Entry64.voidBridge(Entry64.java:82)
+        android.app.IActivityManager$Stub$Proxy.getRunningAppProcesses(IActivityManager.java:7285)
+        android.app.ActivityManager.getRunningAppProcesses(ActivityManager.java:3684)
+        com.xander.performance.demo.MainActivity.testIPC(MainActivity.kt:55)
+        java.lang.reflect.Method.invoke(Method.java:-2)
+        androidx.appcompat.app.AppCompatViewInflater$DeclaredOnClickListener.onClick(AppCompatViewInflater.java:397)
+        android.view.View.performClick(View.java:7496)
+        android.view.View.performClickInternal(View.java:7473)
+        android.view.View.access$3600(View.java:831)
+        android.view.View$PerformClick.run(View.java:28641)
+        android.os.Handler.handleCallback(Handler.java:938)
+        android.os.Handler.dispatchMessage(Handler.java:99)
+        android.os.Looper.loop(Looper.java:236)
+        android.app.ActivityThread.main(ActivityThread.java:7876)
+        java.lang.reflect.Method.invoke(Method.java:-2)
+        com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:656)
+        com.android.internal.os.ZygoteInit.main(ZygoteInit.java:967)
+</code></pre>
+<h1 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h1><ul>
+<li> Mail</li>
+</ul>
+<p><a href="mailto:&#x34;&#x32;&#x30;&#x36;&#52;&#48;&#55;&#54;&#51;&#x40;&#113;&#x71;&#x2e;&#99;&#111;&#x6d;">&#x34;&#x32;&#x30;&#x36;&#52;&#48;&#55;&#54;&#51;&#x40;&#113;&#x71;&#x2e;&#99;&#111;&#x6d;</a></p>
+<ul>
+<li>微信</li>
+</ul>
+<p><img src="https://s3.ax1x.com/2021/01/30/yASVMD.jpg" class="lazyload placeholder" data-srcset="https://s3.ax1x.com/2021/01/30/yASVMD.jpg" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg" alt="微信"></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料:"></a>参考资料:</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/tiann/epic">epic</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ganyao114/SandHook">SandHook</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/markzhai/AndroidPerformanceMonitor">AndroidPerformanceMonitor</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6890407553457963022">面试官：如何监测应用的 FPS ？</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904066259091469">深入探索Android卡顿优化（下）</a></li>
+</ol>
 
   
   
@@ -555,7 +732,7 @@ public @interface TestAnnotation &#123;
               
             
               
-                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/>https://xanderwang.github.io/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/</a></p>
+                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/24/%E4%B8%8D%E4%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F%E4%BD%A0%E5%8F%AA%E5%B7%AE%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E5%BA%93%EF%BC%81/>https://xanderwang.github.io/android-note/2021/02/24/%E4%B8%8D%E4%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F%E4%BD%A0%E5%8F%AA%E5%B7%AE%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E5%BA%93%EF%BC%81/</a></p>
               
             
           </blockquote>
@@ -572,10 +749,10 @@ public @interface TestAnnotation &#123;
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-01T05:37:02+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-20T08:50:05+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Mar 1, 2021</p>
+    <p>更新于：Mar 20, 2021</p>
   </a>
 </div>
 
@@ -584,7 +761,7 @@ public @interface TestAnnotation &#123;
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/%E5%8F%8D%E5%B0%84/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>反射</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/%E6%B3%A8%E8%A7%A3/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>注解</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Performance/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Performance</p></a></div>
 
 
         
@@ -597,7 +774,7 @@ public @interface TestAnnotation &#123;
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/&title=总结笔记(二) - Java 反射和注解总结 - Xander's blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/24/%E4%B8%8D%E4%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F%E4%BD%A0%E5%8F%AA%E5%B7%AE%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E5%BA%93%EF%BC%81/&title=不会性能优化？你只差一个开源库！ - Xander's blog&summary="
           
           >
           
@@ -609,7 +786,7 @@ public @interface TestAnnotation &#123;
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/&title=总结笔记(二) - Java 反射和注解总结 - Xander's blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/24/%E4%B8%8D%E4%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F%E4%BD%A0%E5%8F%AA%E5%B7%AE%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E5%BA%93%EF%BC%81/&title=不会性能优化？你只差一个开源库！ - Xander's blog&summary="
           
           >
           
@@ -621,7 +798,7 @@ public @interface TestAnnotation &#123;
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%BA%8C)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/&title=总结笔记(二) - Java 反射和注解总结 - Xander's blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/24/%E4%B8%8D%E4%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F%E4%BD%A0%E5%8F%AA%E5%B7%AE%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E5%BA%93%EF%BC%81/&title=不会性能优化？你只差一个开源库！ - Xander's blog&summary="
           
           >
           
@@ -651,23 +828,21 @@ public @interface TestAnnotation &#123;
   
     <div class="prev-next">
       
-        <a class='prev' href='/android-note/2021/02/07/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%89)%20-%20Java%20%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>总结笔记(三) - Java 集合总结</p>
-          <p class='content'>Java 集合总结Java 有哪些集合，继承关系是怎么样的
-平时常用的集合有哪些
-Collection
-List 可以重复添加元素
-ArrayList
-LinkedList
+        <a class='prev' href='/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>利用 GitHub 搭建自己的个人博客</p>
+          <p class='content'>先看下预览图吧。
 
+先说下方案:
 
-Set 不能重复...</p>
+ GitHub Page + GitHub Action + hexo &amp; 配套主题 
+
+GitHub Page这个都不陌生吧，注册 GitHub 账...</p>
         </a>
       
       
-        <a class='next' href='/android-note/2020/07/23/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(%E4%B8%80)%20-%20%E6%B3%9B%E5%9E%8B%E6%80%BB%E7%BB%93/'>
-          <p class='title'>总结笔记(一) - 泛型总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>泛型总结泛型是什么？一句话说就是类型参数化。什么意思呢？参数化的意思就是我们在定义的时候不知道具体的值，我们在到我们实际运行的时候才知道具体的值。类型参数化就是具体类型在定义的时候不知道，在实际...</p>
+        <a class='next' href='/android-note/2021/02/07/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(2)%20-%20Java%20%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%A8%E8%A7%A3%E6%80%BB%E7%BB%93/'>
+          <p class='title'>Android 开发总结笔记(二) - Java 反射和注解总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>反射总结什么是反射反射是 Java 语言的一个特性，就是在程序运行状态中，对于任何一个类，都可以通过反射知道这个类所有的方法和属性。对于任何一个实例，都可以调用这个实例的任何方法和属性。这个在运...</p>
         </a>
       
     </div>
@@ -710,7 +885,7 @@ Set 不能重复...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84"><span class="toc-text">什么是反射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8"><span class="toc-text">反射有什么用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">反射的常用方法介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Class-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">Class 常用方法介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Method-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">Method 常用方法介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Filed-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">Filed 常用方法介绍</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-text">常用的场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE"><span class="toc-text">动态配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-text">动态代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hook-%E6%A1%86%E6%9E%B6"><span class="toc-text">hook 框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%A8%E8%A7%A3"><span class="toc-text">什么是注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3%E5%AE%9A%E4%B9%89"><span class="toc-text">注解定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">注解的应用场景</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#UI-%E7%BA%BF%E7%A8%8B-block-%E6%A3%80%E6%B5%8B%E5%8E%9F%E7%90%86"><span class="toc-text">UI 线程 block 检测原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FPS-%E6%A3%80%E6%B5%8B%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-text">FPS 检测的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%90%AF%E5%8A%A8%E7%9B%91%E6%8E%A7%E4%BB%A5%E5%8F%8A%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%88%9B%E5%BB%BA%E7%9B%91%E6%8E%A7"><span class="toc-text">线程的创建和启动监控以及线程池的创建监控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IPC-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E8%AE%AF-%E7%9B%91%E6%8E%A7%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-text">IPC(进程间通讯)监控的原理</span></a></li></ol>
     </div>
   </section>
 
@@ -729,7 +904,7 @@ Set 不能重复...</p>
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="总结笔记(二) - Java 反射和注解总结";
+  pdata.postTitle="不会性能优化？你只差一个开源库！";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
@@ -767,7 +942,7 @@ Set 不能重复...</p>
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
       
     
@@ -779,11 +954,11 @@ Set 不能重复...</p>
       
     
       
-        本站使用
+        Use
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        作为主题，总访问量为
+        as theme, total visits
           <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-          次
+          times
         
       
     
