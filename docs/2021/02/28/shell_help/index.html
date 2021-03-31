@@ -22,9 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>利用 GitHub 搭建自己的个人博客 - Xander&#39;s blog</title>
+  <title>shell 脚本 -a 到 -n 的意思 - Xander&#39;s blog</title>
   
-    <meta name="keywords" content="Github Action,GitHub Page,Gitee Page,Gitee,hexo">
+    <meta name="keywords" content="shell">
   
 
   
@@ -427,7 +427,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        利用 GitHub 搭建自己的个人博客
+        shell 脚本 -a 到 -n 的意思
       </h1>
       <div class='new-meta-box'>
         
@@ -458,7 +458,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Feb 25, 2021</p>
+    <p>发布于：Feb 28, 2021</p>
   </a>
 </div>
 
@@ -469,7 +469,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="利用 GitHub 搭建自己的个人博客" data-path="/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+      <div id="lc-pv" data-title="shell 脚本 -a 到 -n 的意思" data-path="/android-note/2021/02/28/shell_help/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -487,97 +487,145 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <p>先看下预览图吧。</p>
-<p><img src="https://img.imgdb.cn/item/6037cadc5f4313ce25858739.png" class="lazyload placeholder" data-srcset="https://img.imgdb.cn/item/6037cadc5f4313ce25858739.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg" alt="预览图"></p>
-<p>先说下方案:</p>
-<blockquote>
-<p> GitHub Page + GitHub Action + hexo &amp; 配套主题 </p>
-</blockquote>
-<h1 id="GitHub-Page"><a href="#GitHub-Page" class="headerlink" title="GitHub Page"></a>GitHub Page</h1><p>这个都不陌生吧，注册 GitHub 账号后，可以帮你托管你的 <code>repository</code> 下的静态网页，比如我有个 <code>repository</code> 叫  <code>android-note</code> ，我的 github 账号叫 <code>xanderwang</code> ，那么我的 android-note 托管后，访问地址就是：</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://xander.github.io/android-note">https://xander.github.io/android-note</a></p>
-</blockquote>
-<p>托管后，如果我每次写了新的文章后，我把最新的静态 blog 上传上来，那么就可以更新自己的博客。</p>
-<p>如果每次都可以自动编译和上传 blog 静态网页，那就很省事了。事实上，这个是可以做到的，具体细节后面再说。我们先看看如何托管我们的 <code>repository</code> 到 GitHub Page 。</p>
-<p>最开始接触到 GitHub Page 的时候，看文章都是说需要新建一个和自己用户名同名的 <code>repository</code> ，然后往这个 <code>repository</code> 根目录里面上传静态 blog 网页，然后托管。</p>
-<p>后来我发现不是这样，至少目前不是这样，我发现任意的 <code>repository</code> 都可以托管，只需要做一些特别的设置，如何设置呢？</p>
-<p>找到你的 <code>repository</code> ，然后</p>
-<blockquote>
-<p>settings -&gt; GitHub Pages -&gt; Source -&gt; 选择分支和静态博客的目录(貌似只能选 <code>/</code> 或者 <code>/doc</code>)</p>
-</blockquote>
-<p>到这里 GitHub 托管就设置好了。按照之前的规则你就可以访问你托管 blog 了。</p>
-<h1 id="GitHub-Action"><a href="#GitHub-Action" class="headerlink" title="GitHub Action"></a>GitHub Action</h1><p>刚刚说了，如果有个自动编译和上传 blog 的工具或者平台，每次我们写好 blog 后，自动帮我们编译上传好，那我们就可以省很多事。GitHub Action 正好可以做这个的，而且可以和 GitHub 无缝对接。那如何使用呢？</p>
-<p>很简单，只需要在你的 <code>repository</code> 里面新建 <code>.github</code> 文件夹，然后在里面新建 <code>.workflows</code> 文件夹，然后在里面新建 <code>build.yml</code> 文件(build 可以换成任意你喜欢的)，然后 GitHub Action 功能就开通了。这个时候， <code>repository</code> 下的目录结构大概是</p>
-<pre><code>.
-├── .github
-│   └── workflows
-│       └── build.yml
-</code></pre>
-<p>现在介绍下如何配置 build.yml 文件</p>
-<pre><code class="yml">name: Xander&#39;s Blog Task
-# 在push **.md **.yml **.yaml **.sh 文件后执行任务
-on: #配置任务执行时机
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
-  push:
-    # branches:    
-    #   - master
-    paths:
-      - &#39;**.md&#39;
-      - &#39;**.yml&#39;
-      - &#39;**.yaml&#39;
-      - &#39;**.sh&#39;
-jobs: # 配置具体任务
-  build:
-    # runs-on: macOS-latest
-    runs-on: ubuntu-latest
-    steps:
-    # 引用外部 Action, 拉取代码仓库到虚拟机工作目录
-    - name: chekout code
-      uses: actions/checkout@v1
-    # 执行 .sh 脚本文件，很多的任务可以在这个脚本里面执行
-    - name: build note
-      run: sh ./blog_config/build.sh
-# ... 忽略其他内容
-</code></pre>
-<p>上面列出了主要的步骤和解释了，具体可以参考<a target="_blank" rel="noopener" href="https://github.com/XanderWang/android-note">我的 repository</a> </p>
-<p>这里需要说明的是，如果你需要额外传一些参数，比如密码是的，你需要现在 repository 做一些设置，具体参考如下：</p>
-<blockquote>
-<p>settings -&gt; secrets -&gt; 新建一个 secret </p>
-</blockquote>
-<p>然后在你的 <code>build.yml</code> 里面使用</p>
-<pre><code class="yml">steps:
-  - name: Hello world action
-    with: # Set the secret as an input
-      super_secret: $&#123;&#123; secrets.SuperSecret &#125;&#125;
-    env: # Or as an environment variable
-      super_secret: $&#123;&#123; secrets.SuperSecret &#125;&#125;
-    run: |
-      example-command &quot;$super_secret&quot;
-</code></pre>
-<p>到这里自动编译和发布的工作就说完了，现在我们还缺什么？</p>
-<h1 id="hexo-amp-配套主题"><a href="#hexo-amp-配套主题" class="headerlink" title="hexo &amp; 配套主题"></a>hexo &amp; 配套主题</h1><p>前面说了托管和自动编译和发布，现在我们就差一个个性化的静态 blog 模板了，这里我选择的是 hexo &amp; 配套主题。</p>
-<h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><p>这个是一个静态的博客构建软件，配合网络上的主题，可以比较方便构建出自己的博客，同时有大量的精美主题可以选择。</p>
-<p>如何安装就不具体说了，不是很难，官网有很详细的教程。</p>
-<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">点我直达 hexo 官网</a></p>
-<h2 id="hexo-配套主题"><a href="#hexo-配套主题" class="headerlink" title="hexo 配套主题"></a>hexo 配套主题</h2><p>主题的话，一般可以在 GitHub 上面找，我暂时用的 <a target="_blank" rel="noopener" href="https://volantis.js.org/">volantis</a>，可以去官网看下这个主题的具体介绍和相关配置。</p>
-<p>这里说下可能遇到的坑的，</p>
-<p>这里说下 _config.yml</p>
-<pre><code class="yml">...
-
-# URL
-## If your site is put in a subdirectory, set url as &#39;http://yoursite.com/child&#39; and root as &#39;/child/&#39;
-url: https://xanderwang.github.io/android-note
-root: /android-note/
-# 需要注意这里的配置，注意 url 和 root 的配置，如果不是用的 GitHub 同名 repository 托管的，都需要配置
-
-# Directory
-public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的站点文件。
-# public_dir 目录就是 hexo 编译后存放静态 html 的目录，在托管 GitHub Page 的时候注意选择这个目录。
-
-...
-</code></pre>
-<p>其他的配置就是主题配置了，这个建议按照注意的 repository 或者主题的 demo 去配置，每个主题都是不一样的，只能靠自己的折腾了。 </p>
+  <ul>
+<li>[-a file]  </li>
+</ul>
+<p>如果 file 存在则为真</p>
+<ul>
+<li>[-b file]  </li>
+</ul>
+<p>如果 file 存在且是一个块特殊文件则为真</p>
+<ul>
+<li>[-c file]  </li>
+</ul>
+<p>如果 file 存在且是一个字特殊文件则为真</p>
+<ul>
+<li>[-d file]  </li>
+</ul>
+<p>如果file文件存在且是一个目录则为真<br>-d 前的 ! 是逻辑非<br>例如：<br>if [ ! -d $lcd_path/$par_date ] 表示后面的那个目录不存在，则执行后面的 then 操作</p>
+<ul>
+<li>[-e file] </li>
+</ul>
+<p>如果 file 文件存在则为真</p>
+<ul>
+<li>[-f file] </li>
+</ul>
+<p>如果 file 存在且是一个普通文件则为真</p>
+<ul>
+<li>[-g file] </li>
+</ul>
+<p>如果 file 存在且已经设置了 SGID 则为真（SUID 是 Set User ID, SGID 是 Set Group ID的意思）</p>
+<ul>
+<li>[-h file] </li>
+</ul>
+<p>如果 file 存在且是一个符号连接则为真</p>
+<ul>
+<li>[-k file] </li>
+</ul>
+<p>如果 file 存在且已经设置粘制位则为真</p>
+<p>当一个目录被设置为”粘制位”(用chmod a+t),则该目录下的文件只能由</p>
+<ol>
+<li>超级管理员删除</li>
+<li>该目录的所有者删除</li>
+<li>该文件的所有者删除</li>
+</ol>
+<p>也就是说,即便该目录是任何人都可以写,但也只有文件的属主才可以删除文件。</p>
+<p>具体例子如下：</p>
+<p>#ls -dl /tmp</p>
+<p>drwxrwxrwt 4 root root ………</p>
+<p>注意other位置的t，这便是粘连位。</p>
+<ul>
+<li>[-p file] </li>
+</ul>
+<p>如果 file 存在且是一个名字管道（F如果O）则为真<br>管道是 linux 里面进程间通信的一种方式，其他的还有像信号（signal）、信号量、消息队列、共享内存、套接字（socket）等。</p>
+<ul>
+<li>[-r file] </li>
+</ul>
+<p>如果 file 存在且是可读的则为真</p>
+<ul>
+<li>[-s file] </li>
+</ul>
+<p>如果 file 存在且大小不为 0 则为真</p>
+<ul>
+<li>[-t FD] </li>
+</ul>
+<p>如果文件描述符 FD 打开且指向一个终端则为真</p>
+<ul>
+<li>[-u file] </li>
+</ul>
+<p>如果 file 存在且设置了SUID（set userID）则为真</p>
+<ul>
+<li>[-w file] </li>
+</ul>
+<p>如果 file 存在且是可写的则为真</p>
+<ul>
+<li>[-x file] </li>
+</ul>
+<p>如果 file 存在且是可执行的则为真</p>
+<ul>
+<li>[-O file] </li>
+</ul>
+<p>如果 file 存在且属有效用户ID则为真</p>
+<ul>
+<li>[-G file] </li>
+</ul>
+<p>如果 file 存在且属有效用户组则为真</p>
+<ul>
+<li>[-L file] </li>
+</ul>
+<p>如果 file 存在且是一个符号连接则为真</p>
+<ul>
+<li>[-N file] </li>
+</ul>
+<p>如果 file 存在 and has been mod 如果 ied since it was last read 则为真</p>
+<ul>
+<li>[-S file] </li>
+</ul>
+<p>如果 file 存在且是一个套接字则为真</p>
+<ul>
+<li>[file1 –nt file2] </li>
+</ul>
+<p>如果 file1 has been changed more recently than file2 或者 file1 exists and file2 does not 则为真</p>
+<ul>
+<li>[file1 –ot file2] </li>
+</ul>
+<p>如果 file1 比 file2 要老，或者 file2 存在且 file1 不存在则为真</p>
+<ul>
+<li>[file1 –ef file2] </li>
+</ul>
+<p>如果 file1 和 file2 指向相同的设备和节点号则为真</p>
+<ul>
+<li>[-o optionname] </li>
+</ul>
+<p>如果 shell 选项 “optionname” 开启则为真</p>
+<ul>
+<li>[-z string] </li>
+</ul>
+<p>“string” 的长度为零则为真</p>
+<ul>
+<li>[-n string] or [string] </li>
+</ul>
+<p>“string” 的长度为非零 non-zero 则为真</p>
+<ul>
+<li>[sting1==string2] </li>
+</ul>
+<p>如果 2 个字符串相同。</p>
+<ol>
+<li>“=” may be used instead of </li>
+<li>“==” for strict posix compliance<br>则为真</li>
+</ol>
+<ul>
+<li>[string1!=string2] </li>
+</ul>
+<p>如果字符串不相等则为真</p>
+<ul>
+<li>[string1&lt;string2] </li>
+</ul>
+<p>如果 “string1” sorts before “string2”，lexicographically in the current locale 则为真</p>
+<ul>
+<li>[arg1 OP arg2] </li>
+</ul>
+<p>“OP”is one of –eq,-ne,-lt,-le,-gt or –ge.These arithmetic binary oprators return true if “arg1”is equal to,not equal to,less than,less than or equal to,greater than,or greater than or equal to“agr2”,respectively.“arg1”and “agr2”are integers.</p>
 
   
   
@@ -595,7 +643,7 @@ public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的�
               
             
               
-                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/>https://xanderwang.github.io/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</a></p>
+                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/28/shell_help/>https://xanderwang.github.io/android-note/2021/02/28/shell_help/</a></p>
               
             
           </blockquote>
@@ -612,10 +660,10 @@ public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的�
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-20T08:50:05+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-31T11:41:12+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Mar 20, 2021</p>
+    <p>更新于：Mar 31, 2021</p>
   </a>
 </div>
 
@@ -624,7 +672,7 @@ public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的�
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Github-Action/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Github Action</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/GitHub-Page/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>GitHub Page</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Gitee-Page/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Gitee Page</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Gitee/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Gitee</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/hexo/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>hexo</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/shell/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>shell</p></a></div>
 
 
         
@@ -637,7 +685,7 @@ public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的�
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/&title=利用 GitHub 搭建自己的个人博客 - Xander's blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/28/shell_help/&title=shell 脚本 -a 到 -n 的意思 - Xander's blog&summary="
           
           >
           
@@ -649,7 +697,7 @@ public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的�
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/&title=利用 GitHub 搭建自己的个人博客 - Xander's blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/28/shell_help/&title=shell 脚本 -a 到 -n 的意思 - Xander's blog&summary="
           
           >
           
@@ -661,7 +709,7 @@ public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的�
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/25/%E5%88%A9%E7%94%A8%20GitHub%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/&title=利用 GitHub 搭建自己的个人博客 - Xander's blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/28/shell_help/&title=shell 脚本 -a 到 -n 的意思 - Xander's blog&summary="
           
           >
           
@@ -691,18 +739,18 @@ public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的�
   
     <div class="prev-next">
       
-        <a class='prev' href='/android-note/2021/02/26/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(4)%20-%20JVM%20%E6%80%BB%E7%BB%93/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 开发总结笔记(四) - JVM 总结</p>
-          <p class='content'>JVM 总结什么是 JVMJVM 是 Java 虚拟机，是一个虚拟出来的计算机，仿真模拟计算机。
-JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM 的内存主要分为五块
+      
+        <a class='next' href='/android-note/2021/02/26/android_note_06/'>
+          <p class='title'>Android 开发总结笔记(六) - 网络编程总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>网络编程总结网络协议总览网络协议分层
+网络协议框架
+各层协议之间的区别合联系应用层: Http WebSocket FTP 等
+传输层: TCP UDP
+网络层: IP
+链路层: -
 
-程序...</p>
-        </a>
-      
-      
-        <a class='next' href='/android-note/2021/02/24/%E4%B8%8D%E4%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F%E4%BD%A0%E5%8F%AA%E5%B7%AE%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E5%BA%93%EF%BC%81/'>
-          <p class='title'>不会性能优化？你只差一个开源库！<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>简介由于本人工作需要，需要解决一些性能问题，虽然有 Profiler 、Systrace  等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，...</p>
+
+TCP...</p>
         </a>
       
     </div>
@@ -735,20 +783,6 @@ JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM �
 
 
 
-  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
-    
-  <header>
-    
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
-    
-  </header>
-
-
-    <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo"><span class="toc-text">hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo-%E9%85%8D%E5%A5%97%E4%B8%BB%E9%A2%98"><span class="toc-text">hexo 配套主题</span></a></li></ol>
-    </div>
-  </section>
-
 
   
 
@@ -764,7 +798,7 @@ JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM �
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="利用 GitHub 搭建自己的个人博客";
+  pdata.postTitle="shell 脚本 -a 到 -n 的意思";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要

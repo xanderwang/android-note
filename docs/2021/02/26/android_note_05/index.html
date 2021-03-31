@@ -22,9 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>Android 性能优化总结 - Xander&#39;s blog</title>
+  <title>Android 开发总结笔记(五) - Java 线程总结 - Xander&#39;s blog</title>
   
-    <meta name="keywords" content="Android,Performance,优化">
+    <meta name="keywords" content="Android,Java 线程">
   
 
   
@@ -427,7 +427,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        Android 性能优化总结
+        Android 开发总结笔记(五) - Java 线程总结
       </h1>
       <div class='new-meta-box'>
         
@@ -447,7 +447,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='new-meta-item category'>
     <a class='notlink'>
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <a class="category-link" href="/android-note/categories/Android/">Android</a>
+      <a class="category-link" href="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>
     </a>
   </div>
 
@@ -458,7 +458,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Mar 8, 2020</p>
+    <p>发布于：Feb 26, 2021</p>
   </a>
 </div>
 
@@ -469,7 +469,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="Android 性能优化总结" data-path="/android-note/2020/03/08/Android%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/">
+      <div id="lc-pv" data-title="Android 开发总结笔记(五) - Java 线程总结" data-path="/android-note/2021/02/26/android_note_05/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -487,19 +487,293 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h2 id="性能优化总结"><a href="#性能优化总结" class="headerlink" title="性能优化总结"></a>性能优化总结</h2><p>性能的优化是一个老生常谈的点，也是一个比较重要的点。现在对工作中的优化点做一个总结。</p>
-<h3 id="优化的方向，即那些点是需要优化的"><a href="#优化的方向，即那些点是需要优化的" class="headerlink" title="优化的方向，即那些点是需要优化的"></a>优化的方向，即那些点是需要优化的</h3><p>在平时的优化过程中我们需要从哪几个点来优化呢？其实我们平时自己一定也用过软件，在使用软件的过程中有没有什么想吐槽的呢？<br>“太卡了吧！”、”图片怎么还没加载出来？”、”怎么刚进去就卡了。”等等，是不是有这样的想法，这些想法其实包含了我们今天要说的<br>内容，就是从哪些方面来优化我们的 APP ，我总结了以下几点。</p>
+  <h1 id="Java-线程总结"><a href="#Java-线程总结" class="headerlink" title="Java 线程总结"></a>Java 线程总结</h1><h2 id="Java-线程安全"><a href="#Java-线程安全" class="headerlink" title="Java 线程安全"></a>Java 线程安全</h2><h3 id="什么是线程安全"><a href="#什么是线程安全" class="headerlink" title="什么是线程安全"></a>什么是线程安全</h3><p>在上一节的 Java 内存模型里面说到，程序在运行的时候，线程并不是直接从主存里面，而是先从主内存拷贝一份到工作内存(线程私有的)，然后执行代码，最后把计算结果从工作内存写回到主内存。</p>
+<p>有个小问题，为是么需要 JMM ？</p>
+<p>cpu 在存取数据或者存取指令的时候，如果都是在一片连续的区域，效率会高，所以栈里面会有一个变量的副本，这样会把需要参与计算的变量放到一片连续的区域，会提高执行效率，但是这样就会有一个数一致性问题，也就是线程安全问题。说到底就是数据同步问题。</p>
+<p>当有多个线程同时访问同一个变量的时候，因为线程在运算的时候，可能并不是拿的“最新”的值来参与计算的，或者说，参与计算的值不是“最新的”，因为其他线程更新了这个变量，但是线程不知道，还是用的“旧的值”。最终，执行完代码后，写回到主存的值是不符合预期的值。这种情况就是线程不安全，所以，对应的，线程安全就是多个线程同时访问同一个变量的时候，最终的结果和预期结果一致，就表明是线程安全的。</p>
+<p>线程要保证安全，需要满足三个条件</p>
 <ul>
-<li>启动速度</li>
-<li>操作流畅度</li>
-<li>内存的管理和使用</li>
-<li>图片的加载</li>
+<li>原子性(Synchronized / Lock)</li>
 </ul>
-<p>当然，需要优化的不仅仅是这几个方面，我们暂时先就这几个方面来谈谈优化吧</p>
-<h3 id="启动速度"><a href="#启动速度" class="headerlink" title="启动速度"></a>启动速度</h3><p>启动速度是一个很关键的点，相信平时大家在使用软件的时候，如果点了应用的图标，结果很久才能进入主界面，很久才能操作。<br>那么这个应用大概率会被卸载。</p>
-<p>那我们如何优化我们的 APP 的启动速度呢？</p>
-<p>首先，第一步我们要知道我们的应用启动花的时间，</p>
-<h3 id="操作流畅度"><a href="#操作流畅度" class="headerlink" title="操作流畅度"></a>操作流畅度</h3><h3 id="内存的管理和使用"><a href="#内存的管理和使用" class="headerlink" title="内存的管理和使用"></a>内存的管理和使用</h3><h3 id="图片的加载"><a href="#图片的加载" class="headerlink" title="图片的加载"></a>图片的加载</h3>
+<p>原子性的意思是，某个操作要么执行完，要么不做。比如读取值，执行时，开始读数据了，需要保证不能被打断。要么不读值。</p>
+<ul>
+<li>可见性(Volatile / Synchronized / Lock)</li>
+</ul>
+<p>可见性的意思是对值得读写可以立刻捕获，就是说某个线程可以“观察”到其他线程对值得修改，同时，这个线程对值的修改，其他线程也可以“观察”到。</p>
+<ul>
+<li>有序性(Volatile / Synchronized / Lock)</li>
+</ul>
+<p>说到有序性需要说到指令重排，指令重排是为了提高 CPU 的指令执行效率，执行代码的时候，会把一些源码上的不影响方法执行结果的代码打乱执行，以提高 CPU 执行效率。有序性的意思就是说最终代码编译的指令是按照代码的书写顺序执行的。</p>
+<h3 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h3><p>上面说到了，线程安全在于没有“及时”读取到最新的值。要想“及时”读取到最新的值，我们需要用到 volatile 关键字，我们先看看值是如何读取的。</p>
+<h4 id="Java-变量的读写"><a href="#Java-变量的读写" class="headerlink" title="Java 变量的读写"></a>Java 变量的读写</h4><p>Java 变量读的读写是以下的指令来完成的，通过以下的指令，把变量的值从主内存读取到工作内存，工作内存变化后，写入主内存。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lock</td>
+<td>作用于主内存，把变量标识为线程独占状态。</td>
+</tr>
+<tr>
+<td>unlock</td>
+<td>作用于主内存，解除独占状态。</td>
+</tr>
+<tr>
+<td>read</td>
+<td>作用主内存，把一个变量的值从主内存传输到线程的工作内存。</td>
+</tr>
+<tr>
+<td>load</td>
+<td>作用于工作内存，把 read 操作传过来的变量值放入工作内存的变量副本中。</td>
+</tr>
+<tr>
+<td>use</td>
+<td>作用工作内存，把工作内存当中的一个变量值传给执行引擎。</td>
+</tr>
+<tr>
+<td>assign</td>
+<td>作用工作内存，把一个从执行引擎接收到的值赋值给工作内存的变量。</td>
+</tr>
+<tr>
+<td>store</td>
+<td>作用于工作内存的变量，把工作内存的一个变量的值传送到主内存中。</td>
+</tr>
+<tr>
+<td>write</td>
+<td>作用于主内存的变量，把 store 操作传来的变量的值放入主内存的变量中。</td>
+</tr>
+</tbody></table>
+<h4 id="volatile-如何保持内存可见性"><a href="#volatile-如何保持内存可见性" class="headerlink" title="volatile 如何保持内存可见性"></a>volatile 如何保持内存可见性</h4><ul>
+<li>read、load、use 动作必须连续出现。</li>
+<li>assign、store、write 动作必须连续出现。</li>
+</ul>
+<p>所以，使用 volatile 变量能够保证:</p>
+<ul>
+<li>每次<code>读取前</code>必须先从主内存刷新最新的值。</li>
+<li>每次<code>写入后</code>必须立即同步回主内存当中。</li>
+</ul>
+<p>有了这 2 条规则，线程就可以及时“观察”到变量值得变化了。</p>
+<h4 id="volatile-如何防止指令重排序"><a href="#volatile-如何防止指令重排序" class="headerlink" title="volatile 如何防止指令重排序"></a>volatile 如何防止指令重排序</h4><p>通过内存屏障来实现的。</p>
+<table>
+<thead>
+<tr>
+<th>屏障</th>
+<th>举例</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LoadLoad</td>
+<td>Load1;LoadLoad;Load2</td>
+<td>Load2 以及之后的读操作要在 Load1 完成之后</td>
+</tr>
+<tr>
+<td>LoadStore</td>
+<td>Load1;LoadStore;Store</td>
+<td>Store2 以及之后的写操作要在 Load1 完成之后</td>
+</tr>
+<tr>
+<td>StoreStore</td>
+<td>Store1;StoreStore;Store2</td>
+<td>Store2 以及之后的写操作要在 Store1 完成之后</td>
+</tr>
+<tr>
+<td>StoreLoad</td>
+<td>Store1;StoreLoad;Load2</td>
+<td>Load2  以及之后的读操作需要在 Store1 完成之后</td>
+</tr>
+</tbody></table>
+<p>为了实现volatile的内存语义，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。然而，对于编译器来说，发现一个最优布置来最小化插入屏障的总数几乎不可能，为此，Java内存模型采取保守策略。</p>
+<p>下面是基于保守策略的JMM内存屏障插入策略：</p>
+<ul>
+<li>在每个 volatile 写操作的前面插入一个 StoreStore 屏障。</li>
+<li>在每个 volatile 写操作的后面插入一个 StoreLoad 屏障。</li>
+<li>在每个 volatile 读操作的后面插入一个 LoadLoad 屏障。</li>
+<li>在每个 volatile 读操作的后面插入一个 LoadStore 屏障。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://monkeysayhi.github.io/2016/11/29/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8%E3%80%81%E5%8E%9F%E7%90%86/">volatile关键字的作用、原理</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhengbin/p/6407137.html">Java内存模型</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chenyangyao/p/5269622.html">JVM内存模型、指令重排、内存屏障概念解析</a></p>
+<p>解决这个问题(线程不安全)的办法有以下几种方式</p>
+<ol>
+<li>synchronized</li>
+<li>Lock + volatile</li>
+</ol>
+<p>说到底，线程安全的主要的思想就是利用某种方式，保证同时只有一个线程在使用这个变量或者说是方法块，其他的线程“阻塞”，等待正在执行的线程执行完。线程油冰雪执行变成串行执行。</p>
+<h3 id="线程安全的实现方式"><a href="#线程安全的实现方式" class="headerlink" title="线程安全的实现方式"></a>线程安全的实现方式</h3><h4 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h4><p>synchronized 通过字节码指令 enterMoniter 和 exitMoniter 实现同时只有一个线程可以执行某段代码块，等这段代码块执行完以后，其他的线程才可以执行。</p>
+<p>这里面需要了解 synchronized 的作用对象，作用对象是一个 Object 。</p>
+<p>大概的原理就是:每个对象都有一个对象头，这个对象头里面存储了相应的锁的信息(无锁、偏向锁、轻量锁和重量锁)。当代码执行到 synchronized 代码的时候，会看这个锁作用的对象的对象头，是有锁还是无锁，无锁就加锁后继续执行。有锁后就阻塞，等待其他线程执行完。</p>
+<p>但是一开始 synchronized 是一个比较重的操作，后续做了优化，这些优化分别是自旋锁、轻量锁、偏向锁。</p>
+<p>自旋就是不会立即 block 线程，而是做一段小的自循环，如果还是无法获取锁，再 block 线程。</p>
+<p>轻量锁是指，虽然对于同一段代码，有多个线程竞争，但是竞争发生在不同的时间段。轻量锁的做法是第一次对锁对象加锁的时候，锁对象的对象头记录指向线程中的锁记录。再次执行代码，加锁锁对象的时候，如果锁对象的对象头指向的锁记录是这个线程，就直接执行，跳过加锁过程。</p>
+<p>偏向锁就是，锁对象被加锁的时候，锁对象的对象头会保存持有锁的线程 id , 当同步代码执行完后，再次对锁对象加锁的时候，如果锁对象的对象头是偏向锁，并且 thread id 是当前线程，那么就不做加锁过程，直接执行。</p>
+<p>轻量级锁和偏向锁如果存在竞争，最终还是会膨胀为重量锁的。</p>
+<h4 id="锁膨胀过程"><a href="#锁膨胀过程" class="headerlink" title="锁膨胀过程"></a>锁膨胀过程</h4><p>偏向锁(01)：做一次 cas 操作，如果成功，说明获取偏向锁成功，对象头记录获取锁的 ThreadId ，如果失败，说明有竞争，这个时候需要膨胀为轻量级锁。</p>
+<p>轻量级锁(00)：某个线程获取锁的时候，如果对象头是偏向锁，就看 ThreadId 对应的线程是否还活着，如果活着，就看是否退出同步块，如果不存活或者已经退出同步块，就尝试 cas 操作获取偏向锁，如果 cas 失败，说明有竞争，这个时候需要由偏向锁膨胀为轻量级锁，具体的过程就是 JVM 会把当前获取锁的线程挂起，然后再线程的当前栈帧里面创建一个锁记录，然后把对象头用 CAS 拷贝进去，同时创建一个 Owner 指针指向锁对象的对象头，然后锁对象的对象头指向这个锁记录，然后之前获取锁的线程继续执行，没有获取到锁的线程先自旋一段时间，如果自旋结束后成功获取到轻量级锁，就继续执行，如果自旋后还是获取不到轻量级锁，说明由更严重(多个线程)的竞争，需要膨胀为重量级锁。</p>
+<p>重量级锁(10)：线程</p>
+<p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5ca766dcf265da30d02fb35c">https://juejin.im/post/5ca766dcf265da30d02fb35c</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dsj2016/p/5714921.html">JAVA锁的膨胀过程和优化</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/133319319">聊聊Java 锁的JVM锁</a></p>
+<p><a target="_blank" rel="noopener" href="https://xinghelanchen.github.io/2018/08/22/JAVA%E9%94%81%E7%9A%84%E8%86%A8%E8%83%80%E8%BF%87%E7%A8%8B%E5%92%8C%E4%BC%98%E5%8C%96/">JAVA锁的膨胀过程和优化</a></p>
+<h4 id="Lock-volatile"><a href="#Lock-volatile" class="headerlink" title="Lock + volatile"></a>Lock + volatile</h4><p>lock 的话主要是利用 AQS 框架来实现的同步机制。</p>
+<p>AQS 框架内部利用了 CAS 来判断是否有线程持有锁。当有其他线程持有锁的时候，会 block 当前线程，然后入队列(入队的时候可能会有自旋)，当持有锁的线程释放锁后，会唤醒 block 的线程。</p>
+<p>CAS 是 Java 提供的原子性操作 API 。</p>
+<p>AQS 框架的理解：</p>
+<pre><code class="java">acquire 独占式获取锁，如果没有获取成功，就入队列并阻塞。
+
+tryAcquire 独占式锁子类需要复写的方法，独占式请求锁。返回 true 表示线程获取锁成功，false 表示获取锁失败。
+
+acquireShare 共享式获取锁，当获取锁的线程数量超过指定数量(tryAcquireShare的返回结果小于0)，就阻塞尝试获取锁的线程。
+
+tryAcquireShare 共享式锁子类需要复写的方法。返回值如果小于 0 表示共享锁的数量消耗完，需要阻塞。
+
+acquireQueued 独占的时候，入队列
+addWaiter  具体的入队列入口
+doAcquireShared 共享的时候，入队列
+</code></pre>
+<h3 id="Java-里锁的分类"><a href="#Java-里锁的分类" class="headerlink" title="Java 里锁的分类"></a>Java 里锁的分类</h3><ul>
+<li>公平/非公平锁</li>
+</ul>
+<p>公平：按照请求锁的时间顺序依次获取锁，非公平锁就是不一定是按照请求锁的时间顺序来获取锁的。</p>
+<ul>
+<li>独占/共享锁</li>
+</ul>
+<p>独占锁(ReentrantLock)就是锁只能同时被一个线程持有，共享锁(CountDownLatch/Semaphone)就是锁可以同时被多个线程持有。</p>
+<ul>
+<li>自旋锁</li>
+</ul>
+<p>没有请求到锁的时候，做一段循环，等待持有锁的线程释放锁，然后请求锁。坏处就是，如果自旋过久，也会消耗大量的 cpu 资源。</p>
+<ul>
+<li>偏向锁/轻量锁/重量锁</li>
+</ul>
+<p>synchornized 的优化，如果再偏向锁发生竞争的时候会锁膨胀</p>
+<ul>
+<li>可重入/不可重入</li>
+</ul>
+<p>线程获取某个锁后，再次请求这个锁，仍然可以获取锁就是可重入锁。<br>反之，获取锁后，再次请求这个锁，无法获取到锁就是不可重入锁。</p>
+<ul>
+<li>可中断锁</li>
+</ul>
+<p>这个待完善。</p>
+<h3 id="常用锁的原理分析"><a href="#常用锁的原理分析" class="headerlink" title="常用锁的原理分析"></a>常用锁的原理分析</h3><ul>
+<li>ReentrantLock</li>
+</ul>
+<p>可重入锁，独占式的，默认是非公平锁，可通过构造方法来决定是公平锁还是非公平锁。</p>
+<p>调用 lock 方法去尝试获取锁。</p>
+<p>调用 unlock 方法释放锁。</p>
+<ul>
+<li>CountDownLatch</li>
+</ul>
+<p><code>await</code> 方法，调用此方法的时候，只有当 state 为 0 的时候才不阻塞，state 为其他值的情况下会阻塞线程</p>
+<p>CountDownLatch 构造方法需要指定 count , 也就是 state</p>
+<p><code>countDown</code> 方法，会使 count - 1 ，其实就是 count ，当  count - 1 == 0 的时候唤醒阻塞的线程。</p>
+<p>适用于事情开始前，一些条件达成(条件达成，计数器减一)，然后继续。</p>
+<p>需要注意的是 count 只有减少的方法，没有增加和重置的方法，故不可复用。</p>
+<ul>
+<li>CyclicBarrier </li>
+</ul>
+<p>强调的是，事情做完后，等其他线程也达到同等条件，然后在继续执行。</p>
+<p>适用于事情做完后，等待某一条件达成，然后继续。</p>
+<ul>
+<li>ReentrantReadWriteLock</li>
+</ul>
+<p>里面包含读锁和写锁。读读不互斥，读写，写写互斥。就是两个线程都读数据的时候，不会阻塞，两个或者多个线程读写或者写写的时候会阻塞线程。</p>
+<p>相对其他的锁，锁的粒度更小，效率会高一些，同样的，实现会复杂些。</p>
+<p>默认是非公平锁，同样可以通过构造方法控制是否为公平锁。</p>
+<p>read 锁为共享锁</p>
+<p>write 锁为独占锁</p>
+<p>这两个锁共用一个 AQS 框架的 state , state 高16位表示共享锁的 state , 低 16 为表示 write 锁的 state</p>
+<ul>
+<li>AQS 框架小结</li>
+</ul>
+<p>上面的四种框架很好的利用了 AQS 框架，重点基本在 <code>tryAcquire</code>、<code>tryAcquireShare</code> 里面，这 2 个方法的返回值是子类控制AQS框架是否阻塞线程的入口，如果需要自定义一种锁的话，需要好好设计这两个方法。 ReentrantReadWriteLock 就是一个很好的例子。</p>
+<h2 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h2><p>这种互相通信的过程就是线程间的协作</p>
+<p>多线程之间通讯，其实就是多个线程在操作同一个资源，但是操作的动作不同</p>
+<p>线程间通信方式</p>
+<ol>
+<li>wait/notify </li>
+</ol>
+<p>synchornized 的时候，通过 wait/notify 来暂停线程和通知线程，从而达到通信的目的。</p>
+<pre><code class="java">Object 类的方法，final 的，表示子类不可修改
+wait(long time)  主动释放锁，然后休眠，在指定的时间长度后自动唤醒或者被系统唤醒。
+notify() 随机唤醒一个等待的线程进入就绪队列
+notifyAll() 唤醒所有等待的线程进入就绪队列
+</code></pre>
+<p>参考资料</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011635492/article/details/83043212">JAVA线程通信详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bohu83/article/details/51098106">java condition使用及分析</a></p>
+<ol start="2">
+<li>lock/condition</li>
+</ol>
+<p>这个其实和 wait/notify  类似，不过这个是语言层面实现的，不是虚拟机层面的实现。</p>
+<ol start="3">
+<li>管道 </li>
+</ol>
+<p>PipedInputStream/PipedOutputStream 来实现的，一个是开始，一个是结束。</p>
+<p>Object 和 Thread 常用方法介绍</p>
+<pre><code class="java">Object: 下面的方法都只能在同步块中调用
+
+wait()  释放锁资源，并等待唤醒
+
+wait(long time)  释放锁资源，并在指定事件后唤醒
+
+notify()  随机唤醒一个线程进入就绪列表
+
+notifyAll() 唤醒所有线程进入就绪列表
+</code></pre>
+<pre><code class="java">Thread: 类方法
+
+sleep(long time) 让线程休眠指定事件，但是不释放锁资源。
+
+join() 等待目标线程结束
+</code></pre>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>通过 ThreadPoolExcutor 类来创建线程池。</p>
+<p>创建线程池 5 个参数的含义</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>corePoolSize</td>
+<td>线程池的基本大小，即在没有任务需要执行的时候线程池的大小，并且只有在工作队列满了的情况下才会创建超出这个数量的线程</td>
+</tr>
+<tr>
+<td>maximumPoolSize</td>
+<td>线程池中允许的最大线程数，只有工作队列满了，才可能继续创建线程，但是同时运行的线程数不会超过这个</td>
+</tr>
+<tr>
+<td>keepAliveTime</td>
+<td>当 idle 的线程数大于 corePoolSize 时，idle 的线程可以存活的时间。</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>时间单位</td>
+</tr>
+<tr>
+<td>workQueue</td>
+<td>没有被执行的任务会放到这个队列里面</td>
+</tr>
+<tr>
+<td>threadFactory</td>
+<td>用来创建新的线程的</td>
+</tr>
+<tr>
+<td>handler</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>参考资料</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/frankyou/p/10135212.html">理解ThreadPoolExecutor线程池的corePoolSize、maximumPoolSize和poolSize</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/6844903909178212359">探索 Android 多线程优化方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/6855586076132655118">一次Android线程优化的探索</a></p>
+
   
   
     
@@ -516,7 +790,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
             
               
-                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2020/03/08/Android%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/>https://xanderwang.github.io/android-note/2020/03/08/Android%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/</a></p>
+                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/26/android_note_05/>https://xanderwang.github.io/android-note/2021/02/26/android_note_05/</a></p>
               
             
           </blockquote>
@@ -533,10 +807,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-20T08:50:05+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-31T11:41:12+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Mar 20, 2021</p>
+    <p>更新于：Mar 31, 2021</p>
   </a>
 </div>
 
@@ -545,7 +819,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Performance/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Performance</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/%E4%BC%98%E5%8C%96/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>优化</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Java-%E7%BA%BF%E7%A8%8B/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Java 线程</p></a></div>
 
 
         
@@ -558,7 +832,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2020/03/08/Android%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/&title=Android 性能优化总结 - Xander's blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/26/android_note_05/&title=Android 开发总结笔记(五) - Java 线程总结 - Xander's blog&summary="
           
           >
           
@@ -570,7 +844,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2020/03/08/Android%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/&title=Android 性能优化总结 - Xander's blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/26/android_note_05/&title=Android 开发总结笔记(五) - Java 线程总结 - Xander's blog&summary="
           
           >
           
@@ -582,7 +856,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2020/03/08/Android%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/&title=Android 性能优化总结 - Xander's blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/26/android_note_05/&title=Android 开发总结笔记(五) - Java 线程总结 - Xander's blog&summary="
           
           >
           
@@ -612,35 +886,26 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/android-note/2020/07/23/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(1)%20-%20%E6%B3%9B%E5%9E%8B%E6%80%BB%E7%BB%93/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 开发总结笔记(一) - 泛型总结</p>
-          <p class='content'>泛型总结泛型是什么？一句话说就是类型参数化。什么意思呢？参数化的意思就是我们在定义的时候不知道具体的值，我们在到我们实际运行的时候才知道具体的值。类型参数化就是具体类型在定义的时候不知道，在实际...</p>
+        <a class='prev' href='/android-note/2021/02/26/android_note_06/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 开发总结笔记(六) - 网络编程总结</p>
+          <p class='content'>网络编程总结网络协议总览网络协议分层
+网络协议框架
+各层协议之间的区别合联系应用层: Http WebSocket FTP 等
+传输层: TCP UDP
+网络层: IP
+链路层: -
+
+
+TCP...</p>
         </a>
       
       
-        <a class='next' href='/android-note/2020/02/16/Android%20%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2%E6%80%BB%E7%BB%93/'>
-          <p class='title'>Android 学习大纲总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>
-我的 Android 学习笔记
-Java 基础
-基础类型
-循环控制
-常见集合
-数据结构
-数组
-队列
-链表
-栈
-字典
-树
+        <a class='next' href='/android-note/2021/02/26/android_note_04/'>
+          <p class='title'>Android 开发总结笔记(四) - JVM 总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>JVM 总结什么是 JVMJVM 是 Java 虚拟机，是一个虚拟出来的计算机，仿真模拟计算机。
+JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM 的内存主要分为五块
 
-
-
-
-基础控件
-五种 Layout
-ImageView
-ListVie...</p>
+程序...</p>
         </a>
       
     </div>
@@ -683,7 +948,7 @@ ListVie...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93"><span class="toc-text">性能优化总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E5%90%91%EF%BC%8C%E5%8D%B3%E9%82%A3%E4%BA%9B%E7%82%B9%E6%98%AF%E9%9C%80%E8%A6%81%E4%BC%98%E5%8C%96%E7%9A%84"><span class="toc-text">优化的方向，即那些点是需要优化的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6"><span class="toc-text">启动速度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%B5%81%E7%95%85%E5%BA%A6"><span class="toc-text">操作流畅度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%9A%84%E7%AE%A1%E7%90%86%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="toc-text">内存的管理和使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="toc-text">图片的加载</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="toc-text">Java 线程安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="toc-text">什么是线程安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Volatile"><span class="toc-text">Volatile</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-%E5%8F%98%E9%87%8F%E7%9A%84%E8%AF%BB%E5%86%99"><span class="toc-text">Java 变量的读写</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile-%E5%A6%82%E4%BD%95%E4%BF%9D%E6%8C%81%E5%86%85%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="toc-text">volatile 如何保持内存可见性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile-%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E5%BA%8F"><span class="toc-text">volatile 如何防止指令重排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">线程安全的实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#synchronized"><span class="toc-text">synchronized</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%81%E8%86%A8%E8%83%80%E8%BF%87%E7%A8%8B"><span class="toc-text">锁膨胀过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lock-volatile"><span class="toc-text">Lock + volatile</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-%E9%87%8C%E9%94%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">Java 里锁的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E9%94%81%E7%9A%84%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-text">常用锁的原理分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="toc-text">线程间通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-text">线程池</span></a></li></ol>
     </div>
   </section>
 
@@ -702,7 +967,7 @@ ListVie...</p>
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="Android 性能优化总结";
+  pdata.postTitle="Android 开发总结笔记(五) - Java 线程总结";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要

@@ -22,9 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>Android 开发总结笔记(五) - Java 线程总结 - Xander&#39;s blog</title>
+  <title>Android 开发总结笔记(三) - Java 集合总结 - Xander&#39;s blog</title>
   
-    <meta name="keywords" content="Android,Java 线程">
+    <meta name="keywords" content="Android,集合">
   
 
   
@@ -427,7 +427,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        Android 开发总结笔记(五) - Java 线程总结
+        Android 开发总结笔记(三) - Java 集合总结
       </h1>
       <div class='new-meta-box'>
         
@@ -458,7 +458,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Feb 26, 2021</p>
+    <p>发布于：Feb 7, 2021</p>
   </a>
 </div>
 
@@ -469,7 +469,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="Android 开发总结笔记(五) - Java 线程总结" data-path="/android-note/2021/02/26/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(5)%20-%20Java%20%E7%BA%BF%E7%A8%8B%E6%80%BB%E7%BB%93/">
+      <div id="lc-pv" data-title="Android 开发总结笔记(三) - Java 集合总结" data-path="/android-note/2021/02/07/android_note_03/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -487,292 +487,128 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h1 id="Java-线程总结"><a href="#Java-线程总结" class="headerlink" title="Java 线程总结"></a>Java 线程总结</h1><h2 id="Java-线程安全"><a href="#Java-线程安全" class="headerlink" title="Java 线程安全"></a>Java 线程安全</h2><h3 id="什么是线程安全"><a href="#什么是线程安全" class="headerlink" title="什么是线程安全"></a>什么是线程安全</h3><p>在上一节的 Java 内存模型里面说到，程序在运行的时候，线程并不是直接从主存里面，而是先从主内存拷贝一份到工作内存(线程私有的)，然后执行代码，最后把计算结果从工作内存写回到主内存。</p>
-<p>有个小问题，为是么需要 JMM ？</p>
-<p>cpu 在存取数据或者存取指令的时候，如果都是在一片连续的区域，效率会高，所以栈里面会有一个变量的副本，这样会把需要参与计算的变量放到一片连续的区域，会提高执行效率，但是这样就会有一个数一致性问题，也就是线程安全问题。说到底就是数据同步问题。</p>
-<p>当有多个线程同时访问同一个变量的时候，因为线程在运算的时候，可能并不是拿的“最新”的值来参与计算的，或者说，参与计算的值不是“最新的”，因为其他线程更新了这个变量，但是线程不知道，还是用的“旧的值”。最终，执行完代码后，写回到主存的值是不符合预期的值。这种情况就是线程不安全，所以，对应的，线程安全就是多个线程同时访问同一个变量的时候，最终的结果和预期结果一致，就表明是线程安全的。</p>
-<p>线程要保证安全，需要满足三个条件</p>
+  <h1 id="Java-集合总结"><a href="#Java-集合总结" class="headerlink" title="Java 集合总结"></a>Java 集合总结</h1><h2 id="Java-有哪些集合，继承关系是怎么样的"><a href="#Java-有哪些集合，继承关系是怎么样的" class="headerlink" title="Java 有哪些集合，继承关系是怎么样的"></a>Java 有哪些集合，继承关系是怎么样的</h2><p><img src="https://i.loli.net/2020/06/25/1WJPcAhjOQtyINo.png" class="lazyload placeholder" data-srcset="https://i.loli.net/2020/06/25/1WJPcAhjOQtyINo.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg" alt="集合框架图"></p>
+<h2 id="平时常用的集合有哪些"><a href="#平时常用的集合有哪些" class="headerlink" title="平时常用的集合有哪些"></a>平时常用的集合有哪些</h2><ul>
+<li>Collection<ul>
+<li>List 可以重复添加元素<ul>
+<li>ArrayList</li>
+<li>LinkedList</li>
+</ul>
+</li>
+<li>Set 不能重复添加元素<ul>
+<li>HashSet 不接受 null </li>
+<li>TreeSet</li>
+</ul>
+</li>
+<li>Queue<ul>
+<li>Deque</li>
+<li>PriorityQueue 数组实现，堆</li>
+<li>ArrayDeque 数组实现， 2 个游标</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Map 以键值对的形式保存值<ul>
+<li>HashMap<ul>
+<li>LinkedHashMap</li>
+</ul>
+</li>
+<li>TreeMap</li>
+<li>Hashtable</li>
+</ul>
+</li>
+</ul>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p>数组实现，初始容量为 10，不够的时候扩容，扩容就是数组在当前长度基础上增大一倍。添加数据的时候，先判断容量是否够，不够就扩容，扩容完成后再添加。</p>
+<p>缺点: 线程不安全</p>
+<h4 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h4><p>链表实现。尾插法，即新节点插入到链表尾部。</p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><p>Java 1.8 底层基于 <code>HashMap</code> 实现，<code>HashMap</code> 的 <code>value</code> 都是同一个对象。</p>
+<h4 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h4><p>Java 1.8 默认是 <code>TreeMap</code> 实现，也可以给构造方法传入一个  <code>NavigableMap(接口)</code> 的实现实例。</p>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><h4 id="Deque"><a href="#Deque" class="headerlink" title="Deque"></a>Deque</h4><p>双端队列，</p>
+<h4 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h4><p>堆，数组实现的</p>
+<h4 id="ArrayDeque"><a href="#ArrayDeque" class="headerlink" title="ArrayDeque"></a>ArrayDeque</h4><h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p>最常用的一种结构，以数组为基础，数组元素为链表的复合结构。</p>
+<p>需要注意的是：</p>
+<blockquote>
+<p>初始容量为 16，默认承载因子为 0.75 ，需要注意的是，在指定容量的时候，如果不是 2 的指数，会计算一个大于指定容量，但是同时又是符合要求里面最小的一个 2 的指数作为容量。</p>
+</blockquote>
+<blockquote>
+<p>当元素个数大于或等于(当前容量 * 承载因子)，就会扩容。</p>
+</blockquote>
+<blockquote>
+<p>Java 1.7 插入数据的时候是头插法，即新的节点在链表头部。Java 1.8 及以后是尾插法，即新的节点在链表尾部。这个修改是为了解决扩容的时候可能会发生的死循环的问题。</p>
+</blockquote>
+<blockquote>
+<p>Java 1.8 及以后，当同一个链表元素个数大于等于 (8 - 1) 的时候，会变成红黑树来存储，目的是提高效率。红黑树的转变是先比较 key 的 hash 大小，如果相同就尝试比较 key 自身。</p>
+</blockquote>
+<blockquote>
+<p>无论是扩容，还是转成红黑树，都是先把节点放进去后再做扩容或者转换。</p>
+</blockquote>
+<blockquote>
+<p>hash 碰撞，是指不同的 key, key 的 hash 和数组大小再次计算后,得出的索引一致。 hash 碰撞越少，HashMap 的效率越高。1.7 和 1.8 hash 算法有区别。</p>
+</blockquote>
+<h4 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h4><p>基于 <code>HashMap</code> 实现的，同时还是一个双向循环链表(比 HashMap 的节点多了个 before 和 after 指针)，在开启排序的情况下，最近使用过的节点(put、get)会放在链表尾部。</p>
+<p>这个特性很适合 <code>LRU</code> 算法的实现，大概原理就是 <code>LinkedHashMap</code> 开启排序，然后最近使用的元素都在链表<strong>尾部</strong>，当链表长度大于指定长度的时候，就从链表头部开始删除，因为链表头部是最近没有使用的。</p>
+<h4 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h4><p><code>synchroinzed</code> 实现线程安全，效率低下。</p>
+<h4 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h4><p>TreeMap 在 Java 1.8 底层实现是一个<strong>红黑树</strong>，排序的规则是比较 key 的 “大小”。并且要求 key 的类型是需要可以比较的，并且 key 值不能为 null。</p>
+<p>和 <code>HashMap</code> 一样，先插入数据，然后在重排序。</p>
+<h2 id="碰到的常见问题"><a href="#碰到的常见问题" class="headerlink" title="碰到的常见问题"></a>碰到的常见问题</h2><h3 id="线程安全问题"><a href="#线程安全问题" class="headerlink" title="线程安全问题"></a>线程安全问题</h3><p>由于以上的都不是线程安全的，所以多线程的时候容易出问题，对于安全的线程有以下的几种</p>
 <ul>
-<li>原子性(Synchronized / Lock)</li>
+<li>List<ul>
+<li>Vector 通过方法添加 <code>synchizoned</code> 关键字实现，效率低下。</li>
+<li>CopyOnWriteArrayList <strong>每次</strong><code>写(添加，删除，修改)</code>的时候，都会生成一个新副本，所以频繁的写操作会消耗大量内存。</li>
 </ul>
-<p>原子性的意思是，某个操作要么执行完，要么不做。比如读取值，执行时，开始读数据了，需要保证不能被打断。要么不读值。</p>
-<ul>
-<li>可见性(Volatile / Synchronized / Lock)</li>
+</li>
+<li>Set<ul>
+<li>CopyOnWriteArraySet 类似 CopyOnWriteArrayList</li>
 </ul>
-<p>可见性的意思是对值得读写可以立刻捕获，就是说某个线程可以“观察”到其他线程对值得修改，同时，这个线程对值的修改，其他线程也可以“观察”到。</p>
-<ul>
-<li>有序性(Volatile / Synchronized / Lock)</li>
+</li>
+<li>Map<ul>
+<li>ConcurrentHashMap  Java 1.7 是通过分段锁实现，Java 1.8 是 <code>CAS</code> 和 <code>synchroinzed</code> 实现</li>
 </ul>
-<p>说到有序性需要说到指令重排，指令重排是为了提高 CPU 的指令执行效率，执行代码的时候，会把一些源码上的不影响方法执行结果的代码打乱执行，以提高 CPU 执行效率。有序性的意思就是说最终代码编译的指令是按照代码的书写顺序执行的。</p>
-<h3 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h3><p>上面说到了，线程安全在于没有“及时”读取到最新的值。要想“及时”读取到最新的值，我们需要用到 volatile 关键字，我们先看看值是如何读取的。</p>
-<h4 id="Java-变量的读写"><a href="#Java-变量的读写" class="headerlink" title="Java 变量的读写"></a>Java 变量的读写</h4><p>Java 变量读的读写是以下的指令来完成的，通过以下的指令，把变量的值从主内存读取到工作内存，工作内存变化后，写入主内存。</p>
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>lock</td>
-<td>作用于主内存，把变量标识为线程独占状态。</td>
-</tr>
-<tr>
-<td>unlock</td>
-<td>作用于主内存，解除独占状态。</td>
-</tr>
-<tr>
-<td>read</td>
-<td>作用主内存，把一个变量的值从主内存传输到线程的工作内存。</td>
-</tr>
-<tr>
-<td>load</td>
-<td>作用于工作内存，把 read 操作传过来的变量值放入工作内存的变量副本中。</td>
-</tr>
-<tr>
-<td>use</td>
-<td>作用工作内存，把工作内存当中的一个变量值传给执行引擎。</td>
-</tr>
-<tr>
-<td>assign</td>
-<td>作用工作内存，把一个从执行引擎接收到的值赋值给工作内存的变量。</td>
-</tr>
-<tr>
-<td>store</td>
-<td>作用于工作内存的变量，把工作内存的一个变量的值传送到主内存中。</td>
-</tr>
-<tr>
-<td>write</td>
-<td>作用于主内存的变量，把 store 操作传来的变量的值放入主内存的变量中。</td>
-</tr>
-</tbody></table>
-<h4 id="volatile-如何保持内存可见性"><a href="#volatile-如何保持内存可见性" class="headerlink" title="volatile 如何保持内存可见性"></a>volatile 如何保持内存可见性</h4><ul>
-<li>read、load、use 动作必须连续出现。</li>
-<li>assign、store、write 动作必须连续出现。</li>
+</li>
 </ul>
-<p>所以，使用 volatile 变量能够保证:</p>
-<ul>
-<li>每次<code>读取前</code>必须先从主内存刷新最新的值。</li>
-<li>每次<code>写入后</code>必须立即同步回主内存当中。</li>
-</ul>
-<p>有了这 2 条规则，线程就可以及时“观察”到变量值得变化了。</p>
-<h4 id="volatile-如何防止指令重排序"><a href="#volatile-如何防止指令重排序" class="headerlink" title="volatile 如何防止指令重排序"></a>volatile 如何防止指令重排序</h4><p>通过内存屏障来实现的。</p>
-<table>
-<thead>
-<tr>
-<th>屏障</th>
-<th>举例</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>LoadLoad</td>
-<td>Load1;LoadLoad;Load2</td>
-<td>Load2 以及之后的读操作要在 Load1 完成之后</td>
-</tr>
-<tr>
-<td>LoadStore</td>
-<td>Load1;LoadStore;Store</td>
-<td>Store2 以及之后的写操作要在 Load1 完成之后</td>
-</tr>
-<tr>
-<td>StoreStore</td>
-<td>Store1;StoreStore;Store2</td>
-<td>Store2 以及之后的写操作要在 Store1 完成之后</td>
-</tr>
-<tr>
-<td>StoreLoad</td>
-<td>Store1;StoreLoad;Load2</td>
-<td>Load2  以及之后的读操作需要在 Store1 完成之后</td>
-</tr>
-</tbody></table>
-<p>为了实现volatile的内存语义，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。然而，对于编译器来说，发现一个最优布置来最小化插入屏障的总数几乎不可能，为此，Java内存模型采取保守策略。</p>
-<p>下面是基于保守策略的JMM内存屏障插入策略：</p>
-<ul>
-<li>在每个 volatile 写操作的前面插入一个 StoreStore 屏障。</li>
-<li>在每个 volatile 写操作的后面插入一个 StoreLoad 屏障。</li>
-<li>在每个 volatile 读操作的后面插入一个 LoadLoad 屏障。</li>
-<li>在每个 volatile 读操作的后面插入一个 LoadStore 屏障。</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://monkeysayhi.github.io/2016/11/29/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8%E3%80%81%E5%8E%9F%E7%90%86/">volatile关键字的作用、原理</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhengbin/p/6407137.html">Java内存模型</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chenyangyao/p/5269622.html">JVM内存模型、指令重排、内存屏障概念解析</a></p>
-<p>解决这个问题(线程不安全)的办法有以下几种方式</p>
-<ol>
-<li>synchronized</li>
-<li>Lock + volatile</li>
-</ol>
-<p>说到底，线程安全的主要的思想就是利用某种方式，保证同时只有一个线程在使用这个变量或者说是方法块，其他的线程“阻塞”，等待正在执行的线程执行完。线程油冰雪执行变成串行执行。</p>
-<h3 id="线程安全的实现方式"><a href="#线程安全的实现方式" class="headerlink" title="线程安全的实现方式"></a>线程安全的实现方式</h3><h4 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h4><p>synchronized 通过字节码指令 enterMoniter 和 exitMoniter 实现同时只有一个线程可以执行某段代码块，等这段代码块执行完以后，其他的线程才可以执行。</p>
-<p>这里面需要了解 synchronized 的作用对象，作用对象是一个 Object 。</p>
-<p>大概的原理就是:每个对象都有一个对象头，这个对象头里面存储了相应的锁的信息(无锁、偏向锁、轻量锁和重量锁)。当代码执行到 synchronized 代码的时候，会看这个锁作用的对象的对象头，是有锁还是无锁，无锁就加锁后继续执行。有锁后就阻塞，等待其他线程执行完。</p>
-<p>但是一开始 synchronized 是一个比较重的操作，后续做了优化，这些优化分别是自旋锁、轻量锁、偏向锁。</p>
-<p>自旋就是不会立即 block 线程，而是做一段小的自循环，如果还是无法获取锁，再 block 线程。</p>
-<p>轻量锁是指，虽然对于同一段代码，有多个线程竞争，但是竞争发生在不同的时间段。轻量锁的做法是第一次对锁对象加锁的时候，锁对象的对象头记录指向线程中的锁记录。再次执行代码，加锁锁对象的时候，如果锁对象的对象头指向的锁记录是这个线程，就直接执行，跳过加锁过程。</p>
-<p>偏向锁就是，锁对象被加锁的时候，锁对象的对象头会保存持有锁的线程 id , 当同步代码执行完后，再次对锁对象加锁的时候，如果锁对象的对象头是偏向锁，并且 thread id 是当前线程，那么就不做加锁过程，直接执行。</p>
-<p>轻量级锁和偏向锁如果存在竞争，最终还是会膨胀为重量锁的。</p>
-<h4 id="锁膨胀过程"><a href="#锁膨胀过程" class="headerlink" title="锁膨胀过程"></a>锁膨胀过程</h4><p>偏向锁(01)：做一次 cas 操作，如果成功，说明获取偏向锁成功，对象头记录获取锁的 ThreadId ，如果失败，说明有竞争，这个时候需要膨胀为轻量级锁。</p>
-<p>轻量级锁(00)：某个线程获取锁的时候，如果对象头是偏向锁，就看 ThreadId 对应的线程是否还活着，如果活着，就看是否退出同步块，如果不存活或者已经退出同步块，就尝试 cas 操作获取偏向锁，如果 cas 失败，说明有竞争，这个时候需要由偏向锁膨胀为轻量级锁，具体的过程就是 JVM 会把当前获取锁的线程挂起，然后再线程的当前栈帧里面创建一个锁记录，然后把对象头用 CAS 拷贝进去，同时创建一个 Owner 指针指向锁对象的对象头，然后锁对象的对象头指向这个锁记录，然后之前获取锁的线程继续执行，没有获取到锁的线程先自旋一段时间，如果自旋结束后成功获取到轻量级锁，就继续执行，如果自旋后还是获取不到轻量级锁，说明由更严重(多个线程)的竞争，需要膨胀为重量级锁。</p>
-<p>重量级锁(10)：线程</p>
-<p>参考资料：</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5ca766dcf265da30d02fb35c">https://juejin.im/post/5ca766dcf265da30d02fb35c</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dsj2016/p/5714921.html">JAVA锁的膨胀过程和优化</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/133319319">聊聊Java 锁的JVM锁</a></p>
-<p><a target="_blank" rel="noopener" href="https://xinghelanchen.github.io/2018/08/22/JAVA%E9%94%81%E7%9A%84%E8%86%A8%E8%83%80%E8%BF%87%E7%A8%8B%E5%92%8C%E4%BC%98%E5%8C%96/">JAVA锁的膨胀过程和优化</a></p>
-<h4 id="Lock-volatile"><a href="#Lock-volatile" class="headerlink" title="Lock + volatile"></a>Lock + volatile</h4><p>lock 的话主要是利用 AQS 框架来实现的同步机制。</p>
-<p>AQS 框架内部利用了 CAS 来判断是否有线程持有锁。当有其他线程持有锁的时候，会 block 当前线程，然后入队列(入队的时候可能会有自旋)，当持有锁的线程释放锁后，会唤醒 block 的线程。</p>
-<p>CAS 是 Java 提供的原子性操作 API 。</p>
-<p>AQS 框架的理解：</p>
-<pre><code class="java">acquire 独占式获取锁，如果没有获取成功，就入队列并阻塞。
-
-tryAcquire 独占式锁子类需要复写的方法，独占式请求锁。返回 true 表示线程获取锁成功，false 表示获取锁失败。
-
-acquireShare 共享式获取锁，当获取锁的线程数量超过指定数量(tryAcquireShare的返回结果小于0)，就阻塞尝试获取锁的线程。
-
-tryAcquireShare 共享式锁子类需要复写的方法。返回值如果小于 0 表示共享锁的数量消耗完，需要阻塞。
-
-acquireQueued 独占的时候，入队列
-addWaiter  具体的入队列入口
-doAcquireShared 共享的时候，入队列
+<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p>分段锁来实现，分段锁可以提高效率，是因为如果不同线程的读写发生在不同的段上，实际上是没有锁竞争的，也就是没有线程被阻塞，所以效率高。</p>
+<h4 id="Java-1-7-及以前实现原理"><a href="#Java-1-7-及以前实现原理" class="headerlink" title="Java 1.7 及以前实现原理"></a>Java 1.7 及以前实现原理</h4><p>ConcurrentHashMap 有一个 segments 数组，这个数组元素的类型是 Segment，它继承自 ReentrantLock ，也就是说 Segment 是一个锁。</p>
+<p>ConcurrentHashMap 插入或者修改数据的时候，会先找到是哪一个 segment , 然后在这个 segment 上面插入或者修改数据，而 segment 插入或者修改数据的时候，会先尝试获取锁，如果获取失败，说明有锁竞争，然后先尝试自旋，自旋超过次后，就开始阻塞线程。因此是线程安全的。</p>
+<p>另外需要注意的是获取数据的时候没有加锁，因为是 <code>volatile</code> 变量，可以拿到最新的数据，但是呢，</p>
+<h4 id="Java-1-8-及以后实现原理"><a href="#Java-1-8-及以后实现原理" class="headerlink" title="Java 1.8 及以后实现原理"></a>Java 1.8 及以后实现原理</h4><p>类似 HashMap ,放弃了分段锁，在插入或者修改数据的时候利用 cas 和 synchionzed 来保证线程安全，大概的原理就是先利用 cas 来设置，设置失败的时候说明有线程竞争，这个时候就用  synchionzed 来加锁，保证线程安全。</p>
+<h4 id="Java-1-8-之后，为何放弃了分段锁"><a href="#Java-1-8-之后，为何放弃了分段锁" class="headerlink" title="Java 1.8 之后，为何放弃了分段锁"></a>Java 1.8 之后，为何放弃了分段锁</h4><p>分段后，数据不连续，碎片较多，内存浪费严重，扩容等操作耗费大量的时间。</p>
+<p>Java 1.8 是用的 synchornized + HashMap 来做的， synchornized jvm 层做了优化，同时 HashMap 也做了红黑树的优化，所以效率方面有保障。</p>
+<h2 id="主要方法总结"><a href="#主要方法总结" class="headerlink" title="主要方法总结"></a>主要方法总结</h2><h3 id="List-接口"><a href="#List-接口" class="headerlink" title="List 接口"></a>List 接口</h3><pre><code>- add(E):boolean
+- add(int, E):boolean
+- remove(int):E
+- remove(E):boolean
+- size():int
 </code></pre>
-<h3 id="Java-里锁的分类"><a href="#Java-里锁的分类" class="headerlink" title="Java 里锁的分类"></a>Java 里锁的分类</h3><ul>
-<li>公平/非公平锁</li>
-</ul>
-<p>公平：按照请求锁的时间顺序依次获取锁，非公平锁就是不一定是按照请求锁的时间顺序来获取锁的。</p>
-<ul>
-<li>独占/共享锁</li>
-</ul>
-<p>独占锁(ReentrantLock)就是锁只能同时被一个线程持有，共享锁(CountDownLatch/Semaphone)就是锁可以同时被多个线程持有。</p>
-<ul>
-<li>自旋锁</li>
-</ul>
-<p>没有请求到锁的时候，做一段循环，等待持有锁的线程释放锁，然后请求锁。坏处就是，如果自旋过久，也会消耗大量的 cpu 资源。</p>
-<ul>
-<li>偏向锁/轻量锁/重量锁</li>
-</ul>
-<p>synchornized 的优化，如果再偏向锁发生竞争的时候会锁膨胀</p>
-<ul>
-<li>可重入/不可重入</li>
-</ul>
-<p>线程获取某个锁后，再次请求这个锁，仍然可以获取锁就是可重入锁。<br>反之，获取锁后，再次请求这个锁，无法获取到锁就是不可重入锁。</p>
-<ul>
-<li>可中断锁</li>
-</ul>
-<p>这个待完善。</p>
-<h3 id="常用锁的原理分析"><a href="#常用锁的原理分析" class="headerlink" title="常用锁的原理分析"></a>常用锁的原理分析</h3><ul>
-<li>ReentrantLock</li>
-</ul>
-<p>可重入锁，独占式的，默认是非公平锁，可通过构造方法来决定是公平锁还是非公平锁。</p>
-<p>调用 lock 方法去尝试获取锁。</p>
-<p>调用 unlock 方法释放锁。</p>
-<ul>
-<li>CountDownLatch</li>
-</ul>
-<p><code>await</code> 方法，调用此方法的时候，只有当 state 为 0 的时候才不阻塞，state 为其他值的情况下会阻塞线程</p>
-<p>CountDownLatch 构造方法需要指定 count , 也就是 state</p>
-<p><code>countDown</code> 方法，会使 count - 1 ，其实就是 count ，当  count - 1 == 0 的时候唤醒阻塞的线程。</p>
-<p>适用于事情开始前，一些条件达成(条件达成，计数器减一)，然后继续。</p>
-<p>需要注意的是 count 只有减少的方法，没有增加和重置的方法，故不可复用。</p>
-<ul>
-<li>CyclicBarrier </li>
-</ul>
-<p>强调的是，事情做完后，等其他线程也达到同等条件，然后在继续执行。</p>
-<p>适用于事情做完后，等待某一条件达成，然后继续。</p>
-<ul>
-<li>ReentrantReadWriteLock</li>
-</ul>
-<p>里面包含读锁和写锁。读读不互斥，读写，写写互斥。就是两个线程都读数据的时候，不会阻塞，两个或者多个线程读写或者写写的时候会阻塞线程。</p>
-<p>相对其他的锁，锁的粒度更小，效率会高一些，同样的，实现会复杂些。</p>
-<p>默认是非公平锁，同样可以通过构造方法控制是否为公平锁。</p>
-<p>read 锁为共享锁</p>
-<p>write 锁为独占锁</p>
-<p>这两个锁共用一个 AQS 框架的 state , state 高16位表示共享锁的 state , 低 16 为表示 write 锁的 state</p>
-<ul>
-<li>AQS 框架小结</li>
-</ul>
-<p>上面的四种框架很好的利用了 AQS 框架，重点基本在 <code>tryAcquire</code>、<code>tryAcquireShare</code> 里面，这 2 个方法的返回值是子类控制AQS框架是否阻塞线程的入口，如果需要自定义一种锁的话，需要好好设计这两个方法。 ReentrantReadWriteLock 就是一个很好的例子。</p>
-<h2 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h2><p>这种互相通信的过程就是线程间的协作</p>
-<p>多线程之间通讯，其实就是多个线程在操作同一个资源，但是操作的动作不同</p>
-<p>线程间通信方式</p>
-<ol>
-<li>wait/notify </li>
-</ol>
-<p>synchornized 的时候，通过 wait/notify 来暂停线程和通知线程，从而达到通信的目的。</p>
-<pre><code class="java">Object 类的方法，final 的，表示子类不可修改
-wait(long time)  主动释放锁，然后休眠，在指定的时间长度后自动唤醒或者被系统唤醒。
-notify() 随机唤醒一个等待的线程进入就绪队列
-notifyAll() 唤醒所有等待的线程进入就绪队列
+<h4 id="Stack-类"><a href="#Stack-类" class="headerlink" title="Stack 类"></a>Stack 类</h4><p>继承自 Vector , Vector 是一个同步安全的 List</p>
+<pre><code>- push(E):E 入栈
+- pop():E 出栈
+- peek():E 查看顶部第一个元素
+- search(Object):int
+- empty() 是否是空的
 </code></pre>
-<p>参考资料</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011635492/article/details/83043212">JAVA线程通信详解</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bohu83/article/details/51098106">java condition使用及分析</a></p>
-<ol start="2">
-<li>lock/condition</li>
-</ol>
-<p>这个其实和 wait/notify  类似，不过这个是语言层面实现的，不是虚拟机层面的实现。</p>
-<ol start="3">
-<li>管道 </li>
-</ol>
-<p>PipedInputStream/PipedOutputStream 来实现的，一个是开始，一个是结束。</p>
-<p>Object 和 Thread 常用方法介绍</p>
-<pre><code class="java">Object: 下面的方法都只能在同步块中调用
-
-wait()  释放锁资源，并等待唤醒
-
-wait(long time)  释放锁资源，并在指定事件后唤醒
-
-notify()  随机唤醒一个线程进入就绪列表
-
-notifyAll() 唤醒所有线程进入就绪列表
+<h3 id="Set-接口"><a href="#Set-接口" class="headerlink" title="Set 接口"></a>Set 接口</h3><pre><code>- add(E):boolean
+- contains(Object):boolean
+- remove(Object):boolean
+- size():int
 </code></pre>
-<pre><code class="java">Thread: 类方法
+<h3 id="Queue-1"><a href="#Queue-1" class="headerlink" title="Queue"></a>Queue</h3><pre><code>- add 添加元素，返回添加结果，如果不能添加就抛出异常
+- remove 删除队列头，空队列异常
+- element 返回队列头，空队列异常
 
-sleep(long time) 让线程休眠指定事件，但是不释放锁资源。
-
-join() 等待目标线程结束
+- offer 添加元素，返回添加结果
+- poll 返回并删除队列头，空队列的话返回 null
+- peek 返回队列头，空队列的话返回 null
 </code></pre>
-<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>通过 ThreadPoolExcutor 类来创建线程池。</p>
-<p>创建线程池 5 个参数的含义</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>corePoolSize</td>
-<td>线程池的基本大小，即在没有任务需要执行的时候线程池的大小，并且只有在工作队列满了的情况下才会创建超出这个数量的线程</td>
-</tr>
-<tr>
-<td>maximumPoolSize</td>
-<td>线程池中允许的最大线程数，只有工作队列满了，才可能继续创建线程，但是同时运行的线程数不会超过这个</td>
-</tr>
-<tr>
-<td>keepAliveTime</td>
-<td>当 idle 的线程数大于 corePoolSize 时，idle 的线程可以存活的时间。</td>
-</tr>
-<tr>
-<td>unit</td>
-<td>时间单位</td>
-</tr>
-<tr>
-<td>workQueue</td>
-<td>没有被执行的任务会放到这个队列里面</td>
-</tr>
-<tr>
-<td>threadFactory</td>
-<td>用来创建新的线程的</td>
-</tr>
-<tr>
-<td>handler</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>参考资料</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/frankyou/p/10135212.html">理解ThreadPoolExecutor线程池的corePoolSize、maximumPoolSize和poolSize</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.im/post/6844903909178212359">探索 Android 多线程优化方法</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.im/post/6855586076132655118">一次Android线程优化的探索</a></p>
+<h3 id="Map-接口"><a href="#Map-接口" class="headerlink" title="Map 接口"></a>Map 接口</h3><pre><code>- put(K, V):V
+- remove(Object):V
+- containsKey(Object):boolean
+- containsValue(Object):boolean
+- size():int
+</code></pre>
+<h3 id="ArrayMap-和-HashMap"><a href="#ArrayMap-和-HashMap" class="headerlink" title="ArrayMap 和 HashMap"></a>ArrayMap 和 HashMap</h3><p>ArrayMap 有缓存， HashMap 没有</p>
+<p>内存小</p>
+<p><a target="_blank" rel="noopener" href="http://gityuan.com/2019/01/13/arraymap/">深度解读ArrayMap优势与缺陷</a></p>
+<p>SparseArray 和 ArrayList</p>
 
   
   
@@ -790,7 +626,7 @@ join() 等待目标线程结束
               
             
               
-                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/26/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(5)%20-%20Java%20%E7%BA%BF%E7%A8%8B%E6%80%BB%E7%BB%93/>https://xanderwang.github.io/android-note/2021/02/26/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(5)%20-%20Java%20%E7%BA%BF%E7%A8%8B%E6%80%BB%E7%BB%93/</a></p>
+                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/07/android_note_03/>https://xanderwang.github.io/android-note/2021/02/07/android_note_03/</a></p>
               
             
           </blockquote>
@@ -807,10 +643,10 @@ join() 等待目标线程结束
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-20T08:50:05+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-31T11:41:12+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Mar 20, 2021</p>
+    <p>更新于：Mar 31, 2021</p>
   </a>
 </div>
 
@@ -819,7 +655,7 @@ join() 等待目标线程结束
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Java-%E7%BA%BF%E7%A8%8B/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Java 线程</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/%E9%9B%86%E5%90%88/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>集合</p></a></div>
 
 
         
@@ -832,7 +668,7 @@ join() 等待目标线程结束
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/26/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(5)%20-%20Java%20%E7%BA%BF%E7%A8%8B%E6%80%BB%E7%BB%93/&title=Android 开发总结笔记(五) - Java 线程总结 - Xander's blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/07/android_note_03/&title=Android 开发总结笔记(三) - Java 集合总结 - Xander's blog&summary="
           
           >
           
@@ -844,7 +680,7 @@ join() 等待目标线程结束
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/26/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(5)%20-%20Java%20%E7%BA%BF%E7%A8%8B%E6%80%BB%E7%BB%93/&title=Android 开发总结笔记(五) - Java 线程总结 - Xander's blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/07/android_note_03/&title=Android 开发总结笔记(三) - Java 集合总结 - Xander's blog&summary="
           
           >
           
@@ -856,7 +692,7 @@ join() 等待目标线程结束
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/26/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(5)%20-%20Java%20%E7%BA%BF%E7%A8%8B%E6%80%BB%E7%BB%93/&title=Android 开发总结笔记(五) - Java 线程总结 - Xander's blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/07/android_note_03/&title=Android 开发总结笔记(三) - Java 集合总结 - Xander's blog&summary="
           
           >
           
@@ -886,26 +722,15 @@ join() 等待目标线程结束
   
     <div class="prev-next">
       
-        <a class='prev' href='/android-note/2021/02/26/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(6)%20-%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E6%80%BB%E7%BB%93/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 开发总结笔记(六) - 网络编程总结</p>
-          <p class='content'>网络编程总结网络协议总览网络协议分层
-网络协议框架
-各层协议之间的区别合联系应用层: Http WebSocket FTP 等
-传输层: TCP UDP
-网络层: IP
-链路层: -
-
-
-TCP...</p>
+        <a class='prev' href='/android-note/2021/02/07/android_note_02/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 开发总结笔记(二) - Java 反射和注解总结</p>
+          <p class='content'>反射总结什么是反射反射是 Java 语言的一个特性，就是在程序运行状态中，对于任何一个类，都可以通过反射知道这个类所有的方法和属性。对于任何一个实例，都可以调用这个实例的任何方法和属性。这个在运...</p>
         </a>
       
       
-        <a class='next' href='/android-note/2021/02/26/Android%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0(4)%20-%20JVM%20%E6%80%BB%E7%BB%93/'>
-          <p class='title'>Android 开发总结笔记(四) - JVM 总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>JVM 总结什么是 JVMJVM 是 Java 虚拟机，是一个虚拟出来的计算机，仿真模拟计算机。
-JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM 的内存主要分为五块
-
-程序...</p>
+        <a class='next' href='/android-note/2020/07/23/android_note_01/'>
+          <p class='title'>Android 开发总结笔记(一) - 泛型总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>泛型总结泛型是什么？一句话说就是类型参数化。什么意思呢？参数化的意思就是我们在定义的时候不知道具体的值，我们在到我们实际运行的时候才知道具体的值。类型参数化就是具体类型在定义的时候不知道，在实际...</p>
         </a>
       
     </div>
@@ -948,7 +773,7 @@ JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM �
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="toc-text">Java 线程安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="toc-text">什么是线程安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Volatile"><span class="toc-text">Volatile</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-%E5%8F%98%E9%87%8F%E7%9A%84%E8%AF%BB%E5%86%99"><span class="toc-text">Java 变量的读写</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile-%E5%A6%82%E4%BD%95%E4%BF%9D%E6%8C%81%E5%86%85%E5%AD%98%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="toc-text">volatile 如何保持内存可见性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile-%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E5%BA%8F"><span class="toc-text">volatile 如何防止指令重排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">线程安全的实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#synchronized"><span class="toc-text">synchronized</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%81%E8%86%A8%E8%83%80%E8%BF%87%E7%A8%8B"><span class="toc-text">锁膨胀过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lock-volatile"><span class="toc-text">Lock + volatile</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-%E9%87%8C%E9%94%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">Java 里锁的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E9%94%81%E7%9A%84%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-text">常用锁的原理分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="toc-text">线程间通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-text">线程池</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9B%86%E5%90%88%EF%BC%8C%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84"><span class="toc-text">Java 有哪些集合，继承关系是怎么样的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E6%97%B6%E5%B8%B8%E7%94%A8%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-text">平时常用的集合有哪些</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#List"><span class="toc-text">List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList"><span class="toc-text">ArrayList</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LinkedList"><span class="toc-text">LinkedList</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashSet"><span class="toc-text">HashSet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TreeSet"><span class="toc-text">TreeSet</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Queue"><span class="toc-text">Queue</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Deque"><span class="toc-text">Deque</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PriorityQueue"><span class="toc-text">PriorityQueue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayDeque"><span class="toc-text">ArrayDeque</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map"><span class="toc-text">Map</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap"><span class="toc-text">HashMap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LinkedHashMap"><span class="toc-text">LinkedHashMap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hashtable"><span class="toc-text">Hashtable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TreeMap"><span class="toc-text">TreeMap</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A2%B0%E5%88%B0%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">碰到的常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="toc-text">线程安全问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ConcurrentHashMap"><span class="toc-text">ConcurrentHashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-1-7-%E5%8F%8A%E4%BB%A5%E5%89%8D%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-text">Java 1.7 及以前实现原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-1-8-%E5%8F%8A%E4%BB%A5%E5%90%8E%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-text">Java 1.8 及以后实现原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-1-8-%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%B8%BA%E4%BD%95%E6%94%BE%E5%BC%83%E4%BA%86%E5%88%86%E6%AE%B5%E9%94%81"><span class="toc-text">Java 1.8 之后，为何放弃了分段锁</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93"><span class="toc-text">主要方法总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#List-%E6%8E%A5%E5%8F%A3"><span class="toc-text">List 接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Stack-%E7%B1%BB"><span class="toc-text">Stack 类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set-%E6%8E%A5%E5%8F%A3"><span class="toc-text">Set 接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Queue-1"><span class="toc-text">Queue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map-%E6%8E%A5%E5%8F%A3"><span class="toc-text">Map 接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayMap-%E5%92%8C-HashMap"><span class="toc-text">ArrayMap 和 HashMap</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -967,7 +792,7 @@ JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM �
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="Android 开发总结笔记(五) - Java 线程总结";
+  pdata.postTitle="Android 开发总结笔记(三) - Java 集合总结";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
