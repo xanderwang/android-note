@@ -1,7 +1,7 @@
 ---
 seo_title: shell 脚本 -a 到 -n 的意思
 title: shell 脚本 -a 到 -n 的意思
-date: 2021-02-28 22:41:00
+date: 2021-02-28 22:00:00
 tags:
 - shell
 categories: 
