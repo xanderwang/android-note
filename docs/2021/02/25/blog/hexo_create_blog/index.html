@@ -22,9 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>Android 开发总结笔记(四) - JVM 总结 - Xander&#39;s blog</title>
+  <title>利用 GitHub 搭建自己的个人博客 - Xander&#39;s blog</title>
   
-    <meta name="keywords" content="Android,JVM">
+    <meta name="keywords" content="Github Action,GitHub Page,Gitee Page,Gitee,hexo">
   
 
   
@@ -427,7 +427,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        Android 开发总结笔记(四) - JVM 总结
+        利用 GitHub 搭建自己的个人博客
       </h1>
       <div class='new-meta-box'>
         
@@ -447,7 +447,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='new-meta-item category'>
     <a class='notlink'>
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <a class="category-link" href="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>
+      <a class="category-link" href="/android-note/categories/%E5%85%B6%E4%BB%96/">其他</a>
     </a>
   </div>
 
@@ -458,7 +458,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Feb 26, 2021</p>
+    <p>发布于：Feb 25, 2021</p>
   </a>
 </div>
 
@@ -469,7 +469,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="Android 开发总结笔记(四) - JVM 总结" data-path="/android-note/2021/02/26/android_note_04/">
+      <div id="lc-pv" data-title="利用 GitHub 搭建自己的个人博客" data-path="/android-note/2021/02/25/blog/hexo_create_blog/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -487,120 +487,97 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h1 id="JVM-总结"><a href="#JVM-总结" class="headerlink" title="JVM 总结"></a>JVM 总结</h1><h2 id="什么是-JVM"><a href="#什么是-JVM" class="headerlink" title="什么是 JVM"></a>什么是 JVM</h2><p>JVM 是 Java 虚拟机，是一个虚拟出来的计算机，仿真模拟计算机。</p>
-<h2 id="JVM-在运行程序的时候，这个程序在-JVM-里面是怎么样的？"><a href="#JVM-在运行程序的时候，这个程序在-JVM-里面是怎么样的？" class="headerlink" title="JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？"></a>JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？</h2><p><strong>JVM</strong> 的内存主要分为五块</p>
-<ol>
-<li><strong>程序计算器</strong></li>
-</ol>
-<p>程序计算器是用来记录当前线程的执行的位置，通过程序计数器的记录，程序就可以继续进行下去。</p>
-<p><strong>线程私有</strong>的，就是每个线程都不一样。</p>
-<p>需要注意的是这里面没有 <code>OutOfMemory</code> 的异常，在执行 <code>native</code> 方法的时候，记录是空值，一些循环，比如 <code>for</code> 、 <code>while</code> 也是通过这个来实现的。</p>
-<ol start="2">
-<li><strong>虚拟机栈</strong></li>
-</ol>
-<p>每一个线程都会有一个虚拟机栈，用于解释代码的执行过程。线程每调用一个方法的时候就会创建一个栈帧，并放到这个虚拟机栈中，方法执行完成后，这个栈帧出栈。</p>
-<p>栈帧是什么呢？或者说里面是什么内容呢？栈帧主要包括以下 4 个内容：</p>
-<ul>
-<li>**局部变量表(LocalVariableTable)**，里面是这个方法里面的用到的变量，this 是下标为 0 的变量 </li>
-<li><strong>操作数栈</strong>，JVM 是基于栈的，操作数可以理解为中间的计算结果，结果是保存在栈里面的。</li>
-<li><strong>动态链接</strong>，在加载类的时候，类的字段和方法对应的内存布局之间的连接。</li>
-<li><strong>返回值</strong>，方法的返回值</li>
-</ul>
-<p><strong>线程私有</strong>的，就是每个线程都不一样。</p>
-<ol start="3">
-<li><strong>本地方法栈</strong></li>
-</ol>
-<p>和虚拟机栈类型，不过这里面具体就要看 native 层的了。</p>
-<p><strong>线程私有</strong>的，就是每个线程都不一样。</p>
-<ol start="4">
-<li><strong>方法区</strong></li>
-</ol>
-<p>类被加载后，类的属性、方法等信息会保存在这里。</p>
-<ol start="5">
-<li><strong>堆</strong></li>
-</ol>
-<p>一般 new 出来的实例都是放在这里的。其他的部分在方法区里面的常量池。</p>
-<p>那，哪些不在堆里面呢？？？</p>
-<p>那些不在堆里面分配的对象实例可能在栈里面，具体的就哟啊说到逃逸分析了，这里</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.im/post/6844904086010069006">https://juejin.im/post/6844904086010069006</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/94568794">https://zhuanlan.zhihu.com/p/94568794</a></p>
-<h2 id="一个-class-字节码文件里，类的结构是如何的？"><a href="#一个-class-字节码文件里，类的结构是如何的？" class="headerlink" title="一个 class 字节码文件里，类的结构是如何的？"></a>一个 class 字节码文件里，类的结构是如何的？</h2><p>类的结构可以粗略看出是一些无符号数和一些表组成的，表里面可以包含其他的表，大概的结构如下。</p>
-<pre><code>魔数  
-大小版本号 
-常量池(表结构) 
-访问flag 
-父类  
-接口列表(表结构) 
-字段表(表结构) 
-方法表(表结构)  
-属性表(表结构)
-</code></pre>
-<p>表结构由表的元素个数 count 和表的内容组成，表的内容可以是无符号数和表。不同的表，表的内容的每一项结构都是固定和相同的。</p>
+  <p>先看下预览图吧。</p>
+<p><img src="https://img.imgdb.cn/item/6037cadc5f4313ce25858739.png" class="lazyload placeholder" data-srcset="https://img.imgdb.cn/item/6037cadc5f4313ce25858739.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg" alt="预览图"></p>
+<p>先说下方案:</p>
 <blockquote>
-<p>常量池里面的每一项都是表</p>
+<p> GitHub Page + GitHub Action + hexo &amp; 配套主题 </p>
 </blockquote>
-<h2 id="JVM-是如何找到一个类的"><a href="#JVM-是如何找到一个类的" class="headerlink" title="JVM 是如何找到一个类的"></a>JVM 是如何找到一个类的</h2><p>JVM 是通过 ClassLoader 来加载类的。</p>
-<p>ClassLoader 的 loadClass 方法可以让系统找到一个类。</p>
-<p>ClassLoader loadClass 的时候用到了双亲委派模式来加载一个类。先判断是否加载过，如果没有加载过，就先交给父类来加载，如果父类也没有加载过，再回到自己，自己去加载。</p>
-<p>Java 里面的双亲委派并不是很强制的，可以通过复写 ClassLoader 的 loadClass 方法来破坏这种双亲委派模式，从而达到加载自己的类过程。</p>
-<p>ClassLoader 加载类一般是从指定的路径下加载类的，双亲委派模型能保证先优先从顶层的类加载器来加载类，而顶层的类加载器一般是系统提供的，系统提供的类加载器都是加载的指定位置的类库，这样能保证系统类不被篡改。</p>
-<p>另外 ClassLoader 的 defindClass 可以通过一个 byte 数组来定义一个类。</p>
-<h2 id="JVM-加载类的时候，有哪些过程呢？"><a href="#JVM-加载类的时候，有哪些过程呢？" class="headerlink" title="JVM 加载类的时候，有哪些过程呢？"></a>JVM 加载类的时候，有哪些过程呢？</h2><p>类加载可以分为三大步(分别是，载入、连接和初始化)，也可以说是 5 个步骤。</p>
-<p><img src="https://i.loli.net/2020/08/01/2i3va5CMtkwhWJH.jpg" class="lazyload placeholder" data-srcset="https://i.loli.net/2020/08/01/2i3va5CMtkwhWJH.jpg" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg" alt="类的生命周期"></p>
-<p>类的加载过程：</p>
-<ol>
-<li><strong>加载</strong> 从二进制流加载类，主要做了三件事情</li>
-</ol>
-<ul>
-<li>a. 通过类的全限定名查找 <code>.class</code> 文件，并生成二进制流</li>
-<li>b. 解析 <code>.class</code> 文件，主要就是按照 <code>Class</code> 类的结构解析，生成 <code>JVM</code> 特定的数据结构并保存在<code>方法区</code>。</li>
-<li>c. 生成一个 Class 类的实例，后续对这个类的访问可以通过这个 Class 的实例来完成。</li>
-</ul>
-<ol start="2">
-<li><strong>链接</strong>，可细分为一下三小步</li>
-</ol>
-<ul>
-<li><ol>
-<li>验证 校验版本号是否符合要求，高版本 class 不能在低版本 <code>JVM</code> 上运行</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>准备 给类的静态变量赋初始值，<code>final</code> 类型赋值。</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>解析 主要是把常量池里面的符号引用转为直接引用。</li>
-</ol>
-</li>
-</ul>
-<ol start="3">
-<li><strong>初始化</strong></li>
-</ol>
-<p>主要执行<code>静态代码块</code>、调用构造器的<code>构造方法</code>。</p>
-<p>类的生命周期，除了加载过程中的 5 个阶段，还有<code>使用</code>和<code>卸载</code> 2 种阶段。</p>
-<h2 id="Java-内存模型"><a href="#Java-内存模型" class="headerlink" title="Java 内存模型"></a>Java 内存模型</h2><p>之前说过，每个线程都有自己的程序计数器、虚拟机栈和本地方法栈。每个线程都是不一样的，还说过 JVM 是虚拟的一个硬件平台。那么 JVM 具体在执行一个线程的时候内存的情况是如何的呢？</p>
-<p>线程工作的时候，会给线程分配一个内存空间，我们称之为工作内存，然后还有一个主内存。</p>
-<p>线程在工作的时候， JVM  会先从主内存把数据载入工作内存，计算完成以后，在把最后的结果“写回”到主内存。</p>
-<p>为什么要这样先载入最后写回？可能是因为载入的指令比较耗时吧。</p>
-<h2 id="JVM-GC"><a href="#JVM-GC" class="headerlink" title="JVM GC"></a>JVM GC</h2><h3 id="四种索引"><a href="#四种索引" class="headerlink" title="四种索引"></a>四种索引</h3><ul>
-<li>强引用。默认就是强引用，即使内存不够也不会释放。</li>
-<li>软引用。SoftRefrence，内存不够的时候，会断开链接，然后释放内存。</li>
-<li>弱引用。WeakRefrence，gc 的时候，如果发现了弱引用，就会释放，而不管是否内存不足。需要注意的是，可能需要多次 gc 才有可能找到这个弱引用，因为不同的 gc 清理或者说计算的内存区域不一样。</li>
-<li>虚引用。代码里面无法直接使用。无法通过 get 方法获取引用对象。</li>
-</ul>
-<p>软引用和弱引用在创建的时候可同时传入一个ReferenceQueue，当引用的对象被回收的时候，ref 实例会被放到 Queue 里面。</p>
-<h3 id="GC-的类型"><a href="#GC-的类型" class="headerlink" title="GC 的类型"></a>GC 的类型</h3><ul>
-<li>GC_FOR_MALLOC 表示在堆上分配内存不足</li>
-<li>GC_CONCURRENT 表示堆内存达到一定量的值，系统触发</li>
-<li>GC_BEFOR_OOM 准备抛出 oom 异常</li>
-<li>GC_EXPLICIT 调用系统方法  system.gc </li>
-</ul>
-<p><strong>软引用在前三个 gc 的时候释放，弱引用在创建后，下一次 gc 的时候释放。</strong></p>
-<h3 id="回收算法"><a href="#回收算法" class="headerlink" title="回收算法"></a>回收算法</h3><h2 id="DVM-和-JVM-区别，或者说是如何优化的"><a href="#DVM-和-JVM-区别，或者说是如何优化的" class="headerlink" title="DVM  和 JVM 区别，或者说是如何优化的"></a>DVM  和 JVM 区别，或者说是如何优化的</h2><p>DVM 基于寄存器， JVM 基于栈</p>
-<p>基于寄存器的优点是字节指令少，执行效率高，易优化，缺点就是实现复杂</p>
-<p>基于栈的有点就是易移植，相对容易实现。缺点就是效率慢，指令多。</p>
-<p><code>ART</code> 虚拟机是在 <code>DVM</code> 上做了优化。但还是基于寄存器的。</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qdhxhz/p/10646088.html">https://www.cnblogs.com/qdhxhz/p/10646088.html</a></p>
+<h1 id="GitHub-Page"><a href="#GitHub-Page" class="headerlink" title="GitHub Page"></a>GitHub Page</h1><p>这个都不陌生吧，注册 GitHub 账号后，可以帮你托管你的 <code>repository</code> 下的静态网页，比如我有个 <code>repository</code> 叫  <code>android-note</code> ，我的 github 账号叫 <code>xanderwang</code> ，那么我的 android-note 托管后，访问地址就是：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://xander.github.io/android-note">https://xander.github.io/android-note</a></p>
+</blockquote>
+<p>托管后，如果我每次写了新的文章后，我把最新的静态 blog 上传上来，那么就可以更新自己的博客。</p>
+<p>如果每次都可以自动编译和上传 blog 静态网页，那就很省事了。事实上，这个是可以做到的，具体细节后面再说。我们先看看如何托管我们的 <code>repository</code> 到 GitHub Page 。</p>
+<p>最开始接触到 GitHub Page 的时候，看文章都是说需要新建一个和自己用户名同名的 <code>repository</code> ，然后往这个 <code>repository</code> 根目录里面上传静态 blog 网页，然后托管。</p>
+<p>后来我发现不是这样，至少目前不是这样，我发现任意的 <code>repository</code> 都可以托管，只需要做一些特别的设置，如何设置呢？</p>
+<p>找到你的 <code>repository</code> ，然后</p>
+<blockquote>
+<p>settings -&gt; GitHub Pages -&gt; Source -&gt; 选择分支和静态博客的目录(貌似只能选 <code>/</code> 或者 <code>/doc</code>)</p>
+</blockquote>
+<p>到这里 GitHub 托管就设置好了。按照之前的规则你就可以访问你托管 blog 了。</p>
+<h1 id="GitHub-Action"><a href="#GitHub-Action" class="headerlink" title="GitHub Action"></a>GitHub Action</h1><p>刚刚说了，如果有个自动编译和上传 blog 的工具或者平台，每次我们写好 blog 后，自动帮我们编译上传好，那我们就可以省很多事。GitHub Action 正好可以做这个的，而且可以和 GitHub 无缝对接。那如何使用呢？</p>
+<p>很简单，只需要在你的 <code>repository</code> 里面新建 <code>.github</code> 文件夹，然后在里面新建 <code>.workflows</code> 文件夹，然后在里面新建 <code>build.yml</code> 文件(build 可以换成任意你喜欢的)，然后 GitHub Action 功能就开通了。这个时候， <code>repository</code> 下的目录结构大概是</p>
+<pre><code>.
+├── .github
+│   └── workflows
+│       └── build.yml
+</code></pre>
+<p>现在介绍下如何配置 build.yml 文件</p>
+<pre><code class="yml">name: Xander&#39;s Blog Task
+# 在push **.md **.yml **.yaml **.sh 文件后执行任务
+on: #配置任务执行时机
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
+  push:
+    # branches:    
+    #   - master
+    paths:
+      - &#39;**.md&#39;
+      - &#39;**.yml&#39;
+      - &#39;**.yaml&#39;
+      - &#39;**.sh&#39;
+jobs: # 配置具体任务
+  build:
+    # runs-on: macOS-latest
+    runs-on: ubuntu-latest
+    steps:
+    # 引用外部 Action, 拉取代码仓库到虚拟机工作目录
+    - name: chekout code
+      uses: actions/checkout@v1
+    # 执行 .sh 脚本文件，很多的任务可以在这个脚本里面执行
+    - name: build note
+      run: sh ./blog_config/build.sh
+# ... 忽略其他内容
+</code></pre>
+<p>上面列出了主要的步骤和解释了，具体可以参考<a target="_blank" rel="noopener" href="https://github.com/XanderWang/android-note">我的 repository</a> </p>
+<p>这里需要说明的是，如果你需要额外传一些参数，比如密码是的，你需要现在 repository 做一些设置，具体参考如下：</p>
+<blockquote>
+<p>settings -&gt; secrets -&gt; 新建一个 secret </p>
+</blockquote>
+<p>然后在你的 <code>build.yml</code> 里面使用</p>
+<pre><code class="yml">steps:
+  - name: Hello world action
+    with: # Set the secret as an input
+      super_secret: $&#123;&#123; secrets.SuperSecret &#125;&#125;
+    env: # Or as an environment variable
+      super_secret: $&#123;&#123; secrets.SuperSecret &#125;&#125;
+    run: |
+      example-command &quot;$super_secret&quot;
+</code></pre>
+<p>到这里自动编译和发布的工作就说完了，现在我们还缺什么？</p>
+<h1 id="hexo-amp-配套主题"><a href="#hexo-amp-配套主题" class="headerlink" title="hexo &amp; 配套主题"></a>hexo &amp; 配套主题</h1><p>前面说了托管和自动编译和发布，现在我们就差一个个性化的静态 blog 模板了，这里我选择的是 hexo &amp; 配套主题。</p>
+<h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><p>这个是一个静态的博客构建软件，配合网络上的主题，可以比较方便构建出自己的博客，同时有大量的精美主题可以选择。</p>
+<p>如何安装就不具体说了，不是很难，官网有很详细的教程。</p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">点我直达 hexo 官网</a></p>
+<h2 id="hexo-配套主题"><a href="#hexo-配套主题" class="headerlink" title="hexo 配套主题"></a>hexo 配套主题</h2><p>主题的话，一般可以在 GitHub 上面找，我暂时用的 <a target="_blank" rel="noopener" href="https://volantis.js.org/">volantis</a>，可以去官网看下这个主题的具体介绍和相关配置。</p>
+<p>这里说下可能遇到的坑的，</p>
+<p>这里说下 _config.yml</p>
+<pre><code class="yml">...
+
+# URL
+## If your site is put in a subdirectory, set url as &#39;http://yoursite.com/child&#39; and root as &#39;/child/&#39;
+url: https://xanderwang.github.io/android-note
+root: /android-note/
+# 需要注意这里的配置，注意 url 和 root 的配置，如果不是用的 GitHub 同名 repository 托管的，都需要配置
+
+# Directory
+public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的站点文件。
+# public_dir 目录就是 hexo 编译后存放静态 html 的目录，在托管 GitHub Page 的时候注意选择这个目录。
+
+...
+</code></pre>
+<p>其他的配置就是主题配置了，这个建议按照注意的 repository 或者主题的 demo 去配置，每个主题都是不一样的，只能靠自己的折腾了。 </p>
 
   
   
@@ -618,7 +595,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
             
               
-                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/26/android_note_04/>https://xanderwang.github.io/android-note/2021/02/26/android_note_04/</a></p>
+                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/02/25/blog/hexo_create_blog/>https://xanderwang.github.io/android-note/2021/02/25/blog/hexo_create_blog/</a></p>
               
             
           </blockquote>
@@ -635,10 +612,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-31T11:41:12+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-02T07:42:06+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Mar 31, 2021</p>
+    <p>更新于：Apr 2, 2021</p>
   </a>
 </div>
 
@@ -647,7 +624,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/JVM/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>JVM</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Github-Action/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Github Action</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/GitHub-Page/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>GitHub Page</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Gitee-Page/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Gitee Page</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Gitee/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Gitee</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/hexo/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>hexo</p></a></div>
 
 
         
@@ -660,7 +637,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/26/android_note_04/&title=Android 开发总结笔记(四) - JVM 总结 - Xander's blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/02/25/blog/hexo_create_blog/&title=利用 GitHub 搭建自己的个人博客 - Xander's blog&summary="
           
           >
           
@@ -672,7 +649,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/26/android_note_04/&title=Android 开发总结笔记(四) - JVM 总结 - Xander's blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/02/25/blog/hexo_create_blog/&title=利用 GitHub 搭建自己的个人博客 - Xander's blog&summary="
           
           >
           
@@ -684,7 +661,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/26/android_note_04/&title=Android 开发总结笔记(四) - JVM 总结 - Xander's blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/02/25/blog/hexo_create_blog/&title=利用 GitHub 搭建自己的个人博客 - Xander's blog&summary="
           
           >
           
@@ -714,21 +691,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/android-note/2021/02/26/android_note_05/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 开发总结笔记(五) - Java 线程总结</p>
-          <p class='content'>Java 线程总结Java 线程安全什么是线程安全在上一节的 Java 内存模型里面说到，程序在运行的时候，线程并不是直接从主存里面，而是先从主内存拷贝一份到工作内存(线程私有的)，然后执行代码...</p>
+        <a class='prev' href='/android-note/2021/02/26/android_note/android_note_04/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 开发总结笔记(四) - JVM 总结</p>
+          <p class='content'>JVM 总结什么是 JVMJVM 是 Java 虚拟机，是一个虚拟出来的计算机，仿真模拟计算机。
+JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM 的内存主要分为五块
+
+程序...</p>
         </a>
       
       
-        <a class='next' href='/android-note/2021/02/25/hexo_create_blog/'>
-          <p class='title'>利用 GitHub 搭建自己的个人博客<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>先看下预览图吧。
-
-先说下方案:
-
- GitHub Page + GitHub Action + hexo &amp; 配套主题 
-
-GitHub Page这个都不陌生吧，注册 GitHub 账...</p>
+        <a class='next' href='/android-note/2021/02/24/android_performance/android_performance_lib/'>
+          <p class='title'>不会性能优化？你只差一个开源库！<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>简介由于本人工作需要，需要解决一些性能问题，虽然有 Profiler 、Systrace  等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，...</p>
         </a>
       
     </div>
@@ -771,7 +745,7 @@ GitHub Page这个都不陌生吧，注册 GitHub 账...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-JVM"><span class="toc-text">什么是 JVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM-%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E8%BF%99%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%9C%A8-JVM-%E9%87%8C%E9%9D%A2%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="toc-text">JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA-class-%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E9%87%8C%EF%BC%8C%E7%B1%BB%E7%9A%84%E7%BB%93%E6%9E%84%E6%98%AF%E5%A6%82%E4%BD%95%E7%9A%84%EF%BC%9F"><span class="toc-text">一个 class 字节码文件里，类的结构是如何的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM-%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E4%B8%80%E4%B8%AA%E7%B1%BB%E7%9A%84"><span class="toc-text">JVM 是如何找到一个类的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM-%E5%8A%A0%E8%BD%BD%E7%B1%BB%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E8%BF%87%E7%A8%8B%E5%91%A2%EF%BC%9F"><span class="toc-text">JVM 加载类的时候，有哪些过程呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="toc-text">Java 内存模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM-GC"><span class="toc-text">JVM GC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E7%B4%A2%E5%BC%95"><span class="toc-text">四种索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GC-%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">GC 的类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="toc-text">回收算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DVM-%E5%92%8C-JVM-%E5%8C%BA%E5%88%AB%EF%BC%8C%E6%88%96%E8%80%85%E8%AF%B4%E6%98%AF%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%E7%9A%84"><span class="toc-text">DVM  和 JVM 区别，或者说是如何优化的</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo"><span class="toc-text">hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo-%E9%85%8D%E5%A5%97%E4%B8%BB%E9%A2%98"><span class="toc-text">hexo 配套主题</span></a></li></ol>
     </div>
   </section>
 
@@ -790,7 +764,7 @@ GitHub Page这个都不陌生吧，注册 GitHub 账...</p>
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="Android 开发总结笔记(四) - JVM 总结";
+  pdata.postTitle="利用 GitHub 搭建自己的个人博客";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
