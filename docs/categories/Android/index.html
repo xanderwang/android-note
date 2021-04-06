@@ -456,26 +456,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='md'>
     
       
-        启动的类型一般分为，冷启动，热启动
-冷启动指
-热启动指
+        启动的类型一般分为，冷启动和热启动
+
+冷启动：启动时，后台没有任何该应用的进程，系统需要重新创建一个进程，并结合启动参数启动该应用。
+
+
+热启动：启动时，系统已经有该应用的进程(比如按 home 键临时退出该应用)下启动该应用。
+
 如何获取启动时间
 adb 命令
 
-自定义时间戳
-
-
-如何监控启动过程
-systrace
-
-Debug
-
-
-一般有那些方法
-文件解压等耗时操作
-延时初始化
-
-
+adb shell am start -S -W 包名/启动类的全名
+adb shell am start -S -W xxx/...
       
     
   </div>
@@ -514,7 +506,7 @@ Debug
     
     <h2 class="article-title" >
       <a href="/android-note/2021/04/06/android_performance/android_performance_apk_size/">
-        Android 性能优化 - 启动速度优化
+        Android 性能优化 - APK 瘦身
       </a>
     </h2>
   
@@ -898,7 +890,7 @@ https://github.com/XanderWang/performance
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>20.4k 字</div>
+          <div>21k 字</div>
         </div>
       
 
@@ -924,7 +916,7 @@ https://github.com/XanderWang/performance
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue Apr 06 2021 10:50:07 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update" style="display: none;">Tue Apr 06 2021 11:48:40 GMT+0000 (Coordinated Universal Time)</div>
             <div id="last-update-show">2021-04-06 日</div>
           
         </div>

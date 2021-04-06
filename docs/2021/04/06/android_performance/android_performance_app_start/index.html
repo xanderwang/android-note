@@ -487,25 +487,86 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h2 id="启动的类型"><a href="#启动的类型" class="headerlink" title="启动的类型"></a>启动的类型</h2><p>一般分为，冷启动，热启动</p>
-<p>冷启动指</p>
-<p>热启动指</p>
+  <h2 id="启动的类型"><a href="#启动的类型" class="headerlink" title="启动的类型"></a>启动的类型</h2><p>一般分为，冷启动和热启动</p>
+<blockquote>
+<p>冷启动：启动时，后台没有任何该应用的进程，系统需要重新创建一个进程，并结合启动参数启动该应用。</p>
+</blockquote>
+<blockquote>
+<p>热启动：启动时，系统已经有该应用的进程(比如按 home 键临时退出该应用)下启动该应用。</p>
+</blockquote>
 <h2 id="如何获取启动时间"><a href="#如何获取启动时间" class="headerlink" title="如何获取启动时间"></a>如何获取启动时间</h2><ol>
-<li><p>adb 命令</p>
-</li>
-<li><p>自定义时间戳</p>
-</li>
+<li>adb 命令</li>
 </ol>
+<p>adb shell am start -S -W 包名/启动类的全名</p>
+<pre><code>adb shell am start -S -W xxx/xxxActivity
+Stopping: xxx
+Starting: Intent &#123; act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=xxx/xxxActivity &#125;
+Status: ok
+Activity: xxx/xxxActivity
+ThisTime: 770
+TotalTime: 770
+WaitTime: 848
+Complete
+</code></pre>
+<p><strong>ThisTime</strong>: 表示最后一个 Activity 启动时间</p>
+<p><strong>TotalTime</strong>: 表示启动过程中，所有的 Activity 的启动时间</p>
+<p><strong>WaitTime</strong>: 表示应用进程的创建时间 + TotalTime</p>
+<p>一般我们关注 <code>TotalTime</code> 就好了。</p>
+<p>另外，谷歌在 Android4.4（API 19）上也提供了测量方法，在 logcat 中过滤 Displayed 字段也可以看到启动时间</p>
+<blockquote>
+<p>2021-04-06 19:25:52.803 2210-2245 I/ActivityManager: Displayed xxx/xxxActivity: +623ms</p>
+</blockquote>
+<p><code>+623ms</code> 就是Activity 的启动时间。</p>
+<ol start="2">
+<li>时间戳</li>
+</ol>
+<p>时间戳的方法基于以下的 2 个知识点。</p>
+<ul>
+<li>应用进程刚创建，会调用 Application 的 onCreate 方法。</li>
+<li>首次进入一个 Activity 后会在 onResume() 方法后面调用 onWindowsFocusChange 方法。</li>
+</ul>
+<p>结合这 2 个特性，我们可以在<br>A<br>Application 的 onCreate() 方法和 Activity 的 onWindowsFocusChange 方法里面，通过时间戳来获取应用的冷启动时间。</p>
 <h2 id="如何监控启动过程"><a href="#如何监控启动过程" class="headerlink" title="如何监控启动过程"></a>如何监控启动过程</h2><ol>
-<li><p>systrace</p>
-</li>
-<li><p>Debug</p>
-</li>
+<li>systrace</li>
 </ol>
+<p>systrace 是一个功能很强大的工具，除了可以查看卡顿问题，也可以用来查看应用的启动问题。使用示例如下：</p>
+<blockquote>
+<p>python $ANDROID_HOME/platform-tools/systrace/systrace.py gfx view wm am pm ss dalvik app sched -b 90960 -a 你的包名 -o test.log.html</p>
+</blockquote>
+<p>用 Google  浏览器打开 <code>test.log.html</code> 就可以看到详细的启动信息。</p>
+<ol start="2">
+<li>Debug 接口</li>
+</ol>
+<pre><code>package android.os;
+...
+class Debug &#123;
+    ...
+    public static void startMethodTracingSampling(String tracePath, int bufferSize, int intervalUs) &#123;
+
+    &#125;
+    public static void startMethodTracing(String tracePath, int bufferSize) &#123;
+
+    &#125;
+&#125;
+</code></pre>
+<p>利用 Debug 类的这两个方法，可以生成一个 <code>trace</code> 文件，这个 <code>trace</code> 文件，可以直接在 <code>AS</code> 里面打开，可以看到从 <code>startMethodTracingSampling</code> 到 <code>startMethodTracing</code> 过程中的方法调用等信息，也可以较好的分析启动问题。</p>
 <h2 id="一般有那些方法"><a href="#一般有那些方法" class="headerlink" title="一般有那些方法"></a>一般有那些方法</h2><ol>
-<li>文件解压等耗时操作</li>
+<li>耗时操作放到异步进程</li>
+</ol>
+<p>比如文件解压、读写等耗时 IO 操作可以新开一个线程来执行。</p>
+<ol start="2">
 <li>延时初始化</li>
 </ol>
+<p>即暂时不适用的工具类等延后到使用的时候再去初始化。比如从 xml 里面读取颜色，可以考虑在使用的时候再去读取和解析。</p>
+<ol start="3">
+<li>线程优化</li>
+</ol>
+<p>线程的创建需要消耗较多的系统系统资源，减少线程的创建。可以考虑共用一个线程池。</p>
+<p>如何检测线程的创建，可以参考我个开源库 <a target="_blank" rel="noopener" href="https://github.com/XanderWang/performance">performance</a></p>
+<ol start="4">
+<li>布局等优化</li>
+</ol>
+<p>减少布局的层次，合理使用 ViewStub</p>
 
   
   
@@ -540,7 +601,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-06T10:49:28+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-06T11:48:01+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Apr 6, 2021</p>
@@ -621,7 +682,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
       
         <a class='next' href='/android-note/2021/04/06/android_performance/android_performance_apk_size/'>
-          <p class='title'>Android 性能优化 - 启动速度优化<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='title'>Android 性能优化 - APK 瘦身<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
           <p class='content'>如何查看 apk 大小组成可以看到占大头的是 res 、so 、以及代码 
 如何减少 res 资源大小
 删除冗余的资源
