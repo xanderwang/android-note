@@ -30,11 +30,15 @@ categories:
 
 # APK 瘦身
 
-[点击查看详情](android-note/2020/04/06/android_performance/android_performance_apk_size/)
+<!-- [点击查看详情](android-note/2021/04/06/android_performance/android_performance_apk_size/) -->
+
+{% android-note/2021/04/06/android_performance/android_performance_apk_size 点击查看详情 %}
 
 # 启动速度
 
-[点击查看详情](android-note/2020/04/06/android_performance/android_performance_app_start/)
+[点击查看详情](android-note/2021/04/06/android_performance/android_performance_app_start/)
+
+{% android-note/2021/04/06/android_performance/android_performance_app_start/ 点击查看详情 %}
 
 # 稳定性优化
 
