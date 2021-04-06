@@ -1,6 +1,6 @@
 ---
-seo_title: Android 性能优化 - 启动速度优化
-title: Android 性能优化 - 启动速度优化
+seo_title: Android 性能优化 - APK 瘦身
+title: Android 性能优化 - APK 瘦身
 date: 2021-04-06 17:13:00
 tags: 
 - Android
