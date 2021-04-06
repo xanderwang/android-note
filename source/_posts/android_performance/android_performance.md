@@ -18,8 +18,8 @@ categories:
 “这个 app 怎么还没下载完！”、“太卡了吧！”、"图片怎么还没加载出来！"、"怎么刚进去就卡了！"、“这么点了一下就退出了！”等等，是不是有这样的想法，这些想法其实包含了我们今天要说的
 内容，就是从哪些方面来优化我们的 APP ，我总结了以下几点。
 
-- APK 瘦身
-- 启动速度优化
+- {% post_link android_performance/android_performance_apk_size APK 瘦身优化 %}
+- {% post_link android_performance/android_performance_app_start 启动速度优化 %}
 - 稳定性优化
 - 内存的优化
 - 操作流畅度优化
@@ -29,11 +29,11 @@ categories:
 
 # APK 瘦身
 
-{% post_link android_performance/android_performance_apk_size 点击查看详情 %}
+{% post_link android_performance/android_performance_apk_size APK瘦身优化 %}
 
 # 启动速度
 
-{% post_link android_performance/android_performance_app_start 点击查看详情 %}
+{% post_link android_performance/android_performance_app_start 启动速度优化 %}
 
 # 稳定性优化
 

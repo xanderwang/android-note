@@ -10,6 +10,16 @@ categories:
 - Android
 ---
 
+## 系列文章
+
+- {% post_link android_performance/android_performance Android 性能优化总结 %}
+- {% post_link android_performance/android_performance_apk_size APK 瘦身优化 %}
+- {% post_link android_performance/android_performance_app_start 启动速度优化 %}
+- 稳定性优化
+- 内存的优化
+- 操作流畅度优化
+- 电量优化
+
 ## 启动的类型
 
 一般分为，冷启动和热启动
