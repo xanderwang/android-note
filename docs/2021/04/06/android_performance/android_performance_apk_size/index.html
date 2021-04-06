@@ -458,7 +458,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Apr 6, 2020</p>
+    <p>发布于：Apr 6, 2021</p>
   </a>
 </div>
 
@@ -469,7 +469,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="Android 性能优化 - 启动速度优化" data-path="/android-note/2020/04/06/android_performance/android_performance_app_start/">
+      <div id="lc-pv" data-title="Android 性能优化 - 启动速度优化" data-path="/android-note/2021/04/06/android_performance/android_performance_apk_size/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -487,25 +487,107 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h2 id="启动的类型"><a href="#启动的类型" class="headerlink" title="启动的类型"></a>启动的类型</h2><p>一般分为，冷启动，热启动</p>
-<p>冷启动指</p>
-<p>热启动指</p>
-<h2 id="如何获取启动时间"><a href="#如何获取启动时间" class="headerlink" title="如何获取启动时间"></a>如何获取启动时间</h2><ol>
-<li><p>adb 命令</p>
-</li>
-<li><p>自定义时间戳</p>
-</li>
+  <h2 id="如何查看-apk-大小组成"><a href="#如何查看-apk-大小组成" class="headerlink" title="如何查看 apk 大小组成"></a>如何查看 apk 大小组成</h2><p>可以看到占大头的是 res 、so 、以及代码 </p>
+<h2 id="如何减少-res-资源大小"><a href="#如何减少-res-资源大小" class="headerlink" title="如何减少 res 资源大小"></a>如何减少 res 资源大小</h2><ol>
+<li>删除冗余的资源</li>
 </ol>
-<h2 id="如何监控启动过程"><a href="#如何监控启动过程" class="headerlink" title="如何监控启动过程"></a>如何监控启动过程</h2><ol>
-<li><p>systrace</p>
-</li>
-<li><p>Debug</p>
-</li>
+<p>可以使用 lint 工具来搜索项目中不再使用的图片等资源</p>
+<ol start="2">
+<li>重复资源的优化</li>
 </ol>
-<h2 id="一般有那些方法"><a href="#一般有那些方法" class="headerlink" title="一般有那些方法"></a>一般有那些方法</h2><ol>
-<li>文件解压等耗时操作</li>
-<li>延时初始化</li>
+<p>除了有冗余资源，还有些是文件名不一样，但是内容一样的图片，可以通过比较 md5 值来判断是不是一样的资源，然后编辑 resource.r</p>
+<ol start="3">
+<li>图片压缩</li>
 </ol>
+<p>未压缩的图片文件占用空间较大，可以考虑压缩未压缩过的图片来瘦身。常用的工具是  <a target="_blank" rel="noopener" href="https://tinypng.com/">tinypng</a> 网站。</p>
+<p>同时也可以借助 <a target="_blank" rel="noopener" href="https://github.com/Deemonser/TinyPngPlugin">TinyPngPlugin</a> 等插件或者其他开源工具来帮助压缩图片。</p>
+<ol start="4">
+<li>资源混淆</li>
+</ol>
+<p>通过将资源路径 <code>res/drawable/wechat</code> 变为 <code>r/d/a</code> 的方式来减少 apk 的大小，当 apk 有较多资源项的时候，效果比较明显，这是一款微信开源的工具，详细地址是：<a target="_blank" rel="noopener" href="https://github.com/shwenzhang/AndResGuard">AndResGuard</a></p>
+<ol start="5">
+<li>指定语言</li>
+</ol>
+<p>如果没有特殊的需求的话，可以只编译中文，因为其他的语言用不上，如果用不上的语言编译了，会在 resource 的表里面占用大量的空间，故</p>
+<pre><code>android &#123;
+    defaultConfig &#123;
+        ...
+        // 仅支持 中文
+        resConfigs &quot;zh&quot; 
+    &#125;
+&#125;
+</code></pre>
+<h2 id="如何减少-so-库资源大小"><a href="#如何减少-so-库资源大小" class="headerlink" title="如何减少 so 库资源大小"></a>如何减少 so 库资源大小</h2><ol>
+<li>自己编译的 so </li>
+</ol>
+<p>release 包的  so 中移除调试符号。可以使用 Android NDK 中提供的 <code>arm-eabi-strip</code> 工具从原生库中移除不必要的调试符号。</p>
+<p>如果是 cmake 来编译的话，可以再编辑脚本添加如下代码</p>
+<pre><code>set(CMAKE_C_FLAGS_RELEASE &quot;$&#123;CMAKE_C_FLAGS_RELEASE&#125; -s&quot;)
+set(CMAKE_CXX_FLAGS_RELEASE &quot;$&#123;CMAKE_CXX_FLAGS_RELEASE&#125; -s&quot;)
+</code></pre>
+<ol start="2">
+<li>别人编译的 so</li>
+</ol>
+<p>联系作者修改，一般很难联系到。</p>
+<ol start="3">
+<li>动态下发 so</li>
+</ol>
+<p>可以通过服务器下发 so , 下载完后再进入应用，但是体验不好，但是是一个思路。</p>
+<ol start="4">
+<li>只编译指定平台的 so </li>
+</ol>
+<p>一般我们都是给 arm 平台的机器开发，如果没有特殊情况，我们一般只需要考虑 arm 平台的。具体的方法是 app 下的 build.gradle 添加如下代码</p>
+<pre><code>android &#123;
+    defaultConfig &#123;
+        ndk &#123;
+            abiFilter &quot;armeabi&quot;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>各个平台的差别如下：</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>armeabi-v7a</td>
+<td>arm 第 7 代及以上的处理器，2011 年后的设备基本都是。</td>
+</tr>
+<tr>
+<td>arm64-v8a</td>
+<td>arm 第 8 代 64 位处理器设备，很少，s6</td>
+</tr>
+<tr>
+<td>armeabi</td>
+<td>arm第 5、6 代处理器，早期的机器都是这个平台</td>
+</tr>
+<tr>
+<td>x86</td>
+<td>x86 32 位平台，平板和模拟器用的多</td>
+</tr>
+<tr>
+<td>x86_64</td>
+<td>x86 64 位平台</td>
+</tr>
+</tbody></table>
+<h2 id="如何减少代码资源大小"><a href="#如何减少代码资源大小" class="headerlink" title="如何减少代码资源大小"></a>如何减少代码资源大小</h2><ol>
+<li>一个功能尽量用一个库</li>
+</ol>
+<p>比如加载图片库，不要 glide 和 fresco 混用，因为功能是类似的，只是使用的方法不一样，用了多个库来做类似的事情，代码肯定就变多了。</p>
+<ol start="2">
+<li>混淆</li>
+</ol>
+<p>混淆的话，减少了生成的 class 大小，这样积少成多，也可以从一定层度减少 apk 的大小。</p>
+<ol start="3">
+<li>R 文件内联</li>
+</ol>
+<p>通过把 R 文件里面的资源内联到代码中，从而减少 R 文件的大小。</p>
+<p>可以使用 <a target="_blank" rel="noopener" href="https://github.com/bytedance/ByteX/blob/master/shrink-r-plugin/README-zh.md">shrink-r-plugin</a> 工具来做 R 文件的内联</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2017/04/07/android-shrink-overall-solution.html">Android App包瘦身优化实践</a></p>
 
   
   
@@ -523,7 +605,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
             
               
-                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2020/04/06/android_performance/android_performance_app_start/>https://xanderwang.github.io/android-note/2020/04/06/android_performance/android_performance_app_start/</a></p>
+                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2021/04/06/android_performance/android_performance_apk_size/>https://xanderwang.github.io/android-note/2021/04/06/android_performance/android_performance_apk_size/</a></p>
               
             
           </blockquote>
@@ -540,7 +622,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-06T10:17:12+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-06T10:49:28+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Apr 6, 2021</p>
@@ -565,7 +647,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2020/04/06/android_performance/android_performance_app_start/&title=Android 性能优化 - 启动速度优化 - Xander's blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2021/04/06/android_performance/android_performance_apk_size/&title=Android 性能优化 - 启动速度优化 - Xander's blog&summary="
           
           >
           
@@ -577,7 +659,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2020/04/06/android_performance/android_performance_app_start/&title=Android 性能优化 - 启动速度优化 - Xander's blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2021/04/06/android_performance/android_performance_apk_size/&title=Android 性能优化 - 启动速度优化 - Xander's blog&summary="
           
           >
           
@@ -589,7 +671,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2020/04/06/android_performance/android_performance_app_start/&title=Android 性能优化 - 启动速度优化 - Xander's blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2021/04/06/android_performance/android_performance_apk_size/&title=Android 性能优化 - 启动速度优化 - Xander's blog&summary="
           
           >
           
@@ -619,21 +701,42 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/android-note/2020/07/23/android_note/android_note_01/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 开发总结笔记(一) - 泛型总结</p>
-          <p class='content'>泛型总结泛型是什么？一句话说就是类型参数化。什么意思呢？参数化的意思就是我们在定义的时候不知道具体的值，我们在到我们实际运行的时候才知道具体的值。类型参数化就是具体类型在定义的时候不知道，在实际...</p>
+        <a class='prev' href='/android-note/2021/04/06/android_performance/android_performance_app_start/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 性能优化 - 启动速度优化</p>
+          <p class='content'>启动的类型一般分为，冷启动，热启动
+冷启动指
+热启动指
+如何获取启动时间
+adb 命令
+
+自定义时间戳
+
+
+如何监控启动过程
+systrace
+
+Debug
+
+
+一般有那些方法
+文件解压等耗时操...</p>
         </a>
       
       
-        <a class='next' href='/android-note/2020/04/06/android_performance/android_performance_apk_size/'>
-          <p class='title'>Android 性能优化 - 启动速度优化<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>如何查看 apk 大小组成可以看到占大头的是 res 、so 、以及代码 
-如何减少 res 资源大小
-删除冗余的资源
+        <a class='next' href='/android-note/2021/02/28/linux/shell_a_to_n/'>
+          <p class='title'>shell 脚本 -a 到 -n 的意思<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>
+[-a file]  
 
-可以使用 lint 工具来搜索项目中不再使用的图片等资源
+如果 file 存在则为真
 
-重复资源的优...</p>
+[-b file]  
+
+如果 file 存在且是一个块特殊文件则为真
+
+[-c file]  
+
+如果 file 存在且是一个字特殊文...</p>
         </a>
       
     </div>
@@ -676,7 +779,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">启动的类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4"><span class="toc-text">如何获取启动时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%9B%91%E6%8E%A7%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">如何监控启动过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E6%9C%89%E9%82%A3%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="toc-text">一般有那些方法</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B-apk-%E5%A4%A7%E5%B0%8F%E7%BB%84%E6%88%90"><span class="toc-text">如何查看 apk 大小组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-res-%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 res 资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-so-%E5%BA%93%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 so 库资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E4%BB%A3%E7%A0%81%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少代码资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-text">参考文档</span></a></li></ol>
     </div>
   </section>
 

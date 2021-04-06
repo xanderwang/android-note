@@ -476,6 +476,129 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/android-note/2021/04/06/android_performance/android_performance_app_start/">
+        Android 性能优化 - 启动速度优化
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        启动的类型一般分为，冷启动，热启动
+冷启动指
+热启动指
+如何获取启动时间
+adb 命令
+
+自定义时间戳
+
+
+如何监控启动过程
+systrace
+
+Debug
+
+
+一般有那些方法
+文件解压等耗时操作
+延时初始化
+
+
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-04-06</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/android-note/categories/Android/">Android</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/android-note/2021/04/06/android_performance/android_performance_app_start/'>
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/android-note/2021/04/06/android_performance/android_performance_apk_size/">
+        Android 性能优化 - 启动速度优化
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        如何查看 apk 大小组成可以看到占大头的是 res 、so 、以及代码 
+如何减少 res 资源大小
+删除冗余的资源
+
+可以使用 lint 工具来搜索项目中不再使用的图片等资源
+
+重复资源的优化
+
+除了有冗余资源，还有些是文件名不一样，但是内容一样的图片，可以通过比较 md5 值来判断是不是一样的资源，然后编辑 resource.r
+
+图片压缩
+
+未压缩的图片文件占用空间较大，可以考虑压缩...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-04-06</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/android-note/categories/Android/">Android</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/android-note/2021/04/06/android_performance/android_performance_apk_size/'>
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/android-note/2021/02/28/linux/shell_a_to_n/">
         shell 脚本 -a 到 -n 的意思
       </a>
@@ -905,118 +1028,6 @@ Map 以键值...
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2020/07/23/android_note/android_note_01/">
-        Android 开发总结笔记(一) - 泛型总结
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        泛型总结泛型是什么？一句话说就是类型参数化。什么意思呢？参数化的意思就是我们在定义的时候不知道具体的值，我们在到我们实际运行的时候才知道具体的值。类型参数化就是具体类型在定义的时候不知道，在实际运行的时候是确定的某一个类型。
-Java 是如何实现泛型的？泛型是很多高级语言都有的特性。根据定义，泛型在运行时表示同一个类型，我们比较容易想到 List&lt;A&gt; 和 List&lt;B&g...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-07-23</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/android-note/2020/07/23/android_note/android_note_01/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2020/04/06/android_performance/android_performance_app_start/">
-        Android 性能优化 - 启动速度优化
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        启动的类型一般分为，冷启动，热启动
-冷启动指
-热启动指
-如何获取启动时间
-adb 命令
-
-自定义时间戳
-
-
-如何监控启动过程
-systrace
-
-Debug
-
-
-一般有那些方法
-文件解压等耗时操作
-延时初始化
-
-
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-04-06</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/Android/">Android</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/android-note/2020/04/06/android_performance/android_performance_app_start/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1229,7 +1240,7 @@ Debug
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue Apr 06 2021 10:17:44 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update" style="display: none;">Tue Apr 06 2021 10:50:07 GMT+0000 (Coordinated Universal Time)</div>
             <div id="last-update-show">2021-04-06 日</div>
           
         </div>
