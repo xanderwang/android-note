@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -24,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>Tag: JVM - Xander&#39;s blog</title>
+  <title>Android 性能优化 - 启动速度优化 - Xander&#39;s blog</title>
+  
+    <meta name="keywords" content="Android,Performance,启动速度优化">
   
 
   
@@ -346,7 +346,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  dock' style="display: none;">
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -416,83 +416,340 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      
-  <section class="post-list">
     
-      
+    
+      <h1 class="title">
+        Android 性能优化 - 启动速度优化
+      </h1>
+      <div class='new-meta-box'>
         
           
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2021/02/26/android_note/android_note_04/">
-        Android 开发总结笔记(四) - JVM 总结
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        JVM 总结什么是 JVMJVM 是 Java 虚拟机，是一个虚拟出来的计算机，仿真模拟计算机。
-JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM 的内存主要分为五块
+            
+<div class='new-meta-item author'>
+  <a class='author' target="_blank" href="https://github.com/XanderWang/" rel="nofollow noopener">
+    <img no-lazy src="https://i.loli.net/2020/05/18/WO1oJwFsRb4gV79.png">
+    <p>XanderWang</p>
+  </a>
+</div>
 
-程序计算器
-
-程序计算器是用来记录当前线程的执行的位置，通过程序计数器的记录，程序就可以继续进行下去。
-线程私有的，就是每个线程都不一样。
-需要注意的是这里面没有 OutOfMemory 的异常，在执行 ...
-      
-    
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/android-note/categories/Android/">Android</a>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+
+
+          
         
-        <time>2021-02-26</time>
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Apr 6, 2020</p>
+  </a>
+</div>
+
+          
         
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="Android 性能优化 - 启动速度优化" data-path="/android-note/2020/04/06/android_performance/android_performance_apk_size/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  
+  <h2 id="如何查看-apk-大小组成"><a href="#如何查看-apk-大小组成" class="headerlink" title="如何查看 apk 大小组成"></a>如何查看 apk 大小组成</h2><p>可以看到占大头的是 res 、so 、以及代码 </p>
+<h2 id="如何减少-res-资源大小"><a href="#如何减少-res-资源大小" class="headerlink" title="如何减少 res 资源大小"></a>如何减少 res 资源大小</h2><ol>
+<li>删除冗余的资源</li>
+</ol>
+<p>可以使用 lint 工具来搜索项目中不再使用的图片等资源</p>
+<ol start="2">
+<li>重复资源的优化</li>
+</ol>
+<p>除了有冗余资源，还有些是文件名不一样，但是内容一样的图片，可以通过比较 md5 值来判断是不是一样的资源，然后编辑 resource.r</p>
+<ol start="3">
+<li>图片压缩</li>
+</ol>
+<p>未压缩的图片文件占用空间较大，可以考虑压缩未压缩过的图片来瘦身。常用的工具是  <a target="_blank" rel="noopener" href="https://tinypng.com/">tinypng</a> 网站。</p>
+<p>同时也可以借助 <a target="_blank" rel="noopener" href="https://github.com/Deemonser/TinyPngPlugin">TinyPngPlugin</a> 等插件或者其他开源工具来帮助压缩图片。</p>
+<ol start="4">
+<li>资源混淆</li>
+</ol>
+<p>通过将资源路径 <code>res/drawable/wechat</code> 变为 <code>r/d/a</code> 的方式来减少 apk 的大小，当 apk 有较多资源项的时候，效果比较明显，这是一款微信开源的工具，详细地址是：<a target="_blank" rel="noopener" href="https://github.com/shwenzhang/AndResGuard">AndResGuard</a></p>
+<ol start="5">
+<li>指定语言</li>
+</ol>
+<p>如果没有特殊的需求的话，可以只编译中文，因为其他的语言用不上，如果用不上的语言编译了，会在 resource 的表里面占用大量的空间，故</p>
+<pre><code>android &#123;
+    defaultConfig &#123;
+        ...
+        // 仅支持 中文
+        resConfigs &quot;zh&quot; 
+    &#125;
+&#125;
+</code></pre>
+<h2 id="如何减少-so-库资源大小"><a href="#如何减少-so-库资源大小" class="headerlink" title="如何减少 so 库资源大小"></a>如何减少 so 库资源大小</h2><ol>
+<li>自己编译的 so </li>
+</ol>
+<p>release 包的  so 中移除调试符号。可以使用 Android NDK 中提供的 <code>arm-eabi-strip</code> 工具从原生库中移除不必要的调试符号。</p>
+<p>如果是 cmake 来编译的话，可以再编辑脚本添加如下代码</p>
+<pre><code>set(CMAKE_C_FLAGS_RELEASE &quot;$&#123;CMAKE_C_FLAGS_RELEASE&#125; -s&quot;)
+set(CMAKE_CXX_FLAGS_RELEASE &quot;$&#123;CMAKE_CXX_FLAGS_RELEASE&#125; -s&quot;)
+</code></pre>
+<ol start="2">
+<li>别人编译的 so</li>
+</ol>
+<p>联系作者修改，一般很难联系到。</p>
+<ol start="3">
+<li>动态下发 so</li>
+</ol>
+<p>可以通过服务器下发 so , 下载完后再进入应用，但是体验不好，但是是一个思路。</p>
+<ol start="4">
+<li>只编译指定平台的 so </li>
+</ol>
+<p>一般我们都是给 arm 平台的机器开发，如果没有特殊情况，我们一般只需要考虑 arm 平台的。具体的方法是 app 下的 build.gradle 添加如下代码</p>
+<pre><code>android &#123;
+    defaultConfig &#123;
+        ndk &#123;
+            abiFilter &quot;armeabi&quot;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>各个平台的差别如下：</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>armeabi-v7a</td>
+<td>arm 第 7 代及以上的处理器，2011 年后的设备基本都是。</td>
+</tr>
+<tr>
+<td>arm64-v8a</td>
+<td>arm 第 8 代 64 位处理器设备，很少，s6</td>
+</tr>
+<tr>
+<td>armeabi</td>
+<td>arm第 5、6 代处理器，早期的机器都是这个平台</td>
+</tr>
+<tr>
+<td>x86</td>
+<td>x86 32 位平台，平板和模拟器用的多</td>
+</tr>
+<tr>
+<td>x86_64</td>
+<td>x86 64 位平台</td>
+</tr>
+</tbody></table>
+<h2 id="如何减少代码资源大小"><a href="#如何减少代码资源大小" class="headerlink" title="如何减少代码资源大小"></a>如何减少代码资源大小</h2><ol>
+<li>一个功能尽量用一个库</li>
+</ol>
+<p>比如加载图片库，不要 glide 和 fresco 混用，因为功能是类似的，只是使用的方法不一样，用了多个库来做类似的事情，代码肯定就变多了。</p>
+<ol start="2">
+<li>混淆</li>
+</ol>
+<p>混淆的话，减少了生成的 class 大小，这样积少成多，也可以从一定层度减少 apk 的大小。</p>
+<ol start="3">
+<li>R 文件内联</li>
+</ol>
+<p>通过把 R 文件里面的资源内联到代码中，从而减少 R 文件的大小。</p>
+<p>可以使用 <a target="_blank" rel="noopener" href="https://github.com/bytedance/ByteX/blob/master/shrink-r-plugin/README-zh.md">shrink-r-plugin</a> 工具来做 R 文件的内联</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2017/04/07/android-shrink-overall-solution.html">Android App包瘦身优化实践</a></p>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/android-note/2021/02/26/android_note/android_note_04/'>
-            Read More
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://xanderwang.github.io/android-note/2020/04/06/android_performance/android_performance_apk_size/>https://xanderwang.github.io/android-note/2020/04/06/android_performance/android_performance_apk_size/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-06T10:17:12+00:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Apr 6, 2021</p>
+  </a>
 </div>
 
-          </div>
         
       
-    
-  </section>
+        
+          
   
-    
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Performance/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Performance</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>启动速度优化</p></a></div>
 
 
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://xanderwang.github.io/android-note/2020/04/06/android_performance/android_performance_apk_size/&title=Android 性能优化 - 启动速度优化 - Xander's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xanderwang.github.io/android-note/2020/04/06/android_performance/android_performance_apk_size/&title=Android 性能优化 - 启动速度优化 - Xander's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://xanderwang.github.io/android-note/2020/04/06/android_performance/android_performance_apk_size/&title=Android 性能优化 - 启动速度优化 - Xander's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
   
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/android-note/2020/04/06/android_performance/android_performance_app_start/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 性能优化 - 启动速度优化</p>
+          <p class='content'>启动的类型一般分为，冷启动，热启动
+冷启动指
+热启动指
+如何获取启动时间
+adb 命令
+
+自定义时间戳
+
+
+如何监控启动过程
+systrace
+
+Debug
+
+
+一般有那些方法
+文件解压等耗时操...</p>
+        </a>
+      
+      
+        <a class='next' href='/android-note/2020/03/08/android_performance/android_performance/'>
+          <p class='title'>Android 性能优化总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>性能的优化是一个老生常谈的点，也是一个比较重要的点。现在对工作中的优化点做一个总结。
+优化的方向，即那些点是需要优化的在平时的优化过程中我们需要从哪几个点来优化呢？其实我们平时自己一定也用过软件...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -500,253 +757,28 @@ JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM �
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box circle' href='/android-note/about/'>
-          <img no-lazy src='https://i.loli.net/2020/05/18/WO1oJwFsRb4gV79.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">Xander's blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="mailto:420640763@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/XanderWang/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/android-note/"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
 
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop">
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/android-note/categories/Android/" href="/android-note/categories/Android/"
-            id="android-notecategoriesAndroid"
-            ><div class='name'>Android</div><div class='badge'>(6)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/android-note/categories/%E5%85%B6%E4%BB%96/" href="/android-note/categories/%E5%85%B6%E4%BB%96/"
-            id="android-notecategoriesE585B6E4BB96"
-            ><div class='name'>其他</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/" href="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/"
-            id="android-notecategoriesE680BBE7BB93E7AC94E8AEB0"
-            ><div class='name'>总结笔记</div><div class='badge'>(6)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B-apk-%E5%A4%A7%E5%B0%8F%E7%BB%84%E6%88%90"><span class="toc-text">如何查看 apk 大小组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-res-%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 res 资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-so-%E5%BA%93%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 so 库资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E4%BB%A3%E7%A0%81%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少代码资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-text">参考文档</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/android-note/tags/Android/" style="font-size: 24px; color: #555">Android</a> <a href="/android-note/tags/GitHub-Page/" style="font-size: 14px; color: #999">GitHub Page</a> <a href="/android-note/tags/Gitee/" style="font-size: 14px; color: #999">Gitee</a> <a href="/android-note/tags/Gitee-Page/" style="font-size: 14px; color: #999">Gitee Page</a> <a href="/android-note/tags/Github-Action/" style="font-size: 14px; color: #999">Github Action</a> <a href="/android-note/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/android-note/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/android-note/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/android-note/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/android-note/tags/Java-%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">Java 线程</a> <a href="/android-note/tags/Performance/" style="font-size: 20.67px; color: #6c6c6c">Performance</a> <a href="/android-note/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/android-note/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/android-note/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" style="font-size: 14px; color: #999">三次握手</a> <a href="/android-note/tags/%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">优化</a> <a href="/android-note/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 14px; color: #999">反射</a> <a href="/android-note/tags/%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/" style="font-size: 17.33px; color: #828282">启动速度优化</a> <a href="/android-note/tags/%E5%91%A8%E6%8A%A5/" style="font-size: 14px; color: #999">周报</a> <a href="/android-note/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 14px; color: #999">泛型</a> <a href="/android-note/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 14px; color: #999">注解</a> <a href="/android-note/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 14px; color: #999">网络编程</a> <a href="/android-note/tags/%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">集合</a>
-    </div>
-  </section>
-
-
-  
-
-  
-    
-    
-
-<section class="widget shadow desktop">
-  
-  <header>
-    
-      <i class="fas fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>14 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
-        </div>
-        <script>
-          var BirthDay = new Date(new Date('2020/01/01'));
-          var today = new Date();
-          var timeold = (today.getTime() - BirthDay.getTime());
-          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
-          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
-        </script>
-      
-
-
-      
-        <div class="webinfo-item">
-          <div>本站总字数：</div>
-          <div>20.4k 字</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站访客数：</div>
-          
-          <div><span id="lc-uv"><span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 人</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站总访问量：</div>
-          
-          <div><span id="lc-sv"><span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 次</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          
-            <div id="last-update" style="display: none;">Tue Apr 06 2021 10:17:44 GMT+0000 (Coordinated Universal Time)</div>
-            <div id="last-update-show">2021-04-06 日</div>
-          
-        </div>
-        
-        <script>
-          function timeago(dateTimeStamp) {
-              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
-              var hour = minute * 60;
-              var day = hour * 24;
-              var week = day * 7;
-              var month = day * 30;
-              var now = new Date().getTime(); //获取当前时间毫秒
-              var diffValue = now - dateTimeStamp; //时间差
-              if (diffValue < 0) {
-                  return;
-              }
-              var minC = diffValue / minute; //计算时间差的分，时，天，周，月
-              var hourC = diffValue / hour;
-              var dayC = diffValue / day;
-              var weekC = diffValue / week;
-              var monthC = diffValue / month;
-              if (monthC >= 1 && monthC <= 3) {
-                  result = " " + parseInt(monthC) + " 月前"
-              } else if (weekC >= 1 && weekC <= 3) {
-                  result = " " + parseInt(weekC) + " 周前"
-              } else if (dayC >= 1 && dayC <= 6) {
-                  result = " " + parseInt(dayC) + " 天前"
-              } else if (hourC >= 1 && hourC <= 23) {
-                  result = " " + parseInt(hourC) + " 小时前"
-              } else if (minC >= 1 && minC <= 59) {
-                  result = " " + parseInt(minC) + " 分钟前"
-              } else if (diffValue >= 0 && diffValue <= minute) {
-                  result = "刚刚"
-              } else {
-                  var datetime = new Date();
-                  datetime.setTime(dateTimeStamp);
-                  var Nyear = datetime.getFullYear();
-                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
-                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
-                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
-                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-                  result = Nyear + "-" + Nmonth + "-" + Ndate
-              }
-              return result;
-          }
-          var lastUpDate = document.getElementById('last-update').innerHTML;
-          try {
-            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
-          } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-04-06 日';
-          }
-        </script>
-        
-      
-    </div>
-  </div>
-</section>
 
   
 
 
 </aside>
+
 
 
 		  
@@ -755,8 +787,8 @@ JVM 在运行程序的时候，这个程序在 JVM 里面是怎么样的？JVM �
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="Android 性能优化 - 启动速度优化";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要

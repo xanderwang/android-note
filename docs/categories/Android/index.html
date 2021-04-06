@@ -433,6 +433,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
         
+          
+        
       
     
     
@@ -497,6 +499,129 @@ https://github.com/XanderWang/performance
   
     
     <h2 class="article-title" >
+      <a href="/android-note/2020/04/06/android_performance/android_performance_app_start/">
+        Android 性能优化 - 启动速度优化
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        启动的类型一般分为，冷启动，热启动
+冷启动指
+热启动指
+如何获取启动时间
+adb 命令
+
+自定义时间戳
+
+
+如何监控启动过程
+systrace
+
+Debug
+
+
+一般有那些方法
+文件解压等耗时操作
+延时初始化
+
+
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-04-06</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/android-note/categories/Android/">Android</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/android-note/2020/04/06/android_performance/android_performance_app_start/'>
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/android-note/2020/04/06/android_performance/android_performance_apk_size/">
+        Android 性能优化 - 启动速度优化
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        如何查看 apk 大小组成可以看到占大头的是 res 、so 、以及代码 
+如何减少 res 资源大小
+删除冗余的资源
+
+可以使用 lint 工具来搜索项目中不再使用的图片等资源
+
+重复资源的优化
+
+除了有冗余资源，还有些是文件名不一样，但是内容一样的图片，可以通过比较 md5 值来判断是不是一样的资源，然后编辑 resource.r
+
+图片压缩
+
+未压缩的图片文件占用空间较大，可以考虑压缩...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-04-06</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/android-note/categories/Android/">Android</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/android-note/2020/04/06/android_performance/android_performance_apk_size/'>
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/android-note/2020/03/08/android_performance/android_performance/">
         Android 性能优化总结
       </a>
@@ -505,8 +630,8 @@ https://github.com/XanderWang/performance
   <div class='md'>
     
       
-        性能优化总结性能的优化是一个老生常谈的点，也是一个比较重要的点。现在对工作中的优化点做一个总结。
-优化的方向，即那些点是需要优化的在平时的优化过程中我们需要从哪几个点来优化呢？其实我们平时自己一定也用过软件，在使用软件的过程中有没有什么想吐槽的呢？“太卡了吧！”、”图片怎么还没加载出来？”、”怎么刚进去就卡了。”等等，是不是有这样的想法，这些想法其实包含了我们今天要说的内容，就是从哪些方面来...
+        性能的优化是一个老生常谈的点，也是一个比较重要的点。现在对工作中的优化点做一个总结。
+优化的方向，即那些点是需要优化的在平时的优化过程中我们需要从哪几个点来优化呢？其实我们平时自己一定也用过软件，在使用软件的过程中有没有什么想吐槽的呢？“这个 app 怎么还没下载完！”、“太卡了吧！”、”图片怎么还没加载出来！”、”怎么刚进去就卡了！”、“这么点了一下就退出了！”等等，是不是有这样的想法，这...
       
     
   </div>
@@ -585,95 +710,24 @@ https://github.com/XanderWang/performance
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2020/02/16/android/android_knowledge/">
-        Android 学习大纲总结
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        
-我的 Android 学习笔记
-Java 基础
-基础类型
-循环控制
-常见集合
-数据结构
-数组
-队列
-链表
-栈
-字典
-树
-
-
-
-
-基础控件
-五种 Layout
-ImageView
-ListView
-RecyclerView
-Dialog
-
-
-自定义控件
-流程
-属性自定义
-Canvas
-事件下发
-
-
-四大组件
-Activity
-Service
-Provider
-Broadcast
-
-
-多媒体
-...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-02-16</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/Android/">Android</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/android-note/2020/02/16/android/android_knowledge/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
+    
+      <br>
+      <div class="prev-next">
+        
+        <p class="current">
+          1 / 2
+        </p>
+        
+          <a class="next" rel="next" href="/android-note/categories/Android/page/2/">
+            <section class="post next white-box shadow">
+              &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </section>
+          </a>
+        
+      </div>
     
   
 
@@ -763,7 +817,7 @@ Broadcast
           <li><a class="flat-box"
             title="/android-note/categories/Android/" href="/android-note/categories/Android/"
             id="android-notecategoriesAndroid"
-            ><div class='name'>Android</div><div class='badge'>(4)</div></a></li>
+            ><div class='name'>Android</div><div class='badge'>(6)</div></a></li>
         
           <li><a class="flat-box"
             title="/android-note/categories/%E5%85%B6%E4%BB%96/" href="/android-note/categories/%E5%85%B6%E4%BB%96/"
@@ -797,7 +851,7 @@ Broadcast
 
 
     <div class='content'>
-      <a href="/android-note/tags/Android/" style="font-size: 24px; color: #555">Android</a> <a href="/android-note/tags/GitHub-Page/" style="font-size: 14px; color: #999">GitHub Page</a> <a href="/android-note/tags/Gitee/" style="font-size: 14px; color: #999">Gitee</a> <a href="/android-note/tags/Gitee-Page/" style="font-size: 14px; color: #999">Gitee Page</a> <a href="/android-note/tags/Github-Action/" style="font-size: 14px; color: #999">Github Action</a> <a href="/android-note/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/android-note/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/android-note/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/android-note/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/android-note/tags/Java-%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">Java 线程</a> <a href="/android-note/tags/Performance/" style="font-size: 19px; color: #777">Performance</a> <a href="/android-note/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/android-note/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/android-note/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" style="font-size: 14px; color: #999">三次握手</a> <a href="/android-note/tags/%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">优化</a> <a href="/android-note/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 14px; color: #999">反射</a> <a href="/android-note/tags/%E5%91%A8%E6%8A%A5/" style="font-size: 14px; color: #999">周报</a> <a href="/android-note/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 14px; color: #999">泛型</a> <a href="/android-note/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 14px; color: #999">注解</a> <a href="/android-note/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 14px; color: #999">网络编程</a> <a href="/android-note/tags/%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">集合</a>
+      <a href="/android-note/tags/Android/" style="font-size: 24px; color: #555">Android</a> <a href="/android-note/tags/GitHub-Page/" style="font-size: 14px; color: #999">GitHub Page</a> <a href="/android-note/tags/Gitee/" style="font-size: 14px; color: #999">Gitee</a> <a href="/android-note/tags/Gitee-Page/" style="font-size: 14px; color: #999">Gitee Page</a> <a href="/android-note/tags/Github-Action/" style="font-size: 14px; color: #999">Github Action</a> <a href="/android-note/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/android-note/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/android-note/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/android-note/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/android-note/tags/Java-%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">Java 线程</a> <a href="/android-note/tags/Performance/" style="font-size: 20.67px; color: #6c6c6c">Performance</a> <a href="/android-note/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/android-note/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/android-note/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" style="font-size: 14px; color: #999">三次握手</a> <a href="/android-note/tags/%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">优化</a> <a href="/android-note/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 14px; color: #999">反射</a> <a href="/android-note/tags/%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/" style="font-size: 17.33px; color: #828282">启动速度优化</a> <a href="/android-note/tags/%E5%91%A8%E6%8A%A5/" style="font-size: 14px; color: #999">周报</a> <a href="/android-note/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 14px; color: #999">泛型</a> <a href="/android-note/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 14px; color: #999">注解</a> <a href="/android-note/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 14px; color: #999">网络编程</a> <a href="/android-note/tags/%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">集合</a>
     </div>
   </section>
 
@@ -822,7 +876,7 @@ Broadcast
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>12 篇</div>
+          <div>14 篇</div>
         </div>
       
 
@@ -844,7 +898,7 @@ Broadcast
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>19.5k 字</div>
+          <div>20.4k 字</div>
         </div>
       
 
@@ -870,8 +924,8 @@ Broadcast
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Apr 02 2021 07:42:42 GMT+0000 (Coordinated Universal Time)</div>
-            <div id="last-update-show">2021-04-02 日</div>
+            <div id="last-update" style="display: none;">Tue Apr 06 2021 10:17:44 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update-show">2021-04-06 日</div>
           
         </div>
         
@@ -921,7 +975,7 @@ Broadcast
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-04-02 日';
+            document.getElementById('last-update-show').innerHTML = '2021-04-06 日';
           }
         </script>
         
