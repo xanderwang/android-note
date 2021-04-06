@@ -487,7 +487,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h2 id="如何查看-apk-大小组成"><a href="#如何查看-apk-大小组成" class="headerlink" title="如何查看 apk 大小组成"></a>如何查看 apk 大小组成</h2><p>可以看到占大头的是 res 、so 、以及代码 </p>
+  <h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
+<li><a href="/android-note/2020/03/08/android_performance/android_performance/" title="Android 性能优化总结">Android 性能优化总结</a></li>
+<li><a href="/android-note/2021/04/06/android_performance/android_performance_apk_size/" title="APK 瘦身优化">APK 瘦身优化</a></li>
+<li><a href="/android-note/2021/04/06/android_performance/android_performance_app_start/" title="启动速度优化">启动速度优化</a></li>
+<li>稳定性优化</li>
+<li>内存的优化</li>
+<li>操作流畅度优化</li>
+<li>电量优化</li>
+</ul>
+<h2 id="如何查看-apk-大小组成"><a href="#如何查看-apk-大小组成" class="headerlink" title="如何查看 apk 大小组成"></a>如何查看 apk 大小组成</h2><p>可以看到占大头的是 res 、so 、以及代码 </p>
 <h2 id="如何减少-res-资源大小"><a href="#如何减少-res-资源大小" class="headerlink" title="如何减少 res 资源大小"></a>如何减少 res 资源大小</h2><ol>
 <li>删除冗余的资源</li>
 </ol>
@@ -622,7 +631,7 @@ set(CMAKE_CXX_FLAGS_RELEASE &quot;$&#123;CMAKE_CXX_FLAGS_RELEASE&#125; -s&quot;)
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-06T11:48:01+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-06T11:58:14+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Apr 6, 2021</p>
@@ -703,12 +712,18 @@ set(CMAKE_CXX_FLAGS_RELEASE &quot;$&#123;CMAKE_CXX_FLAGS_RELEASE&#125; -s&quot;)
       
         <a class='prev' href='/android-note/2021/04/06/android_performance/android_performance_app_start/'>
           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 性能优化 - 启动速度优化</p>
-          <p class='content'>启动的类型一般分为，冷启动和热启动
+          <p class='content'>系列文章
+Android 性能优化总结
+APK 瘦身优化
+启动速度优化
+稳定性优化
+内存的优化
+操作流畅度优化
+电量优化
 
-冷启动：启动时，后台没有任何该应用的进程，系统需要重新创建一个进程，并结合启动参数启动该应用。
+启动的类型一般分为，冷启动和热启动
 
-
-热启动：启动时，系统已经有该应用的进程(比如按 home...</p>
+冷启动：启动时，后台没有任何该应...</p>
         </a>
       
       
@@ -768,7 +783,7 @@ set(CMAKE_CXX_FLAGS_RELEASE &quot;$&#123;CMAKE_CXX_FLAGS_RELEASE&#125; -s&quot;)
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B-apk-%E5%A4%A7%E5%B0%8F%E7%BB%84%E6%88%90"><span class="toc-text">如何查看 apk 大小组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-res-%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 res 资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-so-%E5%BA%93%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 so 库资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E4%BB%A3%E7%A0%81%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少代码资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-text">参考文档</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B-apk-%E5%A4%A7%E5%B0%8F%E7%BB%84%E6%88%90"><span class="toc-text">如何查看 apk 大小组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-res-%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 res 资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-so-%E5%BA%93%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 so 库资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E4%BB%A3%E7%A0%81%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少代码资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-text">参考文档</span></a></li></ol>
     </div>
   </section>
 
