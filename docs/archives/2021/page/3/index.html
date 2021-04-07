@@ -24,7 +24,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>Tag: 网络编程 - Xander&#39;s blog</title>
+  <title>Archive: 2021 - Xander&#39;s blog</title>
   
 
   
@@ -107,7 +107,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <body>
     
 
-<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+<header id="l_header" class="l_header auto shadow blur " style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -346,7 +346,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  dock' style="display: none;">
+        <div id="half" class='cover-wrapper  dock' style="display: ;">
           
             <div id='cover-backstretch'></div>
           
@@ -416,18 +416,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
-  
-    
-      
+	
+		
   <section class="post-list">
-    
-      
-        
-          
-        
-      
     
     
       
@@ -440,26 +432,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/android-note/2021/02/26/android_note/android_note_06/">
-        Android 开发总结笔记(六) - 网络编程总结
+      <a href="/android-note/2021/02/07/android_note/android_note_02/">
+        Android 开发总结笔记(二) - Java 反射和注解总结
       </a>
     </h2>
   
   <div class='md'>
     
       
-        网络编程总结网络协议总览网络协议分层
-网络协议框架
-各层协议之间的区别合联系应用层: Http WebSocket FTP 等
-传输层: TCP UDP
-网络层: IP
-链路层: -
+        反射总结什么是反射反射是 Java 语言的一个特性，就是在程序运行状态中，对于任何一个类，都可以通过反射知道这个类所有的方法和属性。对于任何一个实例，都可以调用这个实例的任何方法和属性。这个在运行时动态获取类或者实例的属性和方法，动态调用属性和方法的特性就叫反射。
+反射有什么用从特性可以看出，在运行时可以动态调整属性的值和调用代码，可以让程序更灵活。主要用于以下几点
 
-
-TCP 和 UDP
-
-
-TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端和服务器可以互相发送和接收消息。在客户端或者服务端没有主动断开链接的情况下，链接一直存在，所以一般 TCP 也成为长链...
+动态创建实例( cla...
       
     
   </div>
@@ -467,7 +451,7 @@ TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2021-02-26</time>
+        <time>2021-02-07</time>
         
           <span class="dot"></span>
           <a class="category-link" href="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>
@@ -475,7 +459,7 @@ TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端
       </div>
       
         <div>
-          <a class='readmore' href='/android-note/2021/02/26/android_note/android_note_06/'>
+          <a class='readmore' href='/android-note/2021/02/07/android_note/android_note_02/'>
             Read More
           </a>
         </div>
@@ -492,11 +476,25 @@ TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端
   </section>
   
     
-  
-
-
+      <br>
+      <div class="prev-next">
+        
+          <a class="prev" rel="prev" href="/android-note/archives/2021/page/2/">
+            <section class="post prev white-box shadow" >
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
+            </section>
+          </a>
+        
+        <p class="current">
+          3 / 3
+        </p>
+        
+      </div>
     
   
+
+
+	
 </div>
 <aside class='l_side'>
   
@@ -766,14 +764,14 @@ TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端
   // header 这里无论是否开启pjax都需要
   var l_header=document.getElementById("l_header");
   
-  l_header.classList.add("show");
+  l_header.classList.remove("show");
   
   
     // cover
     var cover_wrapper=document.querySelector('.cover-wrapper');
     
-    cover_wrapper.id="none";
-    cover_wrapper.style.display="none";
+    cover_wrapper.id="half";
+    cover_wrapper.style.display="";
     
   
 </script>
