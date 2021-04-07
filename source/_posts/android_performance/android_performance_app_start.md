@@ -12,7 +12,7 @@ categories:
 
 ## 系列文章
 
-- {% post_link android_performance/android_performance Android 性能优化总结 %}
+- {% post_link android_performance/android_performance_all Android 性能优化总结 %}
 - {% post_link android_performance/android_performance_apk_size APK 瘦身优化 %}
 - {% post_link android_performance/android_performance_app_start 启动速度优化 %}
 - {% post_link android_performance/android_performance_app_crash 稳定性优化 %}
