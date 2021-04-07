@@ -488,7 +488,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   
   <h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
-<li><a href="#">Post not found: android_performance/android_performance Android 性能优化总结</a></li>
+<li><a href="/android-note/2020/03/08/android_performance/android_performance_all/" title="Android 性能优化总结">Android 性能优化总结</a></li>
 <li><a href="/android-note/2021/04/06/android_performance/android_performance_apk_size/" title="APK 瘦身优化">APK 瘦身优化</a></li>
 <li><a href="/android-note/2021/04/06/android_performance/android_performance_app_start/" title="启动速度优化">启动速度优化</a></li>
 <li><a href="/android-note/2021/04/07/android_performance/android_performance_app_crash/" title="稳定性优化">稳定性优化</a></li>
@@ -503,9 +503,34 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <blockquote>
 <p>ANR：应用再运行时，由于无法再规定的时间段内响应完，系统做出的一个操作。</p>
 </blockquote>
-<h2 id="如何治理-Crash"><a href="#如何治理-Crash" class="headerlink" title="如何治理 Crash"></a>如何治理 <code>Crash</code></h2><p>Crash 是运行时的错误，所以如果需要解决的话，就需要捕获这个 Crash ，获取方法调用堆栈，从而解决问题。</p>
-<p>Android app 可以分为 2 层，Java 层和 C/C++ 层。所以如何捕获需要分开说</p>
-<h3 id="Java-层获取-Crash-调用堆栈"><a href="#Java-层获取-Crash-调用堆栈" class="headerlink" title="Java 层获取 Crash 调用堆栈"></a>Java 层获取 Crash 调用堆栈</h3><p>这个需要了解虚拟机时如何</p>
+<h2 id="如何治理-Crash"><a href="#如何治理-Crash" class="headerlink" title="如何治理 Crash"></a>如何治理 <code>Crash</code></h2><p>Crash 是运行时的未处理发生的异常，导致 app 无法正常运行。如果需要解决的话，就需要捕获这个未处理的异常，获取方法调用堆栈，从而解决问题。</p>
+<p>Android app 可以分为 2 层，Java 层和 C/C++ 层。所以如何捕获需要分开说。</p>
+<h3 id="Java-层获取-Crash-调用堆栈"><a href="#Java-层获取-Crash-调用堆栈" class="headerlink" title="Java 层获取 Crash 调用堆栈"></a>Java 层获取 Crash 调用堆栈</h3><p>这个需要了解 <code>Java</code> 虚拟机是如何把一个未捕获的异常报上来的。</p>
+<p>未捕获的异常，会沿着方法的调用链依次上抛，直到 <code>ThreadGroup</code> 的 <code>uncaughtException</code> 方法</p>
+<pre><code class="java">    public void uncaughtException(Thread t, Throwable e) &#123;
+        if (parent != null) &#123;
+            // 递归调用，可以忽略
+            parent.uncaughtException(t, e); 
+        &#125; else &#123;
+            // 交给了 Thread.getDefaultUncaughtExceptionHandler() 来处理未捕获的异常
+            Thread.UncaughtExceptionHandler ueh =
+                Thread.getDefaultUncaughtExceptionHandler();
+            if (ueh != null) &#123;
+                ueh.uncaughtException(t, e);
+            &#125; else if (!(e instanceof ThreadDeath)) &#123;
+                System.err.print(&quot;Exception in thread \&quot;&quot;
+                                 + t.getName() + &quot;\&quot; &quot;);
+                e.printStackTrace(System.err);
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+<p>查阅代码发现，发现 <code>ThreadGroup</code> 最终会给 <code>Thread</code> 的 <code>defaultUncaughtExceptionHandler</code> 处理。</p>
+<pre><code class="java">private static volatile UncaughtExceptionHandler defaultUncaughtExceptionHandler;
+</code></pre>
+<p><code>Thread</code> 的 <code>defaultUncaughtExceptionHandler</code> 是 <code>Thread</code> 类的一个静态变量。</p>
+<p>看到这里，如果捕获 <code>Java</code> 层未处理的异常就很清晰了，给 <code>Thread</code> 设置一个<code>新的 defaultUncaughtExceptionHandler</code>，在这个新的<code> defaultUncaughtExceptionHandler</code> 里面收集需要的信息就可以了。</p>
+<p>需要注意的一点是， <code>旧的 defaultUncaughtExceptionHandler</code> 需要保存下来，然后<code>新的 defaultUncaughtExceptionHandler</code> 收集信息后，需要再转给<code>旧的 defaultUncaughtExceptionHandler</code> 继续处理。</p>
 <h2 id="如何治理-ANR"><a href="#如何治理-ANR" class="headerlink" title="如何治理 ANR"></a>如何治理 <code>ANR</code></h2>
   
   
@@ -540,7 +565,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-07T12:04:35+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-07T15:30:35+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Apr 7, 2021</p>
@@ -623,10 +648,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <a class='next' href='/android-note/2021/04/06/android_performance/android_performance_app_start/'>
           <p class='title'>Android 性能优化 - 启动速度优化<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
           <p class='content'>系列文章
-Post not found: android_performance/android_performance Android 性能优化总结
+Android 性能优化总结
 APK 瘦身优化
 启动速度优化
-稳定性优化...</p>
+稳定性优化
+内存的优化
+操作流畅度优化
+电量优化
+
+启动的类型一般分为，冷启动和热启动
+
+冷启动：启动时，后台没有任何该应...</p>
         </a>
       
     </div>
