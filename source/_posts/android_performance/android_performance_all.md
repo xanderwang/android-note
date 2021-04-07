@@ -5,7 +5,6 @@ date: 2020-03-08 20:01:01
 tags: 
 - Android
 - Performance
-- 优化
 categories: 
 - Android
 ---
@@ -20,7 +19,7 @@ categories:
 
 - {% post_link android_performance/android_performance_apk_size APK 瘦身优化 %}
 - {% post_link android_performance/android_performance_app_start 启动速度优化 %}
-- 稳定性优化
+- {% post_link android_performance/android_performance_app_crash 稳定性优化 %}
 - 内存的优化
 - 操作流畅度优化
 - 电量优化

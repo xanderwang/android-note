@@ -5,7 +5,7 @@ date: 2021-04-06 17:15:00
 tags: 
 - Android
 - Performance
-- 启动速度优化
+- 启动速度
 categories: 
 - Android
 ---
@@ -15,7 +15,7 @@ categories:
 - {% post_link android_performance/android_performance Android 性能优化总结 %}
 - {% post_link android_performance/android_performance_apk_size APK 瘦身优化 %}
 - {% post_link android_performance/android_performance_app_start 启动速度优化 %}
-- 稳定性优化
+- {% post_link android_performance/android_performance_app_crash 稳定性优化 %}
 - 内存的优化
 - 操作流畅度优化
 - 电量优化
