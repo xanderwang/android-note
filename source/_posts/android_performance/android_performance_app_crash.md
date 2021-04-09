@@ -22,7 +22,7 @@ categories:
 
 
 
-## app 稳定性的维度
+## APP 稳定性的维度
 
 app 稳定一般指的是 app 能正常运行， app 不能正常运行的情况分为两大类，分别是 `Crash` 和 `ANR`
 
@@ -36,7 +36,7 @@ Crash 是运行时的未处理发生的异常，导致 app 无法正常运行。
 
 Android app 可以分为 2 层，Java 层和 C/C++ 层。所以如何捕获需要分开说。
 
-### Java 层获取 Crash 调用堆栈
+### Java 层获取未处理的异常的调用堆栈
 
 这个需要了解 `Java` 虚拟机是如何把一个未捕获的异常报上来的。
 
@@ -74,6 +74,23 @@ private static volatile UncaughtExceptionHandler defaultUncaughtExceptionHandler
 需要注意的一点是， `旧的 defaultUncaughtExceptionHandler` 需要保存下来，然后`新的 defaultUncaughtExceptionHandler` 收集信息后，需要再转给`旧的 defaultUncaughtExceptionHandler` 继续处理。
 
 
+### Native 层获取未处理的异常的相关信息
+
+Native 层发生未处理的异常的话，后续如何处理，需要掌握 linux 的一些知识，由于本人不是特别了解 linux ，这里就直接参考别人的文章了。如果有错误，还请指正。
+
+本人通过查阅资料发现，Native 层如果发生未处理的异常(注:如果 Native 层捕获了异常，是可以通过 JNI 抛到 Java 层去处理的) ，系统会发出信号给 Native 层，在 Native 层，注册对应信号的处理器就可以了。
+
+待续...
+
 ## 如何治理 `ANR`
 
+ANR 是 的简称，说的是，本来自己也写了一个小总结，但是最近发现头条给 ANR 写了一个系列的文章，觉得很好，这里忍不住引用一下。
+
+- [今日头条 ANR 优化实践系列 - 设计原理及影响因素](https://mp.weixin.qq.com/s/ApNSEWxQdM19QoCNijagtg)
+- [今日头条 ANR 优化实践系列 - 监控工具与分析思路](https://mp.weixin.qq.com/s/_Z6GdGRVWq-_JXf5Fs6fsw)
+- [今日头条 ANR 优化实践系列分享 - 实例剖析集锦](https://mp.weixin.qq.com/s/4-_SnG4dfjMnkrb3rhgUag)
+
+其实具体的为什么会产生，以及如何去捕获 ANR 的发生，以及如何分析解决 ANR 问题，上面的文章都有了详细的解释。很想说一句看上面的总结文章就好了，但是这样就失去了写文章的初心，所以我就总结下我看过上面的文章后的收获吧。
+
+待续...
 
