@@ -446,6 +446,119 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/android-note/2021/04/10/android_performance/android_performance_app_caton/">
+        Android 性能优化 - 操作流畅度优化
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        系列文章
+Android 性能优化总结
+APK 瘦身优化
+启动速度优化
+稳定性优化
+内存的优化
+操作流畅度优化
+
+如何检测卡顿待完成…
+为什么会卡顿待完成…
+如何优化卡顿待完成…
+
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-04-10</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/android-note/categories/Android/">Android</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/android-note/2021/04/10/android_performance/android_performance_app_caton/'>
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/android-note/2021/04/10/android_performance/android_performance_app_memory/">
+        Android 性能优化 - 内存优化
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        系列文章
+Android 性能优化总结
+Android 性能优化总结
+APK 瘦身优化
+启动速度优化
+稳定性优化
+内存的优化
+操作流畅度优化
+
+硬件的内存总是有限的，所有每个应用分到的内存也是有限的，所有内存的优化很有必要，否则应用就没有足够的内存使用了，这个时候就会 Crash 。
+内存都消耗在哪里了优化内存的话，需要了解内存都消耗在哪里了，针对大量消耗内存的场景做优化，对症下药，才可以有...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-04-10</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/android-note/categories/Android/">Android</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/android-note/2021/04/10/android_performance/android_performance_app_memory/'>
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/android-note/2021/04/07/android_performance/android_performance_app_crash/">
         Android 性能优化 - 稳定性优化
       </a>
@@ -461,7 +574,6 @@ APK 瘦身优化
 稳定性优化
 内存的优化
 操作流畅度优化
-电量优化
 
 APP 稳定性的维度app 稳定一般指的是 app 能正常运行， app 不能正常运行的情况分为两大类，分别是 Crash 和 ANR
 
@@ -470,7 +582,7 @@ Crash：运行过程中发生的错误，是无法避免的。
 
 ANR：应用再运行时，由于无法再规定的时间段内响应完，系统做出的一个操作。
 
-...
+如何治理 ...
       
     
   </div>
@@ -518,12 +630,12 @@ ANR：应用再运行时，由于无法再规定的时间段内响应完，系�
       
         系列文章
 Android 性能优化总结
+Android 性能优化总结
 APK 瘦身优化
 启动速度优化
 稳定性优化
 内存的优化
 操作流畅度优化
-电量优化
 
 启动的类型一般分为，冷启动和热启动
 
@@ -533,9 +645,7 @@ APK 瘦身优化
 热启动：启动时，系统已经有该应用的进程(比如按 home 键临时退出该应用)下启动该应用。
 
 如何获取启动时间
-adb 命令
-
-ad...
+...
       
     
   </div>
@@ -573,7 +683,7 @@ ad...
   
     
     <h2 class="article-title" >
-      <a href="/android-note/2021/04/06/android_performance/android_performance_apk_size/">
+      <a href="/android-note/2021/04/06/android_performance/android_performance_app_size/">
         Android 性能优化 - APK 瘦身
       </a>
     </h2>
@@ -583,12 +693,12 @@ ad...
       
         系列文章
 Android 性能优化总结
+Android 性能优化总结
 APK 瘦身优化
 启动速度优化
 稳定性优化
 内存的优化
 操作流畅度优化
-电量优化
 
 如何查看 apk 大小组成可以看到占大头的是 res 、so 、以及代码 
 如何减少 res 资源大小
@@ -598,7 +708,7 @@ APK 瘦身优化
 
 重复资源的优化
 
-除了有冗余资源，还有些是文件名不一样，但是内容一样的图片，可以通过比较...
+除了有冗余资源，还有些是文件名不一样，但是内容一样...
       
     
   </div>
@@ -614,125 +724,7 @@ APK 瘦身优化
       </div>
       
         <div>
-          <a class='readmore' href='/android-note/2021/04/06/android_performance/android_performance_apk_size/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2021/02/28/linux/shell_a_to_n/">
-        shell 脚本 -a 到 -n 的意思
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        
-[-a file]  
-
-如果 file 存在则为真
-
-[-b file]  
-
-如果 file 存在且是一个块特殊文件则为真
-
-[-c file]  
-
-如果 file 存在且是一个字特殊文件则为真
-
-[-d file]  
-
-如果file文件存在且是一个目录则为真-d 前的 ! 是逻辑非例如：if [ ! -d $lcd_path/$par_date ] 表示后面的那个目录不存在，则执...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-02-28</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/%E5%85%B6%E4%BB%96/">其他</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/android-note/2021/02/28/linux/shell_a_to_n/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/android-note/2021/02/26/android_note/android_note_06/">
-        Android 开发总结笔记(六) - 网络编程总结
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        网络编程总结网络协议总览网络协议分层
-网络协议框架
-各层协议之间的区别合联系应用层: Http WebSocket FTP 等
-传输层: TCP UDP
-网络层: IP
-链路层: -
-
-
-TCP 和 UDP
-
-
-TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端和服务器可以互相发送和接收消息。在客户端或者服务端没有主动断开链接的情况下，链接一直存在，所以一般 TCP 也成为长链...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-02-26</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/android-note/categories/%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/">总结笔记</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/android-note/2021/02/26/android_note/android_note_06/'>
+          <a class='readmore' href='/android-note/2021/04/06/android_performance/android_performance_app_size/'>
             Read More
           </a>
         </div>
@@ -851,7 +843,7 @@ TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端
           <li><a class="flat-box"
             title="/android-note/categories/Android/" href="/android-note/categories/Android/"
             id="android-notecategoriesAndroid"
-            ><div class='name'>Android</div><div class='badge'>(7)</div></a></li>
+            ><div class='name'>Android</div><div class='badge'>(9)</div></a></li>
         
           <li><a class="flat-box"
             title="/android-note/categories/%E5%85%B6%E4%BB%96/" href="/android-note/categories/%E5%85%B6%E4%BB%96/"
@@ -885,7 +877,7 @@ TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端
 
 
     <div class='content'>
-      <a href="/android-note/tags/APK-%E7%98%A6%E8%BA%AB/" style="font-size: 14px; color: #999">APK 瘦身</a> <a href="/android-note/tags/Android/" style="font-size: 24px; color: #555">Android</a> <a href="/android-note/tags/GitHub-Page/" style="font-size: 14px; color: #999">GitHub Page</a> <a href="/android-note/tags/Gitee/" style="font-size: 14px; color: #999">Gitee</a> <a href="/android-note/tags/Gitee-Page/" style="font-size: 14px; color: #999">Gitee Page</a> <a href="/android-note/tags/Github-Action/" style="font-size: 14px; color: #999">Github Action</a> <a href="/android-note/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/android-note/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/android-note/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/android-note/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/android-note/tags/Java-%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">Java 线程</a> <a href="/android-note/tags/Performance/" style="font-size: 19px; color: #777">Performance</a> <a href="/android-note/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/android-note/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/android-note/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" style="font-size: 14px; color: #999">三次握手</a> <a href="/android-note/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 14px; color: #999">反射</a> <a href="/android-note/tags/%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6/" style="font-size: 14px; color: #999">启动速度</a> <a href="/android-note/tags/%E5%91%A8%E6%8A%A5/" style="font-size: 14px; color: #999">周报</a> <a href="/android-note/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 14px; color: #999">泛型</a> <a href="/android-note/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 14px; color: #999">注解</a> <a href="/android-note/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" style="font-size: 14px; color: #999">稳定性</a> <a href="/android-note/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 14px; color: #999">网络编程</a> <a href="/android-note/tags/%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">集合</a>
+      <a href="/android-note/tags/APK-%E7%98%A6%E8%BA%AB/" style="font-size: 14px; color: #999">APK 瘦身</a> <a href="/android-note/tags/Android/" style="font-size: 24px; color: #555">Android</a> <a href="/android-note/tags/GitHub-Page/" style="font-size: 14px; color: #999">GitHub Page</a> <a href="/android-note/tags/Gitee/" style="font-size: 14px; color: #999">Gitee</a> <a href="/android-note/tags/Gitee-Page/" style="font-size: 14px; color: #999">Gitee Page</a> <a href="/android-note/tags/Github-Action/" style="font-size: 14px; color: #999">Github Action</a> <a href="/android-note/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/android-note/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/android-note/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/android-note/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/android-note/tags/Java-%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">Java 线程</a> <a href="/android-note/tags/Performance/" style="font-size: 19px; color: #777">Performance</a> <a href="/android-note/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/android-note/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/android-note/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" style="font-size: 14px; color: #999">三次握手</a> <a href="/android-note/tags/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">内存优化</a> <a href="/android-note/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 14px; color: #999">反射</a> <a href="/android-note/tags/%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">启动速度优化</a> <a href="/android-note/tags/%E5%91%A8%E6%8A%A5/" style="font-size: 14px; color: #999">周报</a> <a href="/android-note/tags/%E6%93%8D%E4%BD%9C%E6%B5%81%E7%95%85%E5%BA%A6%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">操作流畅度优化</a> <a href="/android-note/tags/%E6%B3%9B%E5%9E%8B/" style="font-size: 14px; color: #999">泛型</a> <a href="/android-note/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 14px; color: #999">注解</a> <a href="/android-note/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%BC%98%E5%8C%96/" style="font-size: 14px; color: #999">稳定性优化</a> <a href="/android-note/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 14px; color: #999">网络编程</a> <a href="/android-note/tags/%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">集合</a>
     </div>
   </section>
 
@@ -910,7 +902,7 @@ TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>15 篇</div>
+          <div>17 篇</div>
         </div>
       
 
@@ -932,7 +924,7 @@ TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>22.7k 字</div>
+          <div>23k 字</div>
         </div>
       
 
@@ -958,7 +950,7 @@ TCP 是面向连接的一种传输控制协议。TCP 链接连通后，客户端
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Sat Apr 10 2021 12:20:24 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update" style="display: none;">Sat Apr 10 2021 14:15:12 GMT+0000 (Coordinated Universal Time)</div>
             <div id="last-update-show">2021-04-10 日</div>
           
         </div>

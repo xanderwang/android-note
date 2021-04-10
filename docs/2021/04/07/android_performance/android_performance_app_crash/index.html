@@ -24,7 +24,7 @@
   
   <title>Android 性能优化 - 稳定性优化 - Xander&#39;s blog</title>
   
-    <meta name="keywords" content="Android,Performance,稳定性">
+    <meta name="keywords" content="Android,Performance,稳定性优化">
   
 
   
@@ -489,12 +489,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   <h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
 <li><a href="/android-note/2020/03/08/android_performance/android_performance_all/" title="Android 性能优化总结">Android 性能优化总结</a></li>
-<li><a href="/android-note/2021/04/06/android_performance/android_performance_apk_size/" title="APK 瘦身优化">APK 瘦身优化</a></li>
+<li><a href="/android-note/2021/04/06/android_performance/android_performance_app_size/" title="APK 瘦身优化">APK 瘦身优化</a></li>
 <li><a href="/android-note/2021/04/06/android_performance/android_performance_app_start/" title="启动速度优化">启动速度优化</a></li>
 <li><a href="/android-note/2021/04/07/android_performance/android_performance_app_crash/" title="稳定性优化">稳定性优化</a></li>
-<li>内存的优化</li>
-<li>操作流畅度优化</li>
-<li>电量优化</li>
+<li><a href="/android-note/2021/04/10/android_performance/android_performance_app_memory/" title="内存的优化">内存的优化</a></li>
+<li><a href="/android-note/2021/04/10/android_performance/android_performance_app_caton/" title="操作流畅度优化">操作流畅度优化</a></li>
 </ul>
 <h2 id="APP-稳定性的维度"><a href="#APP-稳定性的维度" class="headerlink" title="APP 稳定性的维度"></a>APP 稳定性的维度</h2><p>app 稳定一般指的是 app 能正常运行， app 不能正常运行的情况分为两大类，分别是 <code>Crash</code> 和 <code>ANR</code></p>
 <blockquote>
@@ -591,7 +590,7 @@ int sigaction(int signum,const struct sigaction *act,struct sigaction *oldact));
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-10T12:19:45+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-10T14:14:32+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Apr 10, 2021</p>
@@ -603,7 +602,7 @@ int sigaction(int signum,const struct sigaction *act,struct sigaction *oldact));
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Performance/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Performance</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>稳定性</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Android/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Android</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/Performance/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Performance</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/android-note/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%BC%98%E5%8C%96/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>稳定性优化</p></a></div>
 
 
         
@@ -670,21 +669,35 @@ int sigaction(int signum,const struct sigaction *act,struct sigaction *oldact));
   
     <div class="prev-next">
       
-      
-        <a class='next' href='/android-note/2021/04/06/android_performance/android_performance_app_start/'>
-          <p class='title'>Android 性能优化 - 启动速度优化<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+        <a class='prev' href='/android-note/2021/04/10/android_performance/android_performance_app_memory/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 性能优化 - 内存优化</p>
           <p class='content'>系列文章
+Android 性能优化总结
 Android 性能优化总结
 APK 瘦身优化
 启动速度优化
 稳定性优化
 内存的优化
 操作流畅度优化
-电量优化
+
+硬件的内存总是有限的，所有每个应用分到的内存也是有...</p>
+        </a>
+      
+      
+        <a class='next' href='/android-note/2021/04/06/android_performance/android_performance_app_start/'>
+          <p class='title'>Android 性能优化 - 启动速度优化<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>系列文章
+Android 性能优化总结
+Android 性能优化总结
+APK 瘦身优化
+启动速度优化
+稳定性优化
+内存的优化
+操作流畅度优化
 
 启动的类型一般分为，冷启动和热启动
 
-冷启动：启动时，后台没有任何该应...</p>
+冷启动：启动...</p>
         </a>
       
     </div>
