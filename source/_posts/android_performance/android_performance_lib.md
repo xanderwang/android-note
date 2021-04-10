@@ -1,6 +1,6 @@
 ---
-seo_title: 不会性能优化？你只差一个开源库！
-title: 不会性能优化？你只差一个开源库！
+seo_title: 不会 Android 性能优化？你只差一个开源库！
+title: 不会 Android 性能优化？你只差一个开源库！
 date: 2021-02-24 22:41:00
 tags:
 - Android
@@ -11,19 +11,16 @@ categories:
 
 # 简介
 
-由于本人工作需要，需要解决一些性能问题，虽然有 `Profiler` 、`Systrace
-` 等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，最终完成了这个开源的性能实时检测库。初步能达到预期效果，这里做个记录，算是小结了。
+由于本人工作需要，需要解决一些性能问题，虽然有 `Profiler` 、`Systrace` 等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，最终完成了这个开源的性能实时检测库。初步能达到预期效果，这里做个记录，算是小结了。
 
-开源库的[地址](https://github.com/XanderWang/performance)是:
+[开源库的地址是: https://github.com/XanderWang/performance](https://github.com/XanderWang/performance)
 
-> https://github.com/XanderWang/performance
-
-幸苦各位能给个小小的 star 鼓励下。
+如果对你有帮助，幸苦小可爱能给个小小的 star 鼓励下。
 
 这个性能检测库，可以检测以下问题：
 
 - [x] UI 线程 block 检测。
-- [x] App 的 FPS 检测。
+- [x] APP 的 FPS 检测。
 - [x] 线程的创建和启动监控以及线程池的创建监控。
 - [x] IPC (进程间通讯)监控。
 

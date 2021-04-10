@@ -5,7 +5,7 @@ date: 2021-04-07 17:15:00
 tags: 
 - Android
 - Performance
-- 稳定性
+- 稳定性优化
 categories: 
 - Android
 ---
@@ -13,12 +13,11 @@ categories:
 ## 系列文章
 
 - {% post_link android_performance/android_performance_all Android 性能优化总结 %}
-- {% post_link android_performance/android_performance_apk_size APK 瘦身优化 %}
+- {% post_link android_performance/android_performance_app_size APK 瘦身优化 %}
 - {% post_link android_performance/android_performance_app_start 启动速度优化 %}
 - {% post_link android_performance/android_performance_app_crash 稳定性优化 %}
-- 内存的优化
-- 操作流畅度优化
-- 电量优化
+- {% post_link android_performance/android_performance_app_memory 内存的优化 %}
+- {% post_link android_performance/android_performance_app_caton 操作流畅度优化 %}
 
 
 
