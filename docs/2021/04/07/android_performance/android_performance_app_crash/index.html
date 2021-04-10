@@ -503,8 +503,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <blockquote>
 <p>ANR：应用再运行时，由于无法再规定的时间段内响应完，系统做出的一个操作。</p>
 </blockquote>
-<h2 id="如何治理-Crash"><a href="#如何治理-Crash" class="headerlink" title="如何治理 Crash"></a>如何治理 <code>Crash</code></h2><p>Crash 是运行时的未处理发生的异常，导致 app 无法正常运行。如果需要解决的话，就需要捕获这个未处理的异常，获取方法调用堆栈，从而解决问题。</p>
-<p>Android app 可以分为 2 层，Java 层和 C/C++ 层。所以如何捕获需要分开说。</p>
+<h2 id="如何治理-Crash"><a href="#如何治理-Crash" class="headerlink" title="如何治理 Crash"></a>如何治理 <code>Crash</code></h2><p>应用发生 Crash 是由于应用在运行时，应用产生了一个未处理的异常(就是没有被 try catch 捕获的异常)。这会导致 app 无法正常运行。</p>
+<p>如果需要解决的话，就需要知道这个未处理的异常是在哪里产生的，一般是通过分析未处理的异常的方法调用堆栈来解决问题。</p>
+<p>Android APP 可以分为 2 层，Java 层和 Native 层。所以如何捕获需要分开说。</p>
 <h3 id="Java-层获取未处理的异常的调用堆栈"><a href="#Java-层获取未处理的异常的调用堆栈" class="headerlink" title="Java 层获取未处理的异常的调用堆栈"></a>Java 层获取未处理的异常的调用堆栈</h3><p>这个需要了解 <code>Java</code> 虚拟机是如何把一个未捕获的异常报上来的。</p>
 <p>未捕获的异常，会沿着方法的调用链依次上抛，直到 <code>ThreadGroup</code> 的 <code>uncaughtException</code> 方法</p>
 <pre><code class="java">    public void uncaughtException(Thread t, Throwable e) &#123;
@@ -528,20 +529,34 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>查阅代码发现，发现 <code>ThreadGroup</code> 最终会给 <code>Thread</code> 的 <code>defaultUncaughtExceptionHandler</code> 处理。</p>
 <pre><code class="java">private static volatile UncaughtExceptionHandler defaultUncaughtExceptionHandler;
 </code></pre>
-<p><code>Thread</code> 的 <code>defaultUncaughtExceptionHandler</code> 是 <code>Thread</code> 类的一个静态变量。</p>
-<p>看到这里，如果捕获 <code>Java</code> 层未处理的异常就很清晰了，给 <code>Thread</code> 设置一个<code>新的 defaultUncaughtExceptionHandler</code>，在这个新的<code> defaultUncaughtExceptionHandler</code> 里面收集需要的信息就可以了。</p>
-<p>需要注意的一点是， <code>旧的 defaultUncaughtExceptionHandler</code> 需要保存下来，然后<code>新的 defaultUncaughtExceptionHandler</code> 收集信息后，需要再转给<code>旧的 defaultUncaughtExceptionHandler</code> 继续处理。</p>
-<h3 id="Native-层获取未处理的异常的相关信息"><a href="#Native-层获取未处理的异常的相关信息" class="headerlink" title="Native 层获取未处理的异常的相关信息"></a>Native 层获取未处理的异常的相关信息</h3><p>Native 层发生未处理的异常的话，后续如何处理，需要掌握 linux 的一些知识，由于本人不是特别了解 linux ，这里就直接参考别人的文章了。如果有错误，还请指正。</p>
-<p>本人通过查阅资料发现，Native 层如果发生未处理的异常(注:如果 Native 层捕获了异常，是可以通过 JNI 抛到 Java 层去处理的) ，系统会发出信号给 Native 层，在 Native 层，注册对应信号的处理器就可以了。</p>
-<p>待续…</p>
-<h2 id="如何治理-ANR"><a href="#如何治理-ANR" class="headerlink" title="如何治理 ANR"></a>如何治理 <code>ANR</code></h2><p>ANR 是 的简称，说的是，本来自己也写了一个小总结，但是最近发现头条给 ANR 写了一个系列的文章，觉得很好，这里忍不住引用一下。</p>
+<p> 上面的代码显示：<code>Thread</code> 的 <code>defaultUncaughtExceptionHandler</code> 是 <code>Thread</code> 类的一个静态变量。</p>
+<p>看到这里，如何捕获 <code>Java</code> 层未处理的异常就很清晰了，给 <code>Thread</code> 设置一个<code>新的 defaultUncaughtExceptionHandler</code>，在这个新的<code> defaultUncaughtExceptionHandler</code> 里面收集需要的信息就可以了。</p>
+<p>需要注意的一点是 <code>旧的 defaultUncaughtExceptionHandler</code> 需要保存下来，然后<code>新的 defaultUncaughtExceptionHandler</code> 收集信息后，需要再转给<code>旧的 defaultUncaughtExceptionHandler</code> 继续处理。</p>
+<h3 id="Native-层获取未处理的异常的相关信息"><a href="#Native-层获取未处理的异常的相关信息" class="headerlink" title="Native 层获取未处理的异常的相关信息"></a>Native 层获取未处理的异常的相关信息</h3><p>Java 层如何收集未处理的异常的信息说过了，我们来看看 Native 层发生未处理的异常的话，是如何处理的。 Native 层的处理，需要掌握 linux 的一些知识，由于本人不是特别了解 linux ，这里就直接参考别人的文章了。如果有错误，还请指正。</p>
+<p>本人通过查阅资料发现，Native 层如果发生未处理的异常(注:如果 Native 层捕获了异常，是可以通过 JNI 抛到 Java 层去处理的) ，系统会发出信号给 Native 层，在 Native 层如果要收集未处理的异常信息，就需要注册对应信号的处理函数。当发生异常的时候，Native 层会收到信息，然后通过处理器来收集信息。</p>
+<p>注册信号处理函数如下：</p>
+<pre><code class="c">#include &lt;signal.h&gt; 
+int sigaction(int signum,const struct sigaction *act,struct sigaction *oldact));
+</code></pre>
+<ul>
+<li>signum：代表信号编码，可以是除SIGKILL及SIGSTOP外的任何一个特定有效的信号，如果为这两个信号定义自己的处理函数，将导致信号安装错误。</li>
+<li>act：指向结构体sigaction的一个实例的指针，该实例指定了对特定信号的处理，如果设置为空，进程会执行默认处理。</li>
+<li>oldact：和参数act类似，只不过保存的是原来对相应信号的处理，也可设置为NULL。</li>
+</ul>
+<p>有了信号处理函数，后面还要做的事情就是收集信息了，由于本人不是很熟悉 Native 的开发，这里就不展开说了了，大家可以参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/mingfeng002/p/9118253.html">Android 平台 Native 代码的崩溃捕获机制及实现</a>。</p>
+<h2 id="如何治理-ANR"><a href="#如何治理-ANR" class="headerlink" title="如何治理 ANR"></a>如何治理 <code>ANR</code></h2><p><code>ANR</code> 是 <code>Applicatipon No Response</code> 的简称。如果应用卡死或者响应过慢，系统就会杀死应用。为什么要杀死应用？其实也很好理解，如果不杀死应用，大家会以为系统坏了。</p>
+<p>那我们如何监控 <code>ANR</code> 呢？以及我们如何分析 ANR 的问题呢？常见的导致 ANR 的原因有哪些呢？</p>
+<p>首先，<code>ANR</code> 的原理是 <code>AMS</code> 在 <code>UI 操作</code>开始的时候，会根据 <code>UI 操作</code>的类型开启一个延时任务，如果这个任务被触发了，就表示应用卡死或者响应过慢。这个任务会在 <code>UI 操作</code>结束的时候被移除。</p>
+<p>然后，如何分析 <code>ANR</code> 问题呢？</p>
+<p>一般 <code>ANR</code> 发生的时候， <code>logcat</code> 里面会打印 <code>ANR</code> 相关的信息，过滤关键字 <code>ANR</code> 就可以看到，这里不做详细分析，可以参考后面的文章。</p>
+<p>然后一般会在 <code>/data/anr</code> 目录下面生成 <code>traces.txt</code> 文件，里面一般包含了 <code>ANR</code> 发生的时候，系统和所有应用的线程等信息(需要注意的是，不同的 rom 可能都不一样)，通过 <code>logcat</code> 打印的信息和 <code>traces.txt</code> 里面的信息，大部分的 <code>ANR</code> 可以分析出原因，但是呢，也有相当一部分的 ANR 问题无法分析，因为 <code>logcat</code> 和 <code>traces.txt</code> 提供的信息有限，有时候甚至没有特别有用的信息，特别是 <code>Android</code> 的权限收紧， <code>traces.txt</code> 文件在<code>高 Android 版本</code>无法读取，给 <code>ANR</code> 问题的分析增加了不少的困难。不过好在最近发现头条给 <code>ANR</code> 写了一个系列的文章，里面对 ANR 问题的治理方法，个人觉得很好，这里引用一下。</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ApNSEWxQdM19QoCNijagtg">今日头条 ANR 优化实践系列 - 设计原理及影响因素</a></li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/_Z6GdGRVWq-_JXf5Fs6fsw">今日头条 ANR 优化实践系列 - 监控工具与分析思路</a></li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/4-_SnG4dfjMnkrb3rhgUag">今日头条 ANR 优化实践系列分享 - 实例剖析集锦</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/OBYWrUBkWwV8o6ChSVaCvw">今日头条 ANR 优化实践系列 - Barrier 导致主线程假死</a></li>
 </ul>
-<p>其实具体的为什么会产生，以及如何去捕获 ANR 的发生，以及如何分析解决 ANR 问题，上面的文章都有了详细的解释。很想说一句看上面的总结文章就好了，但是这样就失去了写文章的初心，所以我就总结下我看过上面的文章后的收获吧。</p>
-<p>待续…</p>
+<p>本人之前写过一个小的<a target="_blank" rel="noopener" href="https://github.com/XanderWang/performance">性能监测的工具</a>，其中有监控 <code>UI</code> 线程 <code>Block</code> 的功能，考虑后续加入头条的 <code>ANR</code> 监测机制，等后续完成了，在做一个详细的总结吧。这次的总结就写到这里。</p>
 
   
   
@@ -576,10 +591,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-09T11:59:37+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-10T12:19:45+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Apr 9, 2021</p>
+    <p>更新于：Apr 10, 2021</p>
   </a>
 </div>
 
