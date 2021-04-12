@@ -1,0 +1,111 @@
+# workflow 名字 具体的配置见  https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
+name: Xander's Blog Task
+# 在push *.md文件后执行任务
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
+  push: ## push 指定类型文件的时候自动编译
+    tags:  
+      - v*
+      - V*
+
+jobs:
+  build:
+    # runs-on: macOS-latest
+    runs-on: ubuntu-latest
+    steps:
+    # 设置 python 环境
+    # - name: 'Set python'
+    #   uses: actions/setup-python@v1
+    #   with:
+    #     python-version: '3.x'
+    # 引用外部 Action, 拉取代码仓库到虚拟机工作目录
+    - name: chekout code
+      uses: actions/checkout@v1
+    # 运行编译脚本
+    - name: build github page
+      run: |
+        rm ./_config.yml
+        cp ./blog_config/_config_github.yml ./_config.yml
+        sh ./blog_config/build.sh  
+    # 把编译好的二进制程序 push 到原始的 GitHub 仓库
+    - name: commit and push to github
+      env:
+        GH_NAME: ${{ secrets.GH_NAME }}
+        GH_EMAIL: ${{ secrets.GH_EMAIL }}
+        # https://username:password@github.com/username/repo_name.git #这个格式可以用账户和密码登录来控制上传代码
+        GH_PATH: ${{ secrets.GH_PATH }}
+      run: |
+        echo "--------------------------------------------"
+        git config --local user.name "${GH_NAME}"
+        git config --local user.email "${GH_EMAIL}"
+        git remote set-url origin $GH_PATH
+        echo "---------- git config --list"
+        git config --list
+        echo "---------- git status"
+        git status
+        if [[ -n $(git status -s) ]];then
+          echo "---------- git add ./"
+          git add ./
+          echo "---------- git commit"
+          git commit -m "auto build task"
+          echo "---------- git pull"
+          git pull origin master:master --rebase
+          echo "---------- git status"
+          git status
+          echo "---------- git push"
+          git push origin HEAD:master
+        else
+          echo "---------- github no change"
+        fi
+    # - name: push changes to github
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}        
+    - name: build gitee page 
+      run: |
+        git reset --hard HEAD^ # 回退 github 上的提交
+        rm ./_config.yml
+        cp ./blog_config/_config_gitee.yml ./_config.yml
+        sh ./blog_config/build.sh  
+    - name: commit and push to gitee 
+      env: 
+        GITEE_NAME: ${{ secrets.GITEE_NAME }} 
+        GITEE_EMAIL: ${{ secrets.GITEE_EMAIL }}
+        GITEE_PATH: ${{ secrets.GITEE_PATH }}
+      run: |
+        # python ./blog_config/gitee.py
+        echo "GITEE_NAME: $GITEE_NAME , GITEE_EMAIL: $GITEE_EMAIL "
+        git config --local user.name "$GITEE_NAME"
+        git config --local user.email "$GITEE_EMAIL"
+        # git remote rm origin
+        echo "GITEE_PATH: $GITEE_PATH "
+        git remote set-url origin $GITEE_PATH
+        echo "---------- git config --list"
+        git config --list
+        if [[ -n $(git status -s) ]];then
+          echo "---------- git add ./"
+          git add ./
+          echo "---------- git commit"
+          git commit -m "auto build task"
+          echo "---------- git status"
+          git status
+          echo "---------- git push"
+          git push -f origin HEAD:master
+        else
+          echo "---------- gitee no change"
+        fi
+    - name: publish gitee page
+      uses: yanglbme/gitee-pages-action@main
+      with:
+        # 注意替换为你的 Gitee 用户名
+        gitee-username: ${{ secrets.GITEE_USER_NAME }} #xander_wang
+        # 注意在 Settings->Secrets 配置 GITEE_PASSWORD
+        gitee-password: ${{ secrets.GITEE_PASSWORD }}
+        # 注意替换为你的 Gitee 仓库，仓库名严格区分大小写，请准确填写，否则会出错
+        gitee-repo: ${{ secrets.GITEE_REPO }} #xander_wang/android-note
+        # 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）
+        branch: master
+        # 要部署的分支上的目录
+        directory: docs
+
