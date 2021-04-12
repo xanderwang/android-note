@@ -1,7 +1,7 @@
 ---
 seo_title: Android 性能优化总结
 title: Android 性能优化总结
-date: 2020-03-08 20:01:01
+date: 2021-04-01 20:01:01
 tags: 
 - Android
 - Performance
@@ -41,17 +41,17 @@ APK 包如果小的话，下载和安装的时间都会变快，而且较少的�
 
 稳定性优化，是个重中之重的优化了，毕竟没有谁喜欢在使用 APP 的过程中“闪退”。我是如何做稳定性优化的？可以参考下面的链接。
 
-- {% post_link android_performance/android_performance_app_crash 稳定性优化 %}
+{% post_link android_performance/android_performance_app_crash 稳定性优化 %}
 
 # 内存的优化
 
 内存的优化，是一个持久的优化，因为我发现，经常是这次修好了，下次另外一个地方又有问题了，我对内存的优化可以参考下面的链接。
 
-- {% post_link android_performance/android_performance_app_memory 内存的优化 %}
+{% post_link android_performance/android_performance_app_memory 内存的优化 %}
 
 # 操作流畅度优化
 
 流程度的优化说起来，也是很重要的。毕竟动不动就卡顿的体验属实不好，按照惯例，操作流畅度优化可以参考下面的链接。
 
-- {% post_link android_performance/android_performance_app_caton 操作流畅度优化 %}
+{% post_link android_performance/android_performance_app_caton 操作流畅度优化 %}
 
