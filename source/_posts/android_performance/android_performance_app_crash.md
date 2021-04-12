@@ -19,8 +19,6 @@ categories:
 - {% post_link android_performance/android_performance_app_memory 内存的优化 %}
 - {% post_link android_performance/android_performance_app_caton 操作流畅度优化 %}
 
-
-
 ## APP 稳定性的维度
 
 app 稳定一般指的是 app 能正常运行， app 不能正常运行的情况分为两大类，分别是 `Crash` 和 `ANR`

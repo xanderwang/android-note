@@ -99,7 +99,7 @@ class Debug {
 
 利用 Debug 类的这两个方法，可以生成一个 `trace` 文件，这个 `trace` 文件，可以直接在 `AS` 里面打开，可以看到从 `startMethodTracingSampling` 到 `startMethodTracing` 过程中的方法调用等信息，也可以较好的分析启动问题。
 
-## 一般有那些方法
+## 一般有那些优化方法
 
 1. 耗时操作放到异步进程
 
@@ -116,7 +116,25 @@ class Debug {
 
 如何检测线程的创建，可以参考我个开源库 [performance](https://github.com/XanderWang/performance)
 
-4. 布局等优化
+<!-- 4. 设置 windowsbackground 从视觉上优化
 
-减少布局的层次，合理使用 ViewStub
+```
+<style name="main_activity_style" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+    <item name="android:windowIsTranslucent">false</item>
+    <item name="android:windowDisablePreview">false</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowBackground">@drawable/start_activity_layout_bg</item>
+    <item name="android:background">@null</item>
+</style>
+``` -->
+
+<!-- 4. 布局等优化
+
+- 合理使用 ViewStub 、merge 和 include 等减少布局的层次
+
+- 及时移除不使用的 View 等。
+
+- 使用高效的容器，比如 ConstraintLayout ，除了布局效率高，还可以有效减少布局的层次。 -->
+
+
 

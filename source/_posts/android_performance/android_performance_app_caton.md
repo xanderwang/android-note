@@ -19,11 +19,11 @@ categories:
 - {% post_link android_performance/android_performance_app_memory 内存的优化 %}
 - {% post_link android_performance/android_performance_app_caton 操作流畅度优化 %}
 
-## 如何检测卡顿
+## 为什么会卡顿
 
 待完成...
 
-## 为什么会卡顿
+## 如何检测卡顿
 
 待完成...
 

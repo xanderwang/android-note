@@ -27,21 +27,31 @@ categories:
 
 # APK 瘦身
 
-{% post_link android_performance/android_performance_apk_size APK瘦身优化 %}
+APK 包如果小的话，下载和安装的时间都会变快，而且较少的投入可以看到较明显的效果，APK 瘦身很值得优化，具体的优化方法可以参考下面的连接。
+
+{% post_link android_performance/android_performance_app_size APK 瘦身优化 %}
 
 # 启动速度
+
+启动速度是每个应用都会碰到和需要优化的，这里总结了一下本人工作中的启动优化，详细的内存请参考下面的链接。
 
 {% post_link android_performance/android_performance_app_start 启动速度优化 %}
 
 # 稳定性优化
 
+稳定性优化，是个重中之重的优化了，毕竟没有谁喜欢在使用 APP 的过程中“闪退”。我是如何做稳定性优化的？可以参考下面的链接。
+
 - {% post_link android_performance/android_performance_app_crash 稳定性优化 %}
 
 # 内存的优化
 
+内存的优化，是一个持久的优化，因为我发现，经常是这次修好了，下次另外一个地方又有问题了，我对内存的优化可以参考下面的链接。
+
 - {% post_link android_performance/android_performance_app_memory 内存的优化 %}
 
 # 操作流畅度优化
+
+流程度的优化说起来，也是很重要的。毕竟动不动就卡顿的体验属实不好，按照惯例，操作流畅度优化可以参考下面的链接。
 
 - {% post_link android_performance/android_performance_app_caton 操作流畅度优化 %}
 
