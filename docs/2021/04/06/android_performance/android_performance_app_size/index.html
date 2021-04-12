@@ -496,15 +496,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li><a href="/android-note/2021/04/10/android_performance/android_performance_app_memory/" title="内存的优化">内存的优化</a></li>
 <li><a href="/android-note/2021/04/10/android_performance/android_performance_app_caton/" title="操作流畅度优化">操作流畅度优化</a></li>
 </ul>
-<h2 id="如何查看-apk-大小组成"><a href="#如何查看-apk-大小组成" class="headerlink" title="如何查看 apk 大小组成"></a>如何查看 apk 大小组成</h2><p>可以看到占大头的是 res 、so 、以及代码 </p>
+<h2 id="如何查看-apk-的组成"><a href="#如何查看-apk-的组成" class="headerlink" title="如何查看 apk 的组成"></a>如何查看 apk 的组成</h2><p>如果要优化 apk 的大小，我们首先需要知道我们编译出来的 apk 都包含哪些东西，然后针对占用大的做裁剪，或者删除不需要的东西，从而达到瘦身的目的。</p>
+<p>查看 apk 的内容占用情况很简单，打开 AS ，把 apk 拖到 AS 里面就可以查看 apk 包含的内容了。</p>
+<p><img src="https://img.imgdb.cn/item/607455ab8322e6675c0bab2c.jpg" class="lazyload placeholder" data-srcset="https://img.imgdb.cn/item/607455ab8322e6675c0bab2c.jpg" srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@3/img/placeholder/c617bfd2497fcea598e621413e315c368f8d8e.svg" alt="资源预览"></p>
+<p>可以看到占大头的是 res 代码等，所以瘦身可以从这几个方面来考虑。</p>
 <h2 id="如何减少-res-资源大小"><a href="#如何减少-res-资源大小" class="headerlink" title="如何减少 res 资源大小"></a>如何减少 res 资源大小</h2><ol>
 <li>删除冗余的资源</li>
 </ol>
-<p>可以使用 lint 工具来搜索项目中不再使用的图片等资源</p>
+<p>一般随着项目的迭代，部分图片等资源不再使用了，但是可能仍然被编译到了 apk 里面，所以可以删除这部分不再使用的资源，可以使用 lint 工具来搜索项目中不再使用的图片等资源。</p>
 <ol start="2">
 <li>重复资源的优化</li>
 </ol>
-<p>除了有冗余资源，还有些是文件名不一样，但是内容一样的图片，可以通过比较 md5 值来判断是不是一样的资源，然后编辑 resource.r</p>
+<p>除了有冗余资源，还有些是文件名不一样，但是内容一样的图片，可以通过比较 md5 值来判断是不是一样的资源，然后编辑 resources.arsc 来重定向。</p>
 <ol start="3">
 <li>图片压缩</li>
 </ol>
@@ -597,6 +600,14 @@ set(CMAKE_CXX_FLAGS_RELEASE &quot;$&#123;CMAKE_CXX_FLAGS_RELEASE&#125; -s&quot;)
 <p>通过把 R 文件里面的资源内联到代码中，从而减少 R 文件的大小。</p>
 <p>可以使用 <a target="_blank" rel="noopener" href="https://github.com/bytedance/ByteX/blob/master/shrink-r-plugin/README-zh.md">shrink-r-plugin</a> 工具来做 R 文件的内联</p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2017/04/07/android-shrink-overall-solution.html">Android App包瘦身优化实践</a></p>
+<h1 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h1><ul>
+<li><p>Github: <a target="_blank" rel="noopener" href="https://github.com/XanderWang">https://github.com/XanderWang</a></p>
+</li>
+<li><p>Mail: <a href="mailto:&#52;&#x32;&#48;&#54;&#52;&#48;&#x37;&#54;&#51;&#x40;&#113;&#113;&#x2e;&#99;&#111;&#109;">&#52;&#x32;&#48;&#54;&#52;&#48;&#x37;&#54;&#51;&#x40;&#113;&#113;&#x2e;&#99;&#111;&#109;</a></p>
+</li>
+<li><p>Blog: <a target="_blank" rel="noopener" href="https://xander_wang.gitee.io/android-note/">https://xander_wang.gitee.io/android-note/</a></p>
+</li>
+</ul>
 
   
   
@@ -631,7 +642,7 @@ set(CMAKE_CXX_FLAGS_RELEASE &quot;$&#123;CMAKE_CXX_FLAGS_RELEASE&#125; -s&quot;)
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-12T12:07:07+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-12T15:26:19+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Apr 12, 2021</p>
@@ -729,8 +740,8 @@ APK 瘦身优化
       
         <a class='next' href='/android-note/2021/04/01/android_performance/android_performance_all/'>
           <p class='title'>Android 性能优化总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>性能的优化是一个老生常谈的点，也是一个比较重要的点。现在对工作中的优化点做一个总结。
-优化的方向，即那些点是需要优化的在平时的优化过程中我们需要从哪几个点来优化呢？其实我们平时自己一定也用过软件...</p>
+          <p class='content'>性能的优化是一个老生常谈的点，也是一个比较重要的点。做过一点性能优化的工作，现在对工作中的优化点做一个总结。如有错误，还请指正。
+有哪些方面需要优化在平时的优化过程中我们需要从哪几个点来优化呢？...</p>
         </a>
       
     </div>
@@ -773,7 +784,7 @@ APK 瘦身优化
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B-apk-%E5%A4%A7%E5%B0%8F%E7%BB%84%E6%88%90"><span class="toc-text">如何查看 apk 大小组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-res-%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 res 资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-so-%E5%BA%93%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 so 库资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E4%BB%A3%E7%A0%81%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少代码资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-text">参考文档</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B-apk-%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">如何查看 apk 的组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-res-%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 res 资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91-so-%E5%BA%93%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少 so 库资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E4%BB%A3%E7%A0%81%E8%B5%84%E6%BA%90%E5%A4%A7%E5%B0%8F"><span class="toc-text">如何减少代码资源大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-text">参考文档</span></a></li></ol>
     </div>
   </section>
 
