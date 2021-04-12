@@ -9,13 +9,13 @@ categories:
 - Android
 ---
 
-性能的优化是一个老生常谈的点，也是一个比较重要的点。现在对工作中的优化点做一个总结。
+性能的优化是一个老生常谈的点，也是一个比较重要的点。做过一点性能优化的工作，现在对工作中的优化点做一个总结。如有错误，还请指正。
 
-# 优化的方向，即那些点是需要优化的
+# 有哪些方面需要优化
 
 在平时的优化过程中我们需要从哪几个点来优化呢？其实我们平时自己一定也用过软件，在使用软件的过程中有没有什么想吐槽的呢？
 
-“这个 app 怎么还没下载完！”、“太卡了吧！”、"图片怎么还没加载出来！"、"怎么刚进去就卡了！"、“这么点了一下就退出了！”等等，是不是有这样的想法，这些想法其实包含了我们今天要说的内容，就是从哪些方面来优化我们的 APP ，我总结了以下几点。
+“这个 app 怎么还没下载完！”、“太卡了吧！”、"图片怎么还没加载出来！"、"怎么刚进去就卡了！"、“这么点了一下就退出了！”等等，是不是有这样的想法？这些想法其实包含了我们今天要说的内容，就是从哪些方面来优化我们的 APP ，我总结了以下几点。
 
 - {% post_link android_performance/android_performance_app_size APK 瘦身优化 %}
 - {% post_link android_performance/android_performance_app_start 启动速度优化 %}
@@ -23,7 +23,7 @@ categories:
 - {% post_link android_performance/android_performance_app_memory 内存的优化 %}
 - {% post_link android_performance/android_performance_app_caton 操作流畅度优化 %}
 
-当然，需要优化的不仅仅是这几个方面，我们暂时先就这几个方面来谈谈优化吧
+当然，需要优化的不仅仅是这几个方面，我做的比较多的优化是这几个方面，暂时就这几个方面来谈谈优化吧。
 
 # APK 瘦身
 
@@ -45,7 +45,7 @@ APK 包如果小的话，下载和安装的时间都会变快，而且较少的�
 
 # 内存的优化
 
-内存的优化，是一个持久的优化，因为我发现，经常是这次修好了，下次另外一个地方又有问题了，我对内存的优化可以参考下面的链接。
+内存的优化，是一个持久的优化，因为我发现，经常是这次修好了，下次另外一个地方又有问题了，我对内存的优化工作可以参考下面的链接。
 
 {% post_link android_performance/android_performance_app_memory 内存的优化 %}
 
@@ -54,4 +54,12 @@ APK 包如果小的话，下载和安装的时间都会变快，而且较少的�
 流程度的优化说起来，也是很重要的。毕竟动不动就卡顿的体验属实不好，按照惯例，操作流畅度优化可以参考下面的链接。
 
 {% post_link android_performance/android_performance_app_caton 操作流畅度优化 %}
+
+# 联系我
+
+- Github: [https://github.com/XanderWang](https://github.com/XanderWang)
+
+- Mail: <420640763@qq.com>
+
+- Blog: [https://xander_wang.gitee.io/android-note/](https://xander_wang.gitee.io/android-note/)
 

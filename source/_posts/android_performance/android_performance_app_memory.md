@@ -92,3 +92,11 @@ leakcanary 比较核心的一个原理就是利用了弱引用的一个特性，
 3. 一些回调没有反注册，比如广播的注册和反注册等，有时候一些第三方库也需要注意。
 4. 一些 Listener 没有手动断开连接。
 5. 匿名内部类持有外部类的实例。比如 Handler , Runnable 等常见的用匿名内部类的实现，常常会不小心持有 Context 等外部类实例。
+
+# 联系我
+
+- Github: [https://github.com/XanderWang](https://github.com/XanderWang)
+
+- Mail: <420640763@qq.com>
+
+- Blog: [https://xander_wang.gitee.io/android-note/](https://xander_wang.gitee.io/android-note/)

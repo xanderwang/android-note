@@ -136,5 +136,11 @@ class Debug {
 
 - 使用高效的容器，比如 ConstraintLayout ，除了布局效率高，还可以有效减少布局的层次。 -->
 
+# 联系我
 
+- Github: [https://github.com/XanderWang](https://github.com/XanderWang)
+
+- Mail: <420640763@qq.com>
+
+- Blog: [https://xander_wang.gitee.io/android-note/](https://xander_wang.gitee.io/android-note/)
 

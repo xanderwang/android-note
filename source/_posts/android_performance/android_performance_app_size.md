@@ -21,19 +21,25 @@ categories:
 - {% post_link android_performance/android_performance_app_caton 操作流畅度优化 %}
 
 
-## 如何查看 apk 大小组成
+## 如何查看 apk 的组成
 
-可以看到占大头的是 res 、so 、以及代码 
+如果要优化 apk 的大小，我们首先需要知道我们编译出来的 apk 都包含哪些东西，然后针对占用大的做裁剪，或者删除不需要的东西，从而达到瘦身的目的。
+
+查看 apk 的内容占用情况很简单，打开 AS ，把 apk 拖到 AS 里面就可以查看 apk 包含的内容了。
+
+![资源预览](https://img.imgdb.cn/item/607455ab8322e6675c0bab2c.jpg)
+
+可以看到占大头的是 res 代码等，所以瘦身可以从这几个方面来考虑。
 
 ## 如何减少 res 资源大小
 
 1. 删除冗余的资源
 
-可以使用 lint 工具来搜索项目中不再使用的图片等资源
+一般随着项目的迭代，部分图片等资源不再使用了，但是可能仍然被编译到了 apk 里面，所以可以删除这部分不再使用的资源，可以使用 lint 工具来搜索项目中不再使用的图片等资源。
 
 2. 重复资源的优化
 
-除了有冗余资源，还有些是文件名不一样，但是内容一样的图片，可以通过比较 md5 值来判断是不是一样的资源，然后编辑 resource.r
+除了有冗余资源，还有些是文件名不一样，但是内容一样的图片，可以通过比较 md5 值来判断是不是一样的资源，然后编辑 resources.arsc 来重定向。
 
 3. 图片压缩
 
@@ -72,7 +78,6 @@ release 包的  so 中移除调试符号。可以使用 Android NDK 中提供的
 set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
 ```
-
 
 2. 别人编译的 so
 
@@ -126,4 +131,10 @@ android {
 
 [Android App包瘦身优化实践](https://tech.meituan.com/2017/04/07/android-shrink-overall-solution.html)
 
+# 联系我
 
+- Github: [https://github.com/XanderWang](https://github.com/XanderWang)
+
+- Mail: <420640763@qq.com>
+
+- Blog: [https://xander_wang.gitee.io/android-note/](https://xander_wang.gitee.io/android-note/)
