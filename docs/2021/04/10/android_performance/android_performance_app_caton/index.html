@@ -516,7 +516,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <h2 id="如何优化卡顿"><a href="#如何优化卡顿" class="headerlink" title="如何优化卡顿"></a>如何优化卡顿</h2><p>如何检测说完了，我们来说说如何优化。在 为什么会卡顿 小结我总结了几种常见，现在对几种场景的优化总结下。</p>
 <h3 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h3><p>最常见的一个读写文件而不自知的就是 <code>SharePerfrences</code> 的使用，使用 <code>sp</code> 的时候需要注意不要频繁调用 <code>apply</code> 或者 <code>commit</code> 方法，因为每调用一次就有可能会有一次写文件操作(高版本系统做了优化 apply 做了优化，不一定会写文件)。所以，如果调用次数多的话，就会多次写文件，写文件又是一个耗时且耗资源的操作，所以要少做。</p>
 <p>一般优化方法是合理<code>拆分</code> sp 文件，一个 sp 文件不要包含太多的项，同时每一项的内容尽量短。尽量批量提交数据后再 commit 或者 apply 。同时需要注意的是 commit 会直接触发写文件(内容有变化的时候)，所以如果在 UI 线程调用 commit 方法需要注意可能会阻塞 UI 线程。</p>
-<p>如果有更高的性能需求，可以考虑用 <a href="">mmkv</a> 来替换或者 <a href="">DataStore</a> 来替换 sp 。具体的替换方法就不细说了。网上有很多资料参考。</p>
+<p>如果有更高的性能需求，可以考虑用 <a target="_blank" rel="noopener" href="https://github.com/Tencent/MMKV">mmkv</a> 来替换或者 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/topic/libraries/architecture/datastore?hl=zh-cn">DataStore</a> 来替换 sp 。具体的替换方法就不细说了。网上有很多资料参考。</p>
 <p>另外一个常见的读写文件的场景是从 xml 文件里面读取布局、色值等操作，这些都是一些 io 操作。从 xml 读取布局的话，可以考虑用代码直接创建 view 来优化，从 xml 里面读取颜色可以考虑加个 HashMap 来优化。</p>
 <h3 id="解析大量图片"><a href="#解析大量图片" class="headerlink" title="解析大量图片"></a>解析大量图片</h3><p>解码图片毫无疑问是一个计算量大的操作，所以一般加载图片的时候最好根据实际显示的尺寸做压缩，并且保存压缩后的缩略图，方便下次直接加载。</p>
 <p>另外还需要注意列表滚动过程中，控制对图片的加载，一般列表在滑动过程中，不加载图片，等列表滚动停止后，才开始加载图片。</p>
@@ -555,7 +555,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <h2 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h2><ul>
 <li><p>Github: <a target="_blank" rel="noopener" href="https://github.com/XanderWang">https://github.com/XanderWang</a></p>
 </li>
-<li><p>Mail: <a href="mailto:&#x34;&#x32;&#x30;&#54;&#x34;&#x30;&#x37;&#54;&#x33;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#109;">&#x34;&#x32;&#x30;&#54;&#x34;&#x30;&#x37;&#54;&#x33;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#109;</a></p>
+<li><p>Mail: <a href="mailto:&#52;&#50;&#48;&#x36;&#52;&#x30;&#x37;&#x36;&#x33;&#x40;&#x71;&#113;&#46;&#x63;&#x6f;&#109;">&#52;&#50;&#48;&#x36;&#52;&#x30;&#x37;&#x36;&#x33;&#x40;&#x71;&#113;&#46;&#x63;&#x6f;&#109;</a></p>
 </li>
 <li><p>Blog: <a target="_blank" rel="noopener" href="https://xander_wang.gitee.io/android-note/">https://xander_wang.gitee.io/android-note/</a></p>
 </li>
@@ -594,7 +594,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-13T11:51:25+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-13T14:56:17+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Apr 13, 2021</p>
