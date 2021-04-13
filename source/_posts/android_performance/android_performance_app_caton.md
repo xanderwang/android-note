@@ -57,7 +57,7 @@ categories:
 
 一般优化方法是合理`拆分` sp 文件，一个 sp 文件不要包含太多的项，同时每一项的内容尽量短。尽量批量提交数据后再 commit 或者 apply 。同时需要注意的是 commit 会直接触发写文件(内容有变化的时候)，所以如果在 UI 线程调用 commit 方法需要注意可能会阻塞 UI 线程。
 
-如果有更高的性能需求，可以考虑用 [mmkv]() 来替换或者 [DataStore]() 来替换 sp 。具体的替换方法就不细说了。网上有很多资料参考。
+如果有更高的性能需求，可以考虑用 [mmkv](https://github.com/Tencent/MMKV) 来替换或者 [DataStore](https://developer.android.google.cn/topic/libraries/architecture/datastore?hl=zh-cn) 来替换 sp 。具体的替换方法就不细说了。网上有很多资料参考。
 
 另外一个常见的读写文件的场景是从 xml 文件里面读取布局、色值等操作，这些都是一些 io 操作。从 xml 读取布局的话，可以考虑用代码直接创建 view 来优化，从 xml 里面读取颜色可以考虑加个 HashMap 来优化。
 
