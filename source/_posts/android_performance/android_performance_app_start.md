@@ -12,7 +12,7 @@ categories:
 
 ## 系列文章
 
-- {% post_link android_performance/android_performance_all Android 性能优化总结 %}
+- {% post_link android_performance/android_performance_summary Android 性能优化概要 %}
 - {% post_link android_performance/android_performance_app_size APK 瘦身优化 %}
 - {% post_link android_performance/android_performance_app_start 启动速度优化 %}
 - {% post_link android_performance/android_performance_app_crash 稳定性优化 %}
@@ -135,7 +135,7 @@ class Debug {
 
 - 使用高效的容器，比如 ConstraintLayout ，除了布局效率高，还可以有效减少布局的层次。 -->
 
-# 联系我
+## 联系我
 
 - Github: [https://github.com/XanderWang](https://github.com/XanderWang)
 

@@ -12,7 +12,7 @@ categories:
 
 ## 系列文章
 
-- {% post_link android_performance/android_performance_all Android 性能优化总结 %}
+- {% post_link android_performance/android_performance_summary Android 性能优化概要 %}
 - {% post_link android_performance/android_performance_app_size APK 瘦身优化 %}
 - {% post_link android_performance/android_performance_app_start 启动速度优化 %}
 - {% post_link android_performance/android_performance_app_crash 稳定性优化 %}
@@ -74,7 +74,10 @@ dump APP 内存堆栈后，还可以看到各个类占用的内存情况。
 使用很简单，只需要在 APP  的 build.gradle 下面新增
 
 ```
-debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-2'
+dependencies {
+  // debugImplementation because LeakCanary should only run in debug builds.
+  debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+}
 ```
 
 leakcanary 比较核心的一个原理就是利用了弱引用的一个特性，这个特性就是：
@@ -93,7 +96,7 @@ leakcanary 比较核心的一个原理就是利用了弱引用的一个特性，
 4. 一些 Listener 没有手动断开连接。
 5. 匿名内部类持有外部类的实例。比如 Handler , Runnable 等常见的用匿名内部类的实现，常常会不小心持有 Context 等外部类实例。
 
-# 联系我
+## 联系我
 
 - Github: [https://github.com/XanderWang](https://github.com/XanderWang)
 

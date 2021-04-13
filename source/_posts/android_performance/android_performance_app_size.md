@@ -12,7 +12,7 @@ categories:
 
 ## 系列文章
 
-- {% post_link android_performance/android_performance_all Android 性能优化总结 %}
+- {% post_link android_performance/android_performance_summary Android 性能优化概要 %}
 - {% post_link android_performance/android_performance_app_size APK 瘦身优化 %}
 - {% post_link android_performance/android_performance_app_start 启动速度优化 %}
 - {% post_link android_performance/android_performance_app_crash 稳定性优化 %}
@@ -104,11 +104,11 @@ android {
 
 |平台|说明|
 | -- | -- |
-|armeabi-v7a| arm 第 7 代及以上的处理器，2011 年后的设备基本都是。|
-|arm64-v8a|arm 第 8 代 64 位处理器设备，很少，s6|
-|armeabi|arm第 5、6 代处理器，早期的机器都是这个平台|
-|x86|x86 32 位平台，平板和模拟器用的多|
-|x86_64|x86 64 位平台|
+| armeabi-v7a | arm 第 7 代及以上的处理器，2011 年后的设备基本都是 |
+| arm64-v8a| arm 第 8 代 64 位处理器设备 |
+| armeabi| arm 第 5、6 代处理器，早期的机器都是这个平台 |
+| x86 | x86 32 位平台，平板和模拟器用的多 |
+| x86_64 | x86 64 位平台 |
 
 ## 如何减少代码资源大小
 
@@ -130,7 +130,7 @@ android {
 
 [Android App包瘦身优化实践](https://tech.meituan.com/2017/04/07/android-shrink-overall-solution.html)
 
-# 联系我
+## 联系我
 
 - Github: [https://github.com/XanderWang](https://github.com/XanderWang)
 

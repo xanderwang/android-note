@@ -12,7 +12,7 @@ categories:
 
 ## 系列文章
 
-- {% post_link android_performance/android_performance_all Android 性能优化总结 %}
+- {% post_link android_performance/android_performance_summary Android 性能优化概要 %}
 - {% post_link android_performance/android_performance_app_size APK 瘦身优化 %}
 - {% post_link android_performance/android_performance_app_start 启动速度优化 %}
 - {% post_link android_performance/android_performance_app_crash 稳定性优化 %}
@@ -112,7 +112,7 @@ int sigaction(int signum,const struct sigaction *act,struct sigaction *oldact));
 
 本人之前写过一个小的[性能监测的工具](https://github.com/XanderWang/performance)，其中有监控 `UI` 线程 `Block` 的功能，考虑后续加入头条的 `ANR` 监测机制，等后续完成了，在做一个详细的总结吧。这次的总结就写到这里。
 
-# 联系我
+## 联系我
 
 - Github: [https://github.com/XanderWang](https://github.com/XanderWang)
 
