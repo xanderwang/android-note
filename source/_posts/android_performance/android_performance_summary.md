@@ -23,6 +23,30 @@ categories:
 - {% post_link android_performance/android_performance_app_memory 内存的优化 %}
 - {% post_link android_performance/android_performance_app_caton 操作流畅度优化 %}
 
+<!-- 
+## 系列文章
+
+- [Android 性能优化总结 - 概要](https://blog.csdn.net/wxy318/article/details/115675841)
+- [Android 性能优化总结 - APK 瘦身优化](https://blog.csdn.net/wxy318/article/details/115675595)
+- [Android 性能优化总结 - 启动速度优化](https://blog.csdn.net/wxy318/article/details/115675620)
+- [Android 性能优化总结 - 稳定性优化](https://blog.csdn.net/wxy318/article/details/115675643)
+- [Android 性能优化总结 - 内存的优化](https://blog.csdn.net/wxy318/article/details/115675656)
+- [Android 性能优化总结 - 操作流畅度优化](https://blog.csdn.net/wxy318/article/details/115675663)
+-->
+
+<!-- 
+
+## 系列文章
+
+- [Android 性能优化总结 - 概要](https://my.oschina.net/u/698631/blog/5017875)
+- [Android 性能优化总结 - APK 瘦身优化](https://blog.csdn.net/wxy318/article/details/115675595)
+- [Android 性能优化总结 - 启动速度优化](https://blog.csdn.net/wxy318/article/details/115675620)
+- [Android 性能优化总结 - 稳定性优化](https://blog.csdn.net/wxy318/article/details/115675643)
+- [Android 性能优化总结 - 内存的优化](https://blog.csdn.net/wxy318/article/details/115675656)
+- [Android 性能优化总结 - 操作流畅度优化](https://blog.csdn.net/wxy318/article/details/115675663)
+ -->
+
+
 当然，需要优化的不仅仅是这几个方面，我做的比较多的优化是这几个方面，暂时就这几个方面来谈谈优化吧。
 
 # APK 瘦身

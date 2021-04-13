@@ -27,11 +27,11 @@ categories:
 
 # APK 瘦身
 
-## 如何查看 apk 的组成
+## 如何查看 APK 的组成
 
-如果要优化 apk 的大小，我们首先需要知道我们编译出来的 apk 都包含哪些东西，然后针对占用大的做裁剪，或者删除不需要的东西，从而达到瘦身的目的。
+如果要优化 APK 的大小，我们首先需要知道我们编译出来的 APK 都包含哪些东西，然后针对占用大的做裁剪，或者删除不需要的东西，从而达到瘦身的目的。
 
-查看 apk 的内容占用情况很简单，打开 AS ，把 apk 拖到 AS 里面就可以查看 apk 包含的内容了。
+查看 APK 的内容占用情况很简单，打开 AS ，把 APK 拖到 AS 里面就可以查看 APK 包含的内容了。
 
 ![资源预览](https://img.imgdb.cn/item/607455ab8322e6675c0bab2c.jpg)
 
@@ -502,6 +502,10 @@ leakcanary 比较核心的一个原理就是利用了弱引用的一个特性，
 
 除了频繁创建对象可能会触发 GC ，如果某次使用过大的内存也可能会导致 GC ，比如展示一个超大的 Bitmap ，虽然可以用缩略图来展示，但是可能会碰到需要放大查看具体细节的场景，这个时候可以考虑采用裁剪显示区域(BitmapRegionDecoder)的方式来解析图片。
 
+# 小结
+
+以上是我工作中涉及到的优化点，可能不是很全，也难免有遗漏。如果有错误和遗漏，还请大家指正。
+
 # 联系我
 
 - Github: [https://github.com/XanderWang](https://github.com/XanderWang)
@@ -509,4 +513,3 @@ leakcanary 比较核心的一个原理就是利用了弱引用的一个特性，
 - Mail: <420640763@qq.com>
 
 - Blog: [https://xander_wang.gitee.io/android-note/](https://xander_wang.gitee.io/android-note/)
-
