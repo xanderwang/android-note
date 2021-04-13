@@ -488,7 +488,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   
   <h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
-<li><a href="/android-note/2021/04/01/android_performance/android_performance_all/" title="Android 性能优化总结">Android 性能优化总结</a></li>
+<li><a href="/android-note/2021/04/01/android_performance/android_performance_summary/" title="Android 性能优化概要">Android 性能优化概要</a></li>
 <li><a href="/android-note/2021/04/06/android_performance/android_performance_app_size/" title="APK 瘦身优化">APK 瘦身优化</a></li>
 <li><a href="/android-note/2021/04/06/android_performance/android_performance_app_start/" title="启动速度优化">启动速度优化</a></li>
 <li><a href="/android-note/2021/04/07/android_performance/android_performance_app_crash/" title="稳定性优化">稳定性优化</a></li>
@@ -556,10 +556,10 @@ int sigaction(int signum,const struct sigaction *act,struct sigaction *oldact));
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/OBYWrUBkWwV8o6ChSVaCvw">今日头条 ANR 优化实践系列 - Barrier 导致主线程假死</a></li>
 </ul>
 <p>本人之前写过一个小的<a target="_blank" rel="noopener" href="https://github.com/XanderWang/performance">性能监测的工具</a>，其中有监控 <code>UI</code> 线程 <code>Block</code> 的功能，考虑后续加入头条的 <code>ANR</code> 监测机制，等后续完成了，在做一个详细的总结吧。这次的总结就写到这里。</p>
-<h1 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h1><ul>
+<h2 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h2><ul>
 <li><p>Github: <a target="_blank" rel="noopener" href="https://github.com/XanderWang">https://github.com/XanderWang</a></p>
 </li>
-<li><p>Mail: <a href="mailto:&#52;&#50;&#x30;&#x36;&#x34;&#x30;&#55;&#54;&#51;&#x40;&#113;&#x71;&#46;&#99;&#x6f;&#109;">&#52;&#50;&#x30;&#x36;&#x34;&#x30;&#55;&#54;&#51;&#x40;&#113;&#x71;&#46;&#99;&#x6f;&#109;</a></p>
+<li><p>Mail: <a href="mailto:&#x34;&#x32;&#x30;&#x36;&#x34;&#48;&#x37;&#54;&#51;&#x40;&#113;&#x71;&#x2e;&#x63;&#x6f;&#109;">&#x34;&#x32;&#x30;&#x36;&#x34;&#48;&#x37;&#54;&#51;&#x40;&#113;&#x71;&#x2e;&#x63;&#x6f;&#109;</a></p>
 </li>
 <li><p>Blog: <a target="_blank" rel="noopener" href="https://xander_wang.gitee.io/android-note/">https://xander_wang.gitee.io/android-note/</a></p>
 </li>
@@ -598,10 +598,10 @@ int sigaction(int signum,const struct sigaction *act,struct sigaction *oldact));
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-12T15:41:59+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-13T10:47:49+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Apr 12, 2021</p>
+    <p>更新于：Apr 13, 2021</p>
   </a>
 </div>
 
@@ -680,7 +680,7 @@ int sigaction(int signum,const struct sigaction *act,struct sigaction *oldact));
         <a class='prev' href='/android-note/2021/04/10/android_performance/android_performance_app_memory/'>
           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Android 性能优化 - 内存优化</p>
           <p class='content'>系列文章
-Android 性能优化总结
+Android 性能优化概要
 APK 瘦身优化
 启动速度优化
 稳定性优化
@@ -694,7 +694,7 @@ APK 瘦身优化
         <a class='next' href='/android-note/2021/04/06/android_performance/android_performance_app_start/'>
           <p class='title'>Android 性能优化 - 启动速度优化<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
           <p class='content'>系列文章
-Android 性能优化总结
+Android 性能优化概要
 APK 瘦身优化
 启动速度优化
 稳定性优化
@@ -746,7 +746,7 @@ APK 瘦身优化
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#APP-%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E7%BB%B4%E5%BA%A6"><span class="toc-text">APP 稳定性的维度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86-Crash"><span class="toc-text">如何治理 Crash</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-%E5%B1%82%E8%8E%B7%E5%8F%96%E6%9C%AA%E5%A4%84%E7%90%86%E7%9A%84%E5%BC%82%E5%B8%B8%E7%9A%84%E8%B0%83%E7%94%A8%E5%A0%86%E6%A0%88"><span class="toc-text">Java 层获取未处理的异常的调用堆栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Native-%E5%B1%82%E8%8E%B7%E5%8F%96%E6%9C%AA%E5%A4%84%E7%90%86%E7%9A%84%E5%BC%82%E5%B8%B8%E7%9A%84%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="toc-text">Native 层获取未处理的异常的相关信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86-ANR"><span class="toc-text">如何治理 ANR</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#APP-%E7%A8%B3%E5%AE%9A%E6%80%A7%E7%9A%84%E7%BB%B4%E5%BA%A6"><span class="toc-text">APP 稳定性的维度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86-Crash"><span class="toc-text">如何治理 Crash</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-%E5%B1%82%E8%8E%B7%E5%8F%96%E6%9C%AA%E5%A4%84%E7%90%86%E7%9A%84%E5%BC%82%E5%B8%B8%E7%9A%84%E8%B0%83%E7%94%A8%E5%A0%86%E6%A0%88"><span class="toc-text">Java 层获取未处理的异常的调用堆栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Native-%E5%B1%82%E8%8E%B7%E5%8F%96%E6%9C%AA%E5%A4%84%E7%90%86%E7%9A%84%E5%BC%82%E5%B8%B8%E7%9A%84%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="toc-text">Native 层获取未处理的异常的相关信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%B2%BB%E7%90%86-ANR"><span class="toc-text">如何治理 ANR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E7%B3%BB%E6%88%91"><span class="toc-text">联系我</span></a></li></ol>
     </div>
   </section>
 
