@@ -24,7 +24,7 @@ categories:
 
 这个都不陌生吧，注册 GitHub 账号后，可以帮你托管你的 `repository` 下的静态网页，比如我有个 `repository` 叫  `android-note` ，我的 github 账号叫 `xanderwang` ，那么我的 android-note 托管后，访问地址就是：
 
-> [https://xander.github.io/android-note](https://xander.github.io/android-note)
+> [https://xanderwang.github.io/android-note](https://xanderwang.github.io/android-note)
 
 托管后，如果我每次写了新的文章后，我把最新的静态 blog 上传上来，那么就可以更新自己的博客。
 
