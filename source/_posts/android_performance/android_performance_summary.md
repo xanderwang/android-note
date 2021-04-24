@@ -6,7 +6,7 @@ tags:
 - Android
 - Performance
 categories: 
-- Android
+- Android 性能优化
 ---
 
 性能的优化是一个老生常谈的点，也是一个比较重要的点。做过一点性能优化的工作，现在对工作中的优化点做一个总结。如有错误，还请指正。

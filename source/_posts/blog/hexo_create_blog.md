@@ -6,7 +6,6 @@ tags:
 - Github Action
 - GitHub Page
 - Gitee Page
-- Gitee
 - hexo
 categories: 
 - 其他

@@ -3,12 +3,12 @@ seo_title: Android 开发总结笔记(六) - 网络编程总结
 title: Android 开发总结笔记(六) - 网络编程总结
 date: 2021-02-26 21:31:00
 tags:
+- Android
 - 网络编程
-- HTTP
-- HTTPS
-- 三次握手
+- HTTP/HTTPS
+- TCP/IP
 categories: 
-- 总结笔记
+- Android 总结
 ---
 
 # 网络编程总结

@@ -7,7 +7,7 @@ tags:
 - Performance
 - 启动速度优化
 categories: 
-- Android
+- Android 性能优化
 ---
 
 ## 系列文章

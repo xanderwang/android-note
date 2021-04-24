@@ -4,9 +4,9 @@ title: Android 开发总结笔记(五) - Java 线程总结
 date: 2021-02-26 21:30:00
 tags:
 - Android
-- Java 线程
+- 线程
 categories: 
-- 总结笔记
+- Android 总结
 ---
 
 # Java 线程总结

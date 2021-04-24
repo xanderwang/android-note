@@ -7,7 +7,7 @@ tags:
 - 反射
 - 注解
 categories: 
-- 总结笔记
+- Android 总结
 ---
 
 # 反射总结

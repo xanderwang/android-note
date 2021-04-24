@@ -6,7 +6,7 @@ tags:
 - Android
 - JVM
 categories: 
-- 总结笔记
+- Android 总结
 ---
 
 # JVM 总结

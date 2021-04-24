@@ -1,12 +1,12 @@
 ---
 seo_title: Android 开发总结笔记(一) - 泛型总结
 title: Android 开发总结笔记(一) - 泛型总结
-date: 2020-07-23 12:00:00
+date: 2021-02-06 12:00:00
 tags:
 - Android
 - 泛型
 categories: 
-- 总结笔记
+- Android 总结
 ---
 
 # 泛型总结

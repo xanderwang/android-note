@@ -7,7 +7,7 @@ tags:
 - Performance
 - 稳定性优化
 categories: 
-- Android
+- Android 性能优化
 ---
 
 ## 系列文章
