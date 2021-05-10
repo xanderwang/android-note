@@ -11,16 +11,19 @@ categories:
 
 # 简介
 
-由于本人工作需要，需要解决一些性能问题，虽然有 `Profiler` 、`Systrace` 等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，最终完成了这个开源的性能实时检测库。初步能达到预期效果，这里做个记录，算是小结了。
+由于本人工作需要，需要解决一些性能问题，虽然有 `Profiler` 、`Systrace
+` 等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，最终完成了这个开源的性能实时检测库。初步能达到预期效果，这里做个记录，算是小结了。
 
-[开源库的地址是: https://github.com/XanderWang/performance](https://github.com/XanderWang/performance)
+开源库的[地址](https://github.com/XanderWang/performance)是:
 
-如果对你有帮助，幸苦小可爱能给个小小的 star 鼓励下。
+> https://github.com/XanderWang/performance
+
+幸苦各位能给个小小的 star 鼓励下。
 
 这个性能检测库，可以检测以下问题：
 
 - [x] UI 线程 block 检测。
-- [x] APP 的 FPS 检测。
+- [x] App 的 FPS 检测。
 - [x] 线程的创建和启动监控以及线程池的创建监控。
 - [x] IPC (进程间通讯)监控。
 
@@ -36,18 +39,19 @@ categories:
 
 ```groovy
 dependencies {
-  // 必选
-  debugImplementation "com.xander.performance:perf:0.1.12"
-  releaseImplementation "com.xander.performance:perf-noop:0.1.12"  
+  // 基础依赖，必须添加
+  debugImplementation 'io.github.xanderwang:performance:0.3.1'
+  releaseImplementation 'io.github.xanderwang:performance-noop:0.3.1'
+
   // hook 方案封装，必须添加
-  debugImplementation "com.xander.performance:perf-hook:0.1.12"
-  
+  debugImplementation 'io.github.xanderwang:hook:0.3.1'
+
   // 以下是 hook 方案选择一个就好了。如果运行报错，就换另外一个，如果还是报错，就提个 issue
   // SandHook 方案，推荐添加。如果运行报错，可以替换为 epic 库。
-  debugImplementation "com.xander.performance:perf-hook-sandhook:0.1.12"
+  debugImplementation 'io.github.xanderwang:hook-sandhook:0.3.1'
 
   // epic 方法。如果运行报错，可以替换为 SandHook。
-  // debugImplementation "com.xander.performance:perf-hook-epic:0.1.12"
+  // debugImplementation 'io.github.xanderwang:hook-epic:0.3.1'
 }
 ```
 
@@ -121,8 +125,11 @@ kotlin 示例
 
 # 主要更新记录
 
-- 0.1.12 线程创建的监控，加入 thread name 信息收集。同时接入 startup 库做必要的初始化，以及调整 mulit dex 的时候，配置文件找不到的问题。
-- 0.1.11 优化 hook 方案的封装，通过 SandHook ,IPC 的监控可以按照耗时时间来检测。
+- 0.3.1  新增给 ImageView 设置比实际控件尺寸大的图片检测
+- 0.3.0  修改依赖库发布方式为 MavenCentral 
+- 0.2.0  线程耗时的监控，同时可以监控线程优先级(setPriority)的改变。
+- 0.1.12 线程创建的监控，加入 thread name 信息收集。同时接入 startup 库做必要的初始化，以及调整 multi dex 的时候，配置文件找不到的问题。
+- 0.1.11 优化 hook 方案的封装，通过 SandHook 开源库，可以按照 IPC 的耗时时间长短来检测。
 - 0.1.10 FPS 的检测时间间隔从默认 2s 调整为 1s，同时支持自定义时间间隔。
 - 0.1.9  优化线程池创建的监控。
 - 0.1.8  初版发布，完成基本的功能。
