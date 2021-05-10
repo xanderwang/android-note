@@ -487,13 +487,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>由于本人工作需要，需要解决一些性能问题，虽然有 <code>Profiler</code> 、<code>Systrace</code> 等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，最终完成了这个开源的性能实时检测库。初步能达到预期效果，这里做个记录，算是小结了。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/XanderWang/performance">开源库的地址是: https://github.com/XanderWang/performance</a></p>
-<p>如果对你有帮助，幸苦小可爱能给个小小的 star 鼓励下。</p>
+  <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>由于本人工作需要，需要解决一些性能问题，虽然有 <code>Profiler</code> 、<code>Systrace </code> 等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，最终完成了这个开源的性能实时检测库。初步能达到预期效果，这里做个记录，算是小结了。</p>
+<p>开源库的<a target="_blank" rel="noopener" href="https://github.com/XanderWang/performance">地址</a>是:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/XanderWang/performance">https://github.com/XanderWang/performance</a></p>
+</blockquote>
+<p>幸苦各位能给个小小的 star 鼓励下。</p>
 <p>这个性能检测库，可以检测以下问题：</p>
 <ul>
 <li><input checked="" disabled="" type="checkbox"> UI 线程 block 检测。</li>
-<li><input checked="" disabled="" type="checkbox"> APP 的 FPS 检测。</li>
+<li><input checked="" disabled="" type="checkbox"> App 的 FPS 检测。</li>
 <li><input checked="" disabled="" type="checkbox"> 线程的创建和启动监控以及线程池的创建监控。</li>
 <li><input checked="" disabled="" type="checkbox"> IPC (进程间通讯)监控。</li>
 </ul>
@@ -505,18 +508,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ul>
 <h1 id="接入指南"><a href="#接入指南" class="headerlink" title="接入指南"></a>接入指南</h1><p>1 在 <code>APP</code> 工程目录下面的 <code>build.gradle</code> 添加如下内容。</p>
 <pre><code class="groovy">dependencies &#123;
-  // 必选
-  debugImplementation &quot;com.xander.performance:perf:0.1.12&quot;
-  releaseImplementation &quot;com.xander.performance:perf-noop:0.1.12&quot;  
+  // 基础依赖，必须添加
+  debugImplementation &#39;io.github.xanderwang:performance:0.3.1&#39;
+  releaseImplementation &#39;io.github.xanderwang:performance-noop:0.3.1&#39;
+
   // hook 方案封装，必须添加
-  debugImplementation &quot;com.xander.performance:perf-hook:0.1.12&quot;
-  
+  debugImplementation &#39;io.github.xanderwang:hook:0.3.1&#39;
+
   // 以下是 hook 方案选择一个就好了。如果运行报错，就换另外一个，如果还是报错，就提个 issue
   // SandHook 方案，推荐添加。如果运行报错，可以替换为 epic 库。
-  debugImplementation &quot;com.xander.performance:perf-hook-sandhook:0.1.12&quot;
+  debugImplementation &#39;io.github.xanderwang:hook-sandhook:0.3.1&#39;
 
   // epic 方法。如果运行报错，可以替换为 SandHook。
-  // debugImplementation &quot;com.xander.performance:perf-hook-epic:0.1.12&quot;
+  // debugImplementation &#39;io.github.xanderwang:hook-epic:0.3.1&#39;
 &#125;
 </code></pre>
 <p>2 <code>APP</code> 工程的 <code>Application</code> 类新增类似如下初始化代码。</p>
@@ -580,8 +584,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   &#125;
 </code></pre>
 <h1 id="主要更新记录"><a href="#主要更新记录" class="headerlink" title="主要更新记录"></a>主要更新记录</h1><ul>
-<li>0.1.12 线程创建的监控，加入 thread name 信息收集。同时接入 startup 库做必要的初始化，以及调整 mulit dex 的时候，配置文件找不到的问题。</li>
-<li>0.1.11 优化 hook 方案的封装，通过 SandHook ,IPC 的监控可以按照耗时时间来检测。</li>
+<li>0.3.1  新增给 ImageView 设置比实际控件尺寸大的图片检测</li>
+<li>0.3.0  修改依赖库发布方式为 MavenCentral </li>
+<li>0.2.0  线程耗时的监控，同时可以监控线程优先级(setPriority)的改变。</li>
+<li>0.1.12 线程创建的监控，加入 thread name 信息收集。同时接入 startup 库做必要的初始化，以及调整 multi dex 的时候，配置文件找不到的问题。</li>
+<li>0.1.11 优化 hook 方案的封装，通过 SandHook 开源库，可以按照 IPC 的耗时时间长短来检测。</li>
 <li>0.1.10 FPS 的检测时间间隔从默认 2s 调整为 1s，同时支持自定义时间间隔。</li>
 <li>0.1.9  优化线程池创建的监控。</li>
 <li>0.1.8  初版发布，完成基本的功能。</li>
@@ -700,7 +707,7 @@ com.xander.performace.demo W/demo_FPSTool: APP FPS is: 60 Hz
 <h1 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h1><ul>
 <li> Mail</li>
 </ul>
-<p><a href="mailto:&#52;&#50;&#48;&#x36;&#x34;&#48;&#x37;&#x36;&#x33;&#x40;&#113;&#x71;&#x2e;&#x63;&#x6f;&#x6d;">&#52;&#50;&#48;&#x36;&#x34;&#48;&#x37;&#x36;&#x33;&#x40;&#113;&#x71;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
+<p><a href="mailto:&#52;&#50;&#48;&#54;&#x34;&#x30;&#55;&#x36;&#51;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#109;">&#52;&#50;&#48;&#54;&#x34;&#x30;&#55;&#x36;&#51;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#109;</a></p>
 <ul>
 <li>微信</li>
 </ul>
@@ -746,10 +753,10 @@ com.xander.performace.demo W/demo_FPSTool: APP FPS is: 60 Hz
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-24T03:08:35+00:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-10T06:08:59+00:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Apr 24, 2021</p>
+    <p>更新于：May 10, 2021</p>
   </a>
 </div>
 
