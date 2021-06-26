@@ -115,5 +115,21 @@ jobs:
         # 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）
         branch: master
         # 要部署的分支上的目录
-        directory: gitee_notes
+        directory: docs
+    - name: build aliyun oss blog
+      run: |
+        git reset --hard HEAD^ # 回退 github 上的提交
+        rm ./_config.yml
+        cp ./blog_config/_config_xanderwang.yml ./_config.yml
+        sh ./blog_config/build.sh  
+    - name: publish to aliyun oss
+      uses: fangbinwei/aliyun-oss-website-action@v1
+      with:
+          accessKeyId: ${{ secrets.ALIYUN_ACCESS_KEY }}
+          accessKeySecret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+          bucket: xander-wang-site
+          # use your own endpoint
+          endpoint: oss-cn-shanghai.aliyuncs.com
+          folder: docs
+
 
