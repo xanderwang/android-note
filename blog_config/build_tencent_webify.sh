@@ -34,7 +34,7 @@ hexo version
 echo '-------------------------------'
 # 删除之前编译的
 # rm -rf ./doc
-hexo clean --debug
+# hexo clean --debug
 echo '-------------------------------'
 # 生成静态网页
 hexo generate --debug
