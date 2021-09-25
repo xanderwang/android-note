@@ -460,7 +460,7 @@ site_footer:
   # site copyright
   copyright: '[Copyright © 2017-2020 XXX](/)'
   # You can add your own property here. (Support markdown, for example: br: '<br>')
-  # link: 友情链接[CloudBase Webify](https://webify.cloudbase.net/)
+  link: 友情链接[CloudBase Webify](https://webify.cloudbase.net/)
 ############################### Site Footer ############################### > end
 
 ############################### Plugins ############################### > start
