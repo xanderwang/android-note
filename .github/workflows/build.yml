@@ -62,14 +62,14 @@ jobs:
           echo "---------- git status"
           git status
           echo "---------- git push"
-          git push origin HEAD:master
+          # git push origin HEAD:master
         else
           echo "---------- github no change"
         fi
-    # - name: push changes to github
-    #   uses: ad-m/github-push-action@master
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}        
+    - name: push changes to github
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}        
     - name: build gitee page 
       run: |
         git reset --hard HEAD^ # 回退 github 上的提交
