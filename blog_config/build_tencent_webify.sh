@@ -6,6 +6,7 @@ rm ./_config.yml
 cp ./blog_config/_config_tencent_webify.yml ./_config.yml
 rm ./_config.volantis.yml
 cp ./blog_config/_config.volantis_tencent_webify.yml ./_config.volantis.yml
+cat ./_config.yml
 echo '------------------------------- start npm install '
 # 安装依赖的环境
 # npm install
