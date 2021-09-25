@@ -39,6 +39,10 @@ echo '-------------------------------'
 # 生成静态网页
 hexo generate --debug
 ls -la
+rm -rf ./docs
+cp -rf ./docs_tencent_webify  ./docs
+cp ./blog_config/_config_tencent_webify.yml ./docs/_config_tencent_webify.yml
+ls -la
 echo '============= end build.sh ==================='
 
 

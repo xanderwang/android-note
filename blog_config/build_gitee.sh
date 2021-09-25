@@ -4,6 +4,7 @@ echo '============= change config ==================='
 rm ./_config.yml
 cp ./blog_config/_config_gitee.yml ./_config.yml
 ls -la 
+cat ./_config.yml
 echo '------------------------------- start npm install '
 # 安装依赖的环境
 # npm install
@@ -39,6 +40,7 @@ ls -la
 echo '-------------------------------'
 rm -rf ./docs
 cp -rf ./docs_gitee  ./docs
+cp ./blog_config/_config_gitee.yml ./docs/_config_gitee.yml
 ls -la
 echo '============= end build.sh ==================='
 
