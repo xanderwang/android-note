@@ -76,6 +76,9 @@ jobs:
         # rm ./_config.yml
         # cp ./blog_config/_config_gitee.yml ./_config.yml
         sh ./blog_config/build_gitee.sh  
+    - name: build tencent webify page 
+      run: |
+        sh ./blog_config/build_tencent_webify.sh 
     - name: commit and push to gitee 
       env: 
         GITEE_NAME: ${{ secrets.GITEE_NAME }} 
