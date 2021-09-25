@@ -19,7 +19,7 @@ permalink_defaults: http://xander_wang.gitee.io/android-note
 
 # Directory
 source_dir: source    # 资源文件夹，这个文件夹用来存放内容。
-public_dir: docs      # 公共文件夹，这个文件夹用于存放生成的站点文件。
+public_dir: docs_gitee      # 公共文件夹，这个文件夹用于存放生成的站点文件。
 tag_dir: tags
 archive_dir: archives
 category_dir: categories

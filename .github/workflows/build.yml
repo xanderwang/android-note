@@ -30,14 +30,14 @@ jobs:
     # 引用外部 Action, 拉取代码仓库到虚拟机工作目录
     - name: chekout code
       uses: actions/checkout@v1
-    # 运行编译脚本
+    # 运行 github 编译脚本
     - name: build github page
       run: |
-        rm ./_config.yml
-        cp ./blog_config/_config_github.yml ./_config.yml
-        sh ./blog_config/build.sh  
+        # rm ./_config.yml
+        # cp ./blog_config/_config_github.yml ./_config.yml
+        sh ./blog_config/build_github.sh  
     # 把编译好的二进制程序 push 到原始的 GitHub 仓库
-    - name: commit and push to github
+    - name: commit change
       env:
         GH_NAME: ${{ secrets.GH_NAME }}
         GH_EMAIL: ${{ secrets.GH_EMAIL }}
@@ -73,9 +73,9 @@ jobs:
     - name: build gitee page 
       run: |
         git reset --hard HEAD^ # 回退 github 上的提交
-        rm ./_config.yml
-        cp ./blog_config/_config_gitee.yml ./_config.yml
-        sh ./blog_config/build.sh  
+        # rm ./_config.yml
+        # cp ./blog_config/_config_gitee.yml ./_config.yml
+        sh ./blog_config/build_gitee.sh  
     - name: commit and push to gitee 
       env: 
         GITEE_NAME: ${{ secrets.GITEE_NAME }} 
@@ -119,9 +119,9 @@ jobs:
     - name: build aliyun oss blog
       run: |
         git reset --hard HEAD^ # 回退 github 上的提交
-        rm ./_config.yml
-        cp ./blog_config/_config_xanderwang.yml ./_config.yml
-        sh ./blog_config/build.sh  
+        # rm ./_config.yml
+        # cp ./blog_config/_config_xanderwang.yml ./_config.yml
+        sh ./blog_config/build_aliyun_xanderwang.sh  
     - name: publish to aliyun oss
       uses: fangbinwei/aliyun-oss-website-action@v1
       with:
